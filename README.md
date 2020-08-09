@@ -1,1 +1,1 @@
-# nola
+# The Nola C++ Libraries
