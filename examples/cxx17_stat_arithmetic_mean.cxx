@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <nola/nola.hxx>
+#include <nola/stat.hxx>
 
 
 int main()

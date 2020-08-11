@@ -5,6 +5,7 @@
 #define NOLA_STAT_HXX
 
 
+#include <cmath>
 #include <cstdlib>
 
 
@@ -16,23 +17,23 @@ namespace nola {
 
   template <class Real>
   inline Real
-  arithmetic_mean(Real* x, std::size_t n);
+  arithmetic_mean(Real const x[ ], std::size_t n);
 
   template <class Real>
   inline Real
-  variance(Real* x, std::size_t n);
+  variance(Real const x[ ], std::size_t n);
 
   template <class Real>
   inline Real
-  standard_deviation(Real* x, std::size_t n);
+  standard_deviation(Real const x[ ], std::size_t n);
 
   template <class Real>
   inline Real
-  covariance(Real* x, Real* y, std::size_t n);
+  covariance(Real const x[ ], Real const y[ ], std::size_t n);
 
   template <class Real>
   inline Real
-  correlation(Real* x, Real* y, std::size_t n);
+  correlation(Real const x[ ], Real const y[ ], std::size_t n);
 
 
 
@@ -43,7 +44,7 @@ namespace nola {
 
     template <class Real>
     inline Real
-    arithmetic_mean_impl(Real* x, std::size_t n)
+    arithmetic_mean_impl(Real const x[ ], std::size_t n)
     {
       //
       // Compute and return the mean of the sequence
@@ -53,14 +54,14 @@ namespace nola {
       for (std::size_t i = 0; i < n; ++i)
         sum += x[i];
 
-      mean = sum / n;
+      return sum / n;
     }
 
 
 
     template <class Real>
     inline Real
-    variance_impl(Real* x, std::size_t n)
+    variance_impl(Real const x[ ], std::size_t n)
     {
       //
       // Compute the mean of the sequence
@@ -71,8 +72,6 @@ namespace nola {
         sum += x[i];
 
       Real mean = sum / n;
-
-      // Real mean = nola::detail::arithmetic_mean_impl(x, n);
 
       //
       // Compute and return the variance of the sequence
@@ -84,14 +83,14 @@ namespace nola {
         sum += center * center;
       }
 
-      var = sum / (n - 1);
+      return sum / (n - 1);
     }
 
 
 
     template <class Real>
     inline Real
-    standard_deviation_impl(Real* x, std::size_t n)
+    standard_deviation_impl(Real const x[ ], std::size_t n)
     {
       //
       // Compute the mean of the sequence
@@ -102,8 +101,6 @@ namespace nola {
         sum += x[i];
 
       Real mean = sum / n;
-
-      // Real mean = nola::detail::arithmetic_mean_impl(x, n);
 
       //
       // Compute the variance of the sequence
@@ -120,14 +117,14 @@ namespace nola {
       //
       // Compute and return the standard deviation of the sequence
 
-      std = std::sqrt(var);
+      return std::sqrt(var);
     }
 
 
 
     template <class Real>
     inline Real
-    covariance_impl(Real* x, std::size_t n)
+    covariance_impl(Real const x[ ], Real const y[ ], std::size_t n)
     {
       //
       // Compute the mean of the first sequence
@@ -160,14 +157,14 @@ namespace nola {
         sum += x_center * y_center;
       }
 
-      cov = sum / (n - 1);
+      return sum / (n - 1);
     }
 
 
 
     template <class Real>
     inline Real
-    correlation_impl(Real* x, std::size_t n)
+    correlation_impl(Real const x[ ], Real const y[ ], std::size_t n)
     {
       //
       // Compute the mean of the first sequence
@@ -227,7 +224,7 @@ namespace nola {
       }
 
       Real cov = sum / (n - 1);
-      cor = cov / (x_std * y_std);
+      return cov / (x_std * y_std);
     }
 
 
@@ -241,36 +238,36 @@ namespace nola {
 
   template <class Real>
   inline Real
-  arithmetic_mean(Real* x, std::size_t n)
+  arithmetic_mean(Real const x[ ], std::size_t n)
   {
     return nola::detail::arithmetic_mean_impl(x, n);
   }
 
   template <class Real>
   inline Real
-  variance(Real* x, std::size_t n)
+  variance(Real const x[ ], std::size_t n)
   {
     return nola::detail::variance_impl(x, n);
   }
 
   template <class Real>
   inline Real
-  standard_deviation(Real* x, std::size_t n)
+  standard_deviation(Real const x[ ], std::size_t n)
   {
     return nola::detail::standard_deviation_impl(x, n);
   }
 
   template <class Real>
-  inline Real covariance(Real* x, std::size_t n)
+  inline Real covariance(Real const x[ ], Real const y[ ], std::size_t n)
   {
-    return nola::detail::covariance_impl(x, n);
+    return nola::detail::covariance_impl(x, y, n);
   }
 
   template <class Real>
   inline Real
-  correlation(Real* x, std::size_t n)
+  correlation(Real const x[ ], Real const y[ ], std::size_t n)
   {
-    return nola::detail::correlation_impl(x, n);
+    return nola::detail::correlation_impl(x, y, n);
   }
 
 

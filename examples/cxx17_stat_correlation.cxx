@@ -4,7 +4,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
-#include <nola/nola.hxx>
+#include <nola/stat.hxx>
 
 
 int main()
@@ -19,7 +19,7 @@ int main()
   std::size_t n = x.size();
 
   // Compute correlation
-  double c = nola::correlation(n, x.data(), y.data());
+  double c = nola::correlation( x.data(), y.data(), x.size() );
 
   // Display result
   std::cout << "\ncorrelation = " << c << std::endl; // c = -0.9000
