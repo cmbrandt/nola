@@ -5,8 +5,8 @@
 #define NOLA_STAT_HXX
 
 
-#include <cmath>
-#include <cstdlib>
+#include <cmath>   // std::sqrt
+#include <cstdlib> // std::size_t
 
 
 

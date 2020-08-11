@@ -5,15 +5,18 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <nola/nola.hxx>
+#include <nola/root.hxx>
 
+
+double g(double x)
+{ return std::exp(-x); }
 
 int main()
 {
   std::cout << "\nFixed-Point Method Nola Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-  auto g = [](double x) { return std::exp(-x); };
+//  auto g = [](double x) { return std::exp(-x); };
 
   // Initial point
   double x0 = 1000.0;

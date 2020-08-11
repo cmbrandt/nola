@@ -5,7 +5,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <nola/nola.hxx>
+#include <nola/root.hxx>
 
 
 int main()

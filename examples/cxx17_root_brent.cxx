@@ -5,15 +5,18 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <nola/nola.hxx>
+#include <nola/root.hxx>
 
+
+double f(double x)
+{ return x - std::exp(-x); };
 
 int main()
 {
   std::cout << "\nBrent's Method Nola Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-  auto f = [](double x) { return x - std::exp(-x); };
+//  auto f = [](double x) { return x - std::exp(-x); };
 
   // Initial points
   double x0 = -1.0;

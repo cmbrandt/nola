@@ -5,16 +5,20 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <nola/nola.hxx>
+#include <nola/root.hxx>
 
+
+double f(double x)
+{ return x - std::exp(-x); };
 
 int main()
 {
   std::cout << "\nBisection Method Nola Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-  auto f = [](double x) { return x - std::exp(-x); };
+//  auto f = [](double x) { return x - std::exp(-x); };
 
+  
   // End points of interval
   double a = -1.0;
   double b =  1000.0;
