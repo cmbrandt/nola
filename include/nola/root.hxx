@@ -46,7 +46,7 @@ namespace nola {
   fixed_point(Real (*g)(Real), Real x0, Real tol, std::size_t maxiter);
 
 
-/*
+
   template <class Real>
   inline std::tuple<Real, std::size_t>
   newton(Real (*f)(Real), Real (*fp)(Real), Real x0);
@@ -64,7 +64,7 @@ namespace nola {
   template <class Real>
   inline std::tuple<Real, std::size_t>
   secant(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t maxiter);
-*/
+
 
 
   //
@@ -237,23 +237,76 @@ namespace nola {
     }
 
 
-/*
+
     template <class Real>
     inline std::tuple<Real, std::size_t>
-    newton_impl(Real (*f)(Real), Real (*fp)(Real), Real tol, std::size_t maxiter)
+    newton_impl(Real (*f)(Real), Real (*fp)(Real), Real x0, Real tol, std::size_t iter)
     {
+      Real eps = std::numeric_limits<double>::epsilon();
 
+      std::size_t max_iter{iter};
+      Real        x_old{x0}; // REMOVE DEFINITION AND RENAME X0 TO X_OLD ??
+
+      // Local variable used below
+      Real x_new;
+
+      // Compute root
+      iter = 0;
+      while (iter < max_iter) {
+        ++iter;
+ 
+        x_new = x_old - ( f(x_old) / fp(x_old) );
+
+        Real abserr = std::abs(x_new - x_old);
+        Real relerr = abserr / std::abs(x_new + eps);
+
+        // Stopping criteria
+        if (abserr < tol && relerr < tol)
+          break;
+
+        x_old = x_new;
+      } // while loop
+
+      return {x_new, iter};
     }
 
 
 
     template <class Real>
     inline std::tuple<Real, std::size_t>
-    secant_impl(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t maxiter)
+    secant_impl(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t iter)
     {
+      Real eps = std::numeric_limits<double>::epsilon();
 
+      std::size_t max_iter{iter};
+
+      // Local variable used below
+      Real x2;
+
+      // Compute root
+      iter = 0;
+      while (iter < max_iter) {
+        ++iter;
+
+        Real num = x0 * f(x1) - x1 * f(x0);
+        Real den = f(x1) - f(x0);
+
+        x2 = num / den;
+
+        Real abserr = std::abs(x2 - x1);
+        Real relerr = abserr / std::abs(x2 + eps);
+
+        // Stopping criteria
+        if (abserr < tol && relerr < tol)
+          break;
+
+        x0 = x1;
+        x1 = x2;
+      } // while loop
+
+      return {x2, iter};
     }
-*/
+
   } // namespace detail
 
 
@@ -317,10 +370,10 @@ namespace nola {
   }
 
 
-/*
+
   template <class Real>
   inline std::tuple<Real, std::size_t>
-  newton(Real (*f)(Real), Real (*fp)(Real), Real x0)
+  newton(Real (*f)(Real), Real (*fp)(Real x), Real x0)
   {
     Real tol = 1e-10;
     std::size_t maxiter = 100;
@@ -339,7 +392,7 @@ namespace nola {
 
   template <class Real>
   inline std::tuple<Real, std::size_t>
-  secant(Real (*f)(Real), Real x0, Real x1, Real tol)
+  secant(Real (*f)(Real), Real x0, Real x1)
   {
     Real tol = 1e-10;
     std::size_t maxiter = 100;
@@ -353,7 +406,7 @@ namespace nola {
   {
     return nola::detail::secant_impl(f, x0, x1, tol, maxiter);
   }
-*/
+
 
 
 } // namespace nola

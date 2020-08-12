@@ -8,13 +8,19 @@
 #include <nola/root.hxx>
 
 
+double f(double x)
+{ return x - std::exp(-x); }
+
+double fp(double x)
+{ return 1.0 + std::exp(-x); }
+
 int main()
 {
   std::cout << "\nNewton's Method Nola Interface Example." << std::endl;
 
   // Callback routine and derivative of callback routine (lambda definitions)
-  auto f  = [](double x) { return x   - std::exp(-x); };
-  auto fp = [](double x) { return 1.0 + std::exp(-x); };
+//  auto f  = [](double x) { return x   - std::exp(-x); };
+//  auto fp = [](double x) { return 1.0 + std::exp(-x); };
 
   // Initial point
   double x0 = 1000.0;
