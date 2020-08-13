@@ -6,6 +6,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <vector>
+
 #include "mean_serial.hxx"
 #include "mean_simd.hxx"
 #include "mean_parallel.hxx"
@@ -55,6 +56,7 @@ int main()
 
   std::cout << "time to compute: " << d.count() << std::endl;
 
+
   //
   // Parallel
 
@@ -67,6 +69,7 @@ int main()
   d = s2 - s1;
 
   std::cout << "time to compute: " << d.count() << std::endl;
+
 
   //
   // Parallel SIMD
