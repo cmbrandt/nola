@@ -9,7 +9,7 @@
 
 int main()
 {
-  std::cout << "\nCovariance Nola Interface Example." << std::endl;
+  std::cout << "\nCovariance C++17 Interface Example." << std::endl;
 
   // Two sequences of values
   std::vector<double> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };

@@ -13,7 +13,7 @@ double g(double x)
 
 int main()
 {
-  std::cout << "\nFixed-Point Method Nola Interface Example." << std::endl;
+  std::cout << "\nFixed-Point Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
 //  auto g = [](double x) { return std::exp(-x); };

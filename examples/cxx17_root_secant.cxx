@@ -13,7 +13,7 @@ double f(double x)
 
 int main()
 {
-  std::cout << "\nSecant Method Nola Interface Example." << std::endl;
+  std::cout << "\nSecant Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
 //  auto f = [](double x) { return x - std::exp(-x); };

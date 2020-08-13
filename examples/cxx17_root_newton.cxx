@@ -16,7 +16,7 @@ double fp(double x)
 
 int main()
 {
-  std::cout << "\nNewton's Method Nola Interface Example." << std::endl;
+  std::cout << "\nNewton's Method C++17 Interface Example." << std::endl;
 
   // Callback routine and derivative of callback routine (lambda definitions)
 //  auto f  = [](double x) { return x   - std::exp(-x); };

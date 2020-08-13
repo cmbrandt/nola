@@ -9,7 +9,7 @@
 
 int main()
 {
-  std::cout << "\nVariance Nola Interface Example." << std::endl;
+  std::cout << "\nVariance C++17 Interface Example." << std::endl;
 
   // Sequence of values
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };

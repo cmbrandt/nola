@@ -13,7 +13,7 @@ double f(double x)
 
 int main()
 {
-  std::cout << "\nBrent's Method Nola Interface Example." << std::endl;
+  std::cout << "\nBrent's Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
 //  auto f = [](double x) { return x - std::exp(-x); };
