@@ -14,7 +14,7 @@
 
 int main()
 {
-  std::cout << "\nArithmetic Mean Nola Interface Example." << std::endl;
+  std::cout << "\nArithmetic Mean C++17 Interface Example." << std::endl;
 
 
   //
