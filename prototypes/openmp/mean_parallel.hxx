@@ -18,7 +18,7 @@ namespace nola {
 
     Real sum{0.0};
 
-  //#pragma omp parallel for private(x)
+#pragma omp parallel for reduction(+:sum)
     for (std::size_t i = 0; i < n; ++i)
       sum += x[i];
 

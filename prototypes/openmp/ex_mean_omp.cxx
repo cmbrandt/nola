@@ -1,6 +1,8 @@
 // ex_mean_omp.cxx
 
+// g++-9 -std=c++17 -O3 -fopenmp ex_mean_omp.cxx -o mean
 
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <vector>
@@ -14,23 +16,69 @@ int main()
 {
   std::cout << "\nArithmetic Mean Nola Interface Example." << std::endl;
 
+
+  //
   // Sequence of values
   std::vector<double> x(1000000000, 5.0);
 
+
+  //
+  // Declare start and stop time points
+  std::chrono::steady_clock::time_point s1, s2;
+  std::chrono::duration<double>         d;
+
+
+  //
   // Serial
+
+  s1 = std::chrono::steady_clock::now();
+
   double m1 = nola::arithmetic_mean_serial( x.data(), x.size() );
-  std::cout << "\narithmetic_mean_serial        = " << m1 << std::endl; // m = 0.6000
+  std::cout << "\narithmetic_mean_serial        = " << m1 << std::endl;
 
+  s2 = std::chrono::steady_clock::now();
+  d = s2 - s1;
+
+  std::cout << "time to compute: " << d.count() << std::endl;
+
+
+  //
   // SIMD
+
+  s1 = std::chrono::steady_clock::now();
+
   double m2 = nola::arithmetic_mean_simd( x.data(), x.size() );
-  std::cout << "\narithmetic_mean_simd          = " << m2 << std::endl; // m = 0.6000
+  std::cout << "\narithmetic_mean_simd          = " << m2 << std::endl;
 
+  s2 = std::chrono::steady_clock::now();
+  d = s2 - s1;
+
+  std::cout << "time to compute: " << d.count() << std::endl;
+
+  //
   // Parallel
-  double m3 = nola::arithmetic_mean_parallel( x.data(), x.size() );
-  std::cout << "\narithmetic_mean_parallel      = " << m3 << std::endl; // m = 0.6000
 
+  s1 = std::chrono::steady_clock::now();
+
+  double m3 = nola::arithmetic_mean_parallel( x.data(), x.size() );
+  std::cout << "\narithmetic_mean_parallel      = " << m3 << std::endl;
+
+  s2 = std::chrono::steady_clock::now();
+  d = s2 - s1;
+
+  std::cout << "time to compute: " << d.count() << std::endl;
+
+  //
   // Parallel SIMD
+
+  s1 = std::chrono::steady_clock::now();
+
   double m4 = nola::arithmetic_mean_parallel_simd( x.data(), x.size() );
-  std::cout << "\narithmetic_mean_parallel_simd = " << m4 << std::endl; // m = 0.6000
+  std::cout << "\narithmetic_mean_parallel_simd = " << m4 << std::endl;
+
+  s2 = std::chrono::steady_clock::now();
+  d = s2 - s1;
+
+  std::cout << "time to compute: " << d.count() << std::endl << std::endl;
 
 }
