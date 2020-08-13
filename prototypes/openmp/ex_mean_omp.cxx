@@ -38,9 +38,9 @@ int main()
   std::cout << "\narithmetic_mean_serial        = " << m1 << std::endl;
 
   s2 = std::chrono::steady_clock::now();
-  d = s2 - s1;
+  d  = s2 - s1;
 
-  std::cout << "time to compute: " << d.count() << std::endl;
+  std::cout << "time to compute:  " << d.count() << std::endl;
 
 
   //
@@ -52,9 +52,9 @@ int main()
   std::cout << "\narithmetic_mean_simd          = " << m2 << std::endl;
 
   s2 = std::chrono::steady_clock::now();
-  d = s2 - s1;
+  d  = s2 - s1;
 
-  std::cout << "time to compute: " << d.count() << std::endl;
+  std::cout << "time to compute:  " << d.count() << std::endl;
 
 
   //
@@ -66,9 +66,9 @@ int main()
   std::cout << "\narithmetic_mean_parallel      = " << m3 << std::endl;
 
   s2 = std::chrono::steady_clock::now();
-  d = s2 - s1;
+  d  = s2 - s1;
 
-  std::cout << "time to compute: " << d.count() << std::endl;
+  std::cout << "time to compute:  " << d.count() << std::endl;
 
 
   //
@@ -80,8 +80,8 @@ int main()
   std::cout << "\narithmetic_mean_parallel_simd = " << m4 << std::endl;
 
   s2 = std::chrono::steady_clock::now();
-  d = s2 - s1;
+  d  = s2 - s1;
 
-  std::cout << "time to compute: " << d.count() << std::endl << std::endl;
+  std::cout << "time to compute:  " << d.count() << std::endl << std::endl;
 
 }
