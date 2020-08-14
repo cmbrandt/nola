@@ -12,20 +12,34 @@ namespace nola {
   //
   // Execution policies
 
+  namespace detail {
+
+    template <std::size_t NumThreads>
+    class parallel {
+      // tag class of sorts ??
+    };
+
+  } // namespace detail
+
   class serial {
-    // class definition
+    //
+    // just a simple tag class ??
   };
 
 
-  template <class A, class B, class C>
+  template <class Parallel, class Simd>
   class openmp {
-    // class definition
+    // template parameter Parallel is either nola::par  or nola::no_par
+    // template parameter Simd     is either nola::simd or nola::no_simd
+
+    // How to you add the number of threads to this interface ??
   };
 
 
-  template <class A, class B, class C>
+  template <std::size_t Blocks, std::size_t Cores, class Threads>
   clas cuda {
-    // class definition
+    //
+    // similar design as nola::openmp
   };
 
 } // namespace nola
