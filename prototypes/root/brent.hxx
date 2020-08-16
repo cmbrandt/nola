@@ -15,13 +15,13 @@ namespace nola {
   //
   // Declarations
 
-  template <class Real>
+  template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(Real (*f)(Real), Real x0, Real x1);
+  brent(F f, Real x0, Real x1);
 
-  template <class Real>
+  template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t maxiter);
+  brent(F f, Real x0, Real x1, Real tol, std::size_t maxiter);
 
 
 
@@ -30,9 +30,9 @@ namespace nola {
 
   namespace detail {
 
-    template <class Real>
+    template <class F, class Real>
     inline std::tuple<Real, std::size_t>
-    brent_impl(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t iter)
+    brent_impl(F f, Real x0, Real x1, Real tol, std::size_t iter)
     {
       Real fx0 = f(x0);
       Real fx1 = f(x1);
@@ -115,9 +115,9 @@ namespace nola {
   //
   // C++17 Interfaces
 
-  template <class Real>
+  template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(Real (*f)(Real), Real x0, Real x1)
+  brent(F f, Real x0, Real x1)
   {
     Real tol = 1e-10;
     std::size_t maxiter = 100;
@@ -125,9 +125,9 @@ namespace nola {
     return nola::detail::brent_impl(f, x0, x1, tol, maxiter);
   }
 
-  template <class Real>
+  template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(Real (*f)(Real), Real x0, Real x1, Real tol, std::size_t maxiter)
+  brent(F f, Real x0, Real x1, Real tol, std::size_t maxiter)
   {
     return nola::detail::brent_impl(f, x0, x1, tol, maxiter);
   }

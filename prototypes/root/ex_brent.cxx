@@ -9,15 +9,33 @@
 #include "brent.hxx"
 
 
-double f(double x)
+double f1(double x)
 { return x - std::exp(-x); };
+
+
+struct F_no_state {
+  double operator()(double x) { return x - std::exp(-x); };
+};
+
+
+struct F_state {
+  double operator()(double x) { return x - std::exp(-x); };
+  double value = 5.0;
+};
+
 
 int main()
 {
   std::cout << "\nBrent's Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-//  auto f = [](double x) { return x - std::exp(-x); };
+  auto f2 = [](double x) { return x - std::exp(-x); };
+
+  // Function object without state
+  F_no_state f3;
+
+  // Function object with state
+  F_state    f4;
 
   // Initial points
   double x0 = -1.0;
@@ -30,8 +48,8 @@ int main()
   std::size_t maxit = 100;
 
   // Compute root of f
-  auto [r1, iter1] = nola::brent(f, x0, x1);
-  auto [r2, iter2] = nola::brent(f, x0, x1, tol, maxit);
+  auto [r1, iter1] = nola::brent(f4, x0, x1);
+  auto [r2, iter2] = nola::brent(f4, x0, x1, tol, maxit);
 
   // Display result
   std::cout << std::setprecision(10)
