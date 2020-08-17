@@ -1,6 +1,8 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
+// g++-9 -std=c++17 -Wall -I /Users/cmbrandt/projects/nola/include/ cxx17_root_fixed_point.cxx -o fixed_point
+
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
@@ -8,15 +10,15 @@
 #include <nola/root.hxx>
 
 
-double g(double x)
-{ return std::exp(-x); }
+//double g(double x)
+//{ return std::exp(-x); }
 
 int main()
 {
   std::cout << "\nFixed-Point Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-//  auto g = [](double x) { return std::exp(-x); };
+  auto g = [](double x) { return std::exp(-x); };
 
   // Initial point
   double x0 = 1000.0;

@@ -7,6 +7,7 @@
 #include <cmath>   // std::abs
 #include <cstdlib> // std::size_t
 #include <limits>  // std::numeric_limits
+#include <utility> // std::forward
 
 
 
@@ -17,11 +18,11 @@ namespace nola {
 
   template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(F const& f, Real x0, Real x1);
+  brent(F f, Real x0, Real x1);
 
   template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(F const& f, Real x0, Real x1, Real tol, std::size_t maxiter);
+  brent(F f, Real x0, Real x1, Real tol, std::size_t maxiter);
 
 
 
@@ -32,7 +33,7 @@ namespace nola {
 
     template <class F, class Real>
     inline std::tuple<Real, std::size_t>
-    brent_impl(F const& f, Real x0, Real x1, Real tol, std::size_t iter)
+    brent_impl(F f, Real x0, Real x1, Real tol, std::size_t iter)
     {
       Real fx0 = f(x0);
       Real fx1 = f(x1);
@@ -117,19 +118,19 @@ namespace nola {
 
   template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(F const& f, Real x0, Real x1)
+  brent(F f, Real x0, Real x1)
   {
     Real tol = 1e-10;
     std::size_t maxiter = 100;
 
-    return nola::detail::brent_impl(f, x0, x1, tol, maxiter);
+    return nola::detail::brent_impl(std::forward<F>(f), x0, x1, tol, maxiter);
   }
 
   template <class F, class Real>
   inline std::tuple<Real, std::size_t>
-  brent(F const& f, Real x0, Real x1, Real tol, std::size_t maxiter)
+  brent(F f, Real x0, Real x1, Real tol, std::size_t maxiter)
   {
-    return nola::detail::brent_impl(f, x0, x1, tol, maxiter);
+    return nola::detail::brent_impl(std::forward<F>(f), x0, x1, tol, maxiter);
   }
 
 

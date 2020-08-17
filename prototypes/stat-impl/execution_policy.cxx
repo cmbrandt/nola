@@ -11,13 +11,16 @@
 using Serial  = nola::serial;
 
 // OpenMP parallel
-using OmpPar  = nola::openmp<par, no_vec>;
+using OmpPar  = nola::openmp<par, no_simd>;
 
 // OpenMP vectorized
-using OmpSimd = nola::openmp<no_par, vec>;
+using OmpSimd = nola::openmp<no_par, simd>;
 
 // OpenMP parallel vectorized
-using OmpParSimd = nola::openmp<par, vec>;
+using OmpParSimd = nola::openmp<par, simd>;
+
+// Cuda execution
+using Cuda = nola::cuda<3, 3, 3>;
 
 
 

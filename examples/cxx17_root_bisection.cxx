@@ -1,6 +1,8 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
+// g++-9 -std=c++17 -Wall -I /Users/cmbrandt/projects/nola/include/ cxx17_root_bisection.cxx -o bisec
+
 #include <cmath>
 #include <cstdlib>
 #include <iomanip>
@@ -8,15 +10,15 @@
 #include <nola/root.hxx>
 
 
-double f(double x)
-{ return x - std::exp(-x); };
+//double f(double x)
+//{ return x - std::exp(-x); };
 
 int main()
 {
   std::cout << "\nBisection Method C++17 Interface Example." << std::endl;
 
   // Callback routine (lambda definition)
-//  auto f = [](double x) { return x - std::exp(-x); };
+  auto f = [](double x) { return x - std::exp(-x); };
 
   
   // End points of interval
