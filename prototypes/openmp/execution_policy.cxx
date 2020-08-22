@@ -4,34 +4,53 @@
 
 
 
-//
-// Example usage
+// Possible OMP Interface Design (Including Type Aliases)
+
+
+// Possible Base Class Specification
+template <std::size_t NumThreads, Simd S>
+openmp<NumThreads, S>;
 
 // Serial execution
-using Serial  = nola::serial;
+using nola::serial = nola::openmp<1, nola::no_simd>;
 
 // OpenMP parallel
-using OmpPar  = nola::openmp<par, no_vec>;
+template <std::size_t NumThreads>
+using nola::omp_par  = nola::openmp<NumThreads, nola::no_simd>;
 
 // OpenMP vectorized
-using OmpSimd = nola::openmp<no_par, vec>;
+using nola::omp_vec  = nola::openmp<1, nola::simd>;
 
 // OpenMP parallel vectorized
-using OmpParSimd = nola::openmp<par, vec>;
+template <std::size_t NumThreads>
+using nola::omp_parvec  = nola::openmp<NumThreads, nola::simd>;
+
+
+// Possible OMP Usage
+
+// Serial execution
+using Serial = nola::serial;
+
+// OpenMP parallel with 4 threads
+using OmpPar = nola::omp_par<4>;
+
+// OpenMP vectorized
+using OmpVec = nola::omp_vec;
+
+// OpenMP parallel vectorized with 4 threads
+using OmpParVec = nola::omp_parvec<4>;
 
 
 
-//
-// Customized parallel execution
+// Possible CUDA Inteface Design
 
-// 4 parallel threads
-using OmpCustomPar = nola::openmp<Par, NoVec>(4);
 
-// close thread affinity
-using OmpCustomPar = nola::openmp<Par, NoVec>(close);
+// Possible Base Class Specification
+template <std::size_t NumBlocks, std::size_t NumThreads, std::size_t NumIdk>
+cuda<NumBlocks, NumThreads, NumIdk>;
 
-// 8 parallel threads with spread affinity
-using OmpCustomPar = nola::openmp<Par, NoVec>(8, spread);
+// Possible CUDA Usage
+using Cuda = nola::cuda<10, 20, 20>;
 
 
 // Constructors for optional Parallel arguments:
@@ -41,3 +60,6 @@ using OmpCustomPar = nola::openmp<Par, NoVec>(8, spread);
 // (4) num_threads, affinity
 // (5) num_threads, schedule, chunk_size
 // (6) 
+
+
+
