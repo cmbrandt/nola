@@ -8,22 +8,31 @@
 
 
 // Possible Base Class Specification
-template <std::size_t NumThreads, Simd S>
-openmp<NumThreads, S>;
+template <std::size_t NumThreads, Simd S> // S needs to be locked down.. NOT a customization point for users !!!
+struct openmp<NumThreads, S> {
+
+  // Constructor
+  template <std::size_t NumThreads, Simd S>
+  constexpr openmp() = default;
+
+  // Accessor
+  constexpr std::size_t num_threads() { return NumThreads; };
+};
+
 
 // Serial execution
 using nola::serial = nola::openmp<1, nola::no_simd>;
 
 // OpenMP parallel
 template <std::size_t NumThreads>
-using nola::omp_par  = nola::openmp<NumThreads, nola::no_simd>;
+using nola::omp_par = nola::openmp<NumThreads, nola::no_simd>;
 
 // OpenMP vectorized
-using nola::omp_vec  = nola::openmp<1, nola::simd>;
+using nola::omp_vec = nola::openmp<1, nola::simd>;
 
 // OpenMP parallel vectorized
 template <std::size_t NumThreads>
-using nola::omp_parvec  = nola::openmp<NumThreads, nola::simd>;
+using nola::omp_parvec = nola::openmp<NumThreads, nola::simd>;
 
 
 // Possible OMP Usage
@@ -47,9 +56,20 @@ using OmpParVec = nola::omp_parvec<4>;
 
 // Possible Base Class Specification
 template <std::size_t NumBlocks, std::size_t NumThreads, std::size_t NumIdk>
-cuda<NumBlocks, NumThreads, NumIdk>;
+struct cuda<NumBlocks, NumThreads, NumIdk> {
 
-// Possible CUDA Usage
+  // Constructor
+  template <std::size_t NumBlocks, std::size_t NumThreads, std::size_t NumIdk>
+  constexpr cuda() = default;
+  
+  // Accessors
+  constexpr std::size_t num_blocks()  { return NumBlocks;  };
+  constexpr std::size_t num_threads() { return NumThreads; };
+  constexpr std::size_t num_idk()     { return NumIdk;     };
+};
+
+
+// Possible CUDA Usage with 10 blocks, 20 threads per block, and 20 ???
 using Cuda = nola::cuda<10, 20, 20>;
 
 
