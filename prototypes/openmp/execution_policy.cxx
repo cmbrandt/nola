@@ -15,7 +15,6 @@ inline constexpr simd_t simd = { };
 struct no_simd_t { };
 inline constexpr no_simd_t no_simd = { };
 
-
 // Possible Base Class Specifications
 
 template <std::size_t NumThreads, class nola::simd_t> // nola::simd_t is a tag class
@@ -62,24 +61,24 @@ using nola::omp_parvec = nola::openmp<NumThreads, nola::simd_t>;
 
 // Serial execution
 using Serial = nola::serial;
+Serial serial;
 //nola::serial Serial;
 
 // OpenMP parallel with 4 threads
-using OmpPar = nola::omp_par<4>;
+using Omp_par = nola::omp_par<4>;
 //nola::omp_par<4> OmpPar;
 
 // OpenMP vectorized
-using OmpVec = nola::omp_vec;
+using Omp_vec = nola::omp_vec;
 //nola::omp_vec OmpVec;
 
 // OpenMP parallel vectorized with 4 threads
-using OmpParVec = nola::omp_parvec<4>;
+using Omp_parvec = nola::omp_parvec<4>;
 //nola::omp_parvec<4> OmpParVec;
 
 
 //
 // Possible CUDA Inteface Design
-
 
 // Possible Base Class Specification
 
