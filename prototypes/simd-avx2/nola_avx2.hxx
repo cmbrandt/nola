@@ -21,7 +21,7 @@ using v256d = __m256d;
 
 // Single precision
 inline v256f avx2_set_scalar(float a);
-//inline v256f avx2_set_zero();
+inline v256f avx2_set_zero();
 //inline v256f avx2_broadcast(float const* addr);
 //inline v256f avx2_load(float const* addr);
 void         avx2_store(float* addr, v256f a);
@@ -54,10 +54,10 @@ inline v256d avx2_fma(v256d a, v256d b, v256d c);
 // Single precision
 inline v256f
 avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
-/*
+
 inline v256f
 avx2_set_zero() { return _mm256_setzero_ps(); }
-
+/*
 inline v256f
 avx2_broadcast(float const& addr) { return _mm256_broadcast_ss(addr); }
 

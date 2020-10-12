@@ -1,5 +1,12 @@
 // avx2_set_scalar.cxx
 
+// Compile:
+//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_set_scalar.cxx -o set_scalar.exe
+
+// Usage:
+//    ./set_scalar.exe
+
+
 #include <array>
 #include <iostream>
 #include "nola_avx2.hxx"
