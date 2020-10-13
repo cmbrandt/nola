@@ -1,10 +1,10 @@
-// avx2_set_scalar.cxx
+// avx2_float_set_scalar.cxx
 
 // Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_set_scalar.cxx -o set_scalar.exe
+//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_float_set_scalar.cxx -o float_set_scalar.exe
 
 // Usage:
-//    ./set_scalar.exe
+//    ./float_set_scalar.exe
 
 
 #include <array>
@@ -14,13 +14,11 @@
 
 int main()
 {
-  float a = 5.0;
-
-  nola::v256f av = nola::avx2_set_scalar(a);
+  nola::v256f av = nola::avx2_set_scalar( float(5.0) );
 
   std::array<float, 8> v;
 
-  nola::avx2_store(v.data(), av);
+  nola::avx2_store( v.data(), av );
 
   std::cout << "v = " << v[0] << " " << v[1] << " "
                       << v[2] << " " << v[3] << " "

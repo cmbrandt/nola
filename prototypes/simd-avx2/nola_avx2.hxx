@@ -4,6 +4,7 @@
 #define NOLA_AVX2_HXX
 
 
+#include <utility>
 #include <immintrin.h>
 
 
@@ -20,19 +21,17 @@ using v256d = __m256d;
 // Function declarations
 
 // Single precision
-inline v256f avx2_set_scalar(float a);
+//inline v256f avx2_set_scalar(float a);
 inline v256f avx2_set_zero();
-//inline v256f avx2_broadcast(float const* addr);
-//inline v256f avx2_load(float const* addr);
-void         avx2_store(float* addr, v256f a);
-/*
+inline v256f avx2_broadcast(float const* addr);
+inline v256f avx2_load(float const* addr);
+inline void  avx2_store(float* addr, v256f a);
 inline v256f avx2_add(v256f a, v256f b);
 inline v256f avx2_sub(v256f a, v256f b);
 inline v256f avx2_mul(v256f a, v256f b);
 inline v256f avx2_div(v256f a, v256f b);
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
 
-*/
 
 /*
 // Double precision
@@ -52,21 +51,21 @@ inline v256d avx2_fma(v256d a, v256d b, v256d c);
 // Function implementations
 
 // Single precision
-inline v256f
-avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
+//inline v256f
+//avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
 
 inline v256f
 avx2_set_zero() { return _mm256_setzero_ps(); }
-/*
-inline v256f
-avx2_broadcast(float const& addr) { return _mm256_broadcast_ss(addr); }
 
 inline v256f
-avx2_load(float const& addr)  return _mm256_load_ps(addr); }
-*/
+avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
+
+inline v256f
+avx2_load(float const* addr) { return _mm256_load_ps(addr); }
+
 inline void
 avx2_store(float* addr, v256f a) { _mm256_store_ps(addr, a); }
-/*
+
 inline v256f
 avx2_add(v256f a, v256f b) { return _mm256_add_ps(a, b); }
 
@@ -74,14 +73,14 @@ inline v256f
 avx2_sub(v256f a, v256f b) { return _mm256_sub_ps(a, b); }
 
 inline v256f
-avx2_mul(v256f a, v256f b) { return _mm256_mul(a, b); }
+avx2_mul(v256f a, v256f b) { return _mm256_mul_ps(a, b); }
 
 inline v256f
-avx2_div(v256f a, v256f b) { return _mm256_div(a, b); }
+avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
 
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
-*/
+
 
 // Double precision
 

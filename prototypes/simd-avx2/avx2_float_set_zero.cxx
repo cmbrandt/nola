@@ -1,10 +1,10 @@
-// avx2_set_zero.cxx
+// avx2_float_set_zero.cxx
 
 // Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_set_zero.cxx -o set_zero.exe
+//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_float_set_zero.cxx -o float_set_zero.exe
 
 // Usage:
-//    ./set_zero.exe
+//    ./float_set_zero.exe
 
 
 #include <array>
@@ -18,7 +18,7 @@ int main()
 
   std::array<float, 8> v;
 
-  nola::avx2_store(v.data(), av);
+  nola::avx2_store( v.data(), av );
 
   std::cout << "v = " << v[0] << " " << v[1] << " "
                       << v[2] << " " << v[3] << " "
