@@ -14,14 +14,14 @@
 
 int main()
 {
+  std::array<float, 8> a;
+
   nola::v256f av = nola::avx2_set_scalar( float(5.0) );
 
-  std::array<float, 8> v;
+  nola::avx2_store( a.data(), av );
 
-  nola::avx2_store( v.data(), av );
-
-  std::cout << "v = " << v[0] << " " << v[1] << " "
-                      << v[2] << " " << v[3] << " "
-                      << v[4] << " " << v[5] << " "
-                      << v[6] << " " << v[7] << std::endl;
+  std::cout << "v = " << a[0] << " " << a[1] << " "
+                      << a[2] << " " << a[3] << " "
+                      << a[4] << " " << a[5] << " "
+                      << a[6] << " " << a[7] << std::endl;
 }

@@ -51,6 +51,7 @@ inline v256d avx2_fma(v256d a, v256d b, v256d c);
 // Function implementations
 
 // Single precision
+
 //inline v256f
 //avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
 
@@ -83,6 +84,7 @@ avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
 
 
 // Double precision
+
 //inline v256d
 //avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 

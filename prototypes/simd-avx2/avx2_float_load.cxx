@@ -15,15 +15,14 @@
 int main()
 {
   std::array<float, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
+  std::array<float, 8> b;
 
   nola::v256f av = nola::avx2_load( a.data() );
 
-  std::array<float, 8> v;
+  nola::avx2_store( b.data(), av );
 
-  nola::avx2_store( v.data(), av );
-
-  std::cout << "v = " << v[0] << " " << v[1] << " "
-                      << v[2] << " " << v[3] << " "
-                      << v[4] << " " << v[5] << " "
-                      << v[6] << " " << v[7] << std::endl;
+  std::cout << "v = " << b[0] << " " << b[1] << " "
+                      << b[2] << " " << b[3] << " "
+                      << b[4] << " " << b[5] << " "
+                      << b[6] << " " << b[7] << std::endl;
 }
