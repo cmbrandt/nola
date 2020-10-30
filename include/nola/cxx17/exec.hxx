@@ -11,8 +11,17 @@ namespace exec
 {
 
 
+struct sequential { };
+constexpr sequential seq;
 
+struct unsequential { };
+constexpr unsequential unseq;
 
+struct parallel { };
+constexpr parallel par;
+
+struct parallel_unsequential { };
+constexpr parallel_unsequential par_unseq;
 
 
 } // namespace exec

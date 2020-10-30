@@ -1,8 +1,8 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#ifndef NOLA_STAT_IMPL_PAR_HXX
-#define NOLA_STAT_IMPL_PAR_HXX
+#ifndef NOLA_DETAIL_STAT_PAR_UNSEQ_HXX
+#define NOLA_DETAIL_STAT_PAR_UNSEQ_HXX
 
 #include <cmath>
 #include <cstdint>
@@ -18,7 +18,7 @@ namespace detail
 
 
 //----------------------------------------------------------------------------//
-// Parallel Implementations
+// Statistics Parallel Unsequential Implementations
 
 
 //
@@ -26,15 +26,15 @@ namespace detail
 
 template <class Real>
 inline Real
-arithmetic_mean_impl(nola::exec::par, std::int32_t n, const Real x[ ])
+arithmetic_mean_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 {
   // Compute and return the mean of the sequence
   Real sum{0.0};
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x)       \
-    firstprivate (n)       \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x)            \
+    firstprivate (n)            \
     reduction    (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -48,15 +48,15 @@ arithmetic_mean_impl(nola::exec::par, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-variance_impl(nola::exec::par, std::int32_t n, const Real x[ ])
+variance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x)       \
-    firstprivate (n)       \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x)            \
+    firstprivate (n)            \
     reduction    (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -66,10 +66,10 @@ variance_impl(nola::exec::par, std::int32_t n, const Real x[ ])
   // Compute and return the variance of the sequence
   sum = 0.0;
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x)       \
-    firstprivate (n, mean) \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x)            \
+    firstprivate (n, mean)      \
     reduction    (+:sum)
   for (std::int32_t i = 0; i < n; ++i) {
     Real center = x[i] - mean;
@@ -85,15 +85,15 @@ variance_impl(nola::exec::par, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-standard_deviation_impl(nola::exec::par, std::int32_t n, const Real x[ ])
+standard_deviation_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x)       \
-    firstprivate (n)       \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x)            \
+    firstprivate (n)            \
     reduction    (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -103,10 +103,10 @@ standard_deviation_impl(nola::exec::par, std::int32_t n, const Real x[ ])
   // Compute the variance of the sequence
   sum = 0.0;
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x)       \
-    firstprivate (n, mean) \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x)            \
+    firstprivate (n, mean)      \
     reduction    (+:sum)
   for (std::int32_t i = 0; i < n; ++i) {
     Real center = x[i] - mean;
@@ -125,16 +125,16 @@ standard_deviation_impl(nola::exec::par, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-covariance_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[ ])
+covariance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x, y)    \
-    firstprivate (n)       \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x, y)         \
+    firstprivate (n)            \
     reduction    (+:sum1, sum2)
   for (std::int32_t i = 0; i < n; ++i) {
     sum1 += x[i];
@@ -147,7 +147,7 @@ covariance_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[ 
   // Compute and return the covariance of two sequences
   sum1 = 0.0;
 
-  #pragma omp parallel for           \
+  #pragma omp parallel for simd      \
     default      (none)              \
     shared       (x, y)              \
     firstprivate (n, x_mean, y_mean) \
@@ -167,16 +167,16 @@ covariance_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[ 
 
 template <class Real>
 inline Real
-correlation_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[ ])
+correlation_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
 
-  #pragma omp parallel for \
-    default      (none)    \
-    shared       (x, y)    \
-    firstprivate (n)       \
+  #pragma omp parallel for simd \
+    default      (none)         \
+    shared       (x, y)         \
+    firstprivate (n)            \
     reduction    (+:sum1, sum2)
   for (std::int32_t i = 0; i < n; ++i) {
     sum1 += x[i];
@@ -190,7 +190,7 @@ correlation_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[
   sum1 = 0.0;
   sum2 = 0.0;
 
-  #pragma omp parallel for           \
+  #pragma omp parallel for simd      \
     default      (none)              \
     shared       (x, y)              \
     firstprivate (n, x_mean, y_mean) \
@@ -212,7 +212,7 @@ correlation_impl(nola::exec::par, std::int32_t n, const Real x[ ], const Real y[
   // Compute and return the correlation between two sequences
   sum1 = 0.0;
 
-  #pragma omp parallel for           \
+  #pragma omp parallel for simd      \
     default      (none)              \
     shared       (x, y)              \
     firstprivate (n, x_mean, y_mean) \

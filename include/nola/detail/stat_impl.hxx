@@ -1,8 +1,8 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#ifndef NOLA_STAT_IMPL_HXX
-#define NOLA_STAT_IMPL_HXX
+#ifndef NOLA_DETAIL_STAT_HXX
+#define NOLA_DETAIL_STAT_HXX
 
 #include <cmath>
 #include <cstdint>
@@ -17,7 +17,7 @@ namespace detail
 
 
 //----------------------------------------------------------------------------//
-// Sequential Implementations
+// Statistics Implementation
 
 
 //

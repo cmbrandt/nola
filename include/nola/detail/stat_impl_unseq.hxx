@@ -1,8 +1,8 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#ifndef NOLA_STAT_IMPL_UNSEQ_HXX
-#define NOLA_STAT_IMPL_UNSEQ_HXX
+#ifndef NOLA_DETAIL_STAT_UNSEQ_HXX
+#define NOLA_DETAIL_STAT_UNSEQ_HXX
 
 #include <cmath>
 #include <cstdint>
@@ -18,7 +18,7 @@ namespace detail
 
 
 //----------------------------------------------------------------------------//
-// Unsequential Implementations
+// Statistics Unsequential Implementations
 
 
 //
