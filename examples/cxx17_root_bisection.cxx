@@ -7,7 +7,7 @@
 #include <cstdlib>
 #include <iomanip>
 #include <iostream>
-#include <nola/root.hxx>
+#include <nola/cxx17/root.hxx>
 
 
 //double f(double x)
@@ -32,8 +32,8 @@ int main()
   std::size_t maxit = 100;
 
   // Compute root of f
-  auto [r1, iter1] = nola::bisection(f, a, b);
-  auto [r2, iter2] = nola::bisection(f, a, b, tol, maxit);
+  auto [r1, iter1] = nola::root::bisection(f, a, b);
+  auto [r2, iter2] = nola::root::bisection(f, a, b, tol, maxit);
 
   // Display result
   std::cout << std::setprecision(10)
