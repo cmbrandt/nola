@@ -1,8 +1,6 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-// g++-9 -std=c++17 -Wall -I ~/projects/nola/include/ cxx17_root_newton.cxx -o newton
-
 #include <cmath>
 #include <cstdint>
 #include <iomanip>
@@ -10,17 +8,18 @@
 #include <nola/cxx17/root.hxx>
 
 
-//double f(double x)
-//{ return x - std::exp(-x); }
+// Callback routine and derivative (free function definitions)
+// double f(double x)
+// { return x - std::exp(-x); }
 
-//double fp(double x)
-//{ return 1.0 + std::exp(-x); }
+// double fp(double x)
+// { return 1.0 + std::exp(-x); }
 
 int main()
 {
   std::cout << "\nNewton's Method C++17 Interface Example." << std::endl;
 
-  // Callback routine and derivative of callback routine (lambda definitions)
+  // Callback routine and derivative (lambda definitions)
   auto f  = [](double x) { return x   - std::exp(-x); };
   auto fp = [](double x) { return 1.0 + std::exp(-x); };
 

@@ -1,8 +1,6 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-// g++-9 -std=c++17 -Wall -I ~/projects/nola/include/ cxx17_root_brent.cxx -o brent
-
 #include <cmath>
 #include <cstdint>
 #include <iomanip>
@@ -10,8 +8,9 @@
 #include <nola/cxx17/root.hxx>
 
 
-//double f(double x)
-//{ return x - std::exp(-x); };
+// Callback routine (free function definition)
+// double f(double x)
+// { return x - std::exp(-x); };
 
 int main()
 {
