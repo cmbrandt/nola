@@ -18,7 +18,7 @@ namespace nola {
 
     Real sum{0.0};
 
-#pragma omp simd
+#pragma omp simd reduction (+:sum)
     for (std::size_t i = 0; i < n; ++i)
       sum += x[i];
 

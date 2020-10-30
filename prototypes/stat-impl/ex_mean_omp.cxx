@@ -20,7 +20,7 @@ int main()
 
   //
   // Sequence of values
-  std::vector<double> x(1000000000, 5.0);
+  std::vector<double> x(100000000, 5.0);
 
 
   //
