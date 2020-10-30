@@ -1,10 +1,10 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-// g++-9 -std=c++17 -Wall -I /Users/cmbrandt/projects/nola/include/ cxx17_root_bisection.cxx -o bisec
+// g++-9 -std=c++17 -Wall -I ~/projects/nola/include/ cxx17_root_bisection.cxx -o bisec
 
 #include <cmath>
-#include <cstdlib>
+#include <cstdint>
 #include <iomanip>
 #include <iostream>
 #include <nola/cxx17/root.hxx>
@@ -20,7 +20,6 @@ int main()
   // Callback routine (lambda definition)
   auto f = [](double x) { return x - std::exp(-x); };
 
-  
   // End points of interval
   double a = -1.0;
   double b =  1000.0;
@@ -29,7 +28,7 @@ int main()
   double tol = 1e-12;
 
   // Maximum interations
-  std::size_t maxit = 100;
+  std::int32_t maxit = 100;
 
   // Compute root of f
   auto [r1, iter1] = nola::root::bisection(f, a, b);

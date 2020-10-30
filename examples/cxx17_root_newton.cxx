@@ -1,13 +1,13 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-// g++-9 -std=c++17 -Wall -I /Users/cmbrandt/projects/nola/include/ cxx17_root_newton.cxx -o newton
+// g++-9 -std=c++17 -Wall -I ~/projects/nola/include/ cxx17_root_newton.cxx -o newton
 
 #include <cmath>
-#include <cstdlib>
+#include <cstdint>
 #include <iomanip>
 #include <iostream>
-#include <nola/root.hxx>
+#include <nola/cxx17/root.hxx>
 
 
 //double f(double x)
@@ -31,11 +31,11 @@ int main()
   double tol = 1e-12;
 
   // Maximum interations
-  std::size_t maxit = 100;
+  std::int32_t maxit = 100;
 
   // Compute root of f
-  auto [r1, iter1] = nola::newton(f, fp, x0);
-  auto [r2, iter2] = nola::newton(f, fp, x0, tol, maxit);
+  auto [r1, iter1] = nola::root::newton(f, fp, x0);
+  auto [r2, iter2] = nola::root::newton(f, fp, x0, tol, maxit);
 
   // Display result
   std::cout << std::setprecision(10)
