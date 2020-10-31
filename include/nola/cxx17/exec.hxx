@@ -4,6 +4,10 @@
 #ifndef NOLA_CXX17_EXEC_HXX
 #define NOLA_CXX17_EXEC_HXX
 
+#include <nola/detail/stat_impl_unseq.hxx>
+#include <nola/detail/stat_impl_par.hxx>
+#include <nola/detail/stat_impl_par_unseq.hxx>
+
 
 namespace nola
 {
