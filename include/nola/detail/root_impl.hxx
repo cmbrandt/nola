@@ -4,11 +4,11 @@
 #ifndef NOLA_DETAIL_ROOT_HXX
 #define NOLA_DETAIL_ROOT_HXX
 
-#include <cassert>     // assert
-#include <cmath>       // std::abs
-#include <cstdint>     // std::int32_t
-#include <limits>      // std::numeric_limits
-#include <type_traits> //
+#include <cassert> // assert
+#include <cmath>   // std::abs
+#include <cstdint> // std::int32_t
+#include <limits>  // std::numeric_limits
+#include <tuple>   // std::tuple
 
 
 namespace nola

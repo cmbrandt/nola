@@ -5,6 +5,7 @@
 #define NOLA_CXX17_ROOT_HXX
 
 #include <cstdint> // std::int32_t
+#include <tuple>   // std::tuple
 #include <utility> // std::forward
 #include <nola/detail/root_impl.hxx>
 
@@ -82,7 +83,7 @@ template <class UnaryFunction>
 inline std::tuple<float, std::int32_t>
 bisection(UnaryFunction&& f, float a, float b)
 {
-  float        tol{1e-5};
+  float        tol{1e-05};
   std::int32_t maxiter{100};
   return detail::bisection_impl( std::forward<UnaryFunction>(f), a, b, tol, maxiter );
 }
@@ -111,7 +112,7 @@ template <class UnaryFunction>
 inline std::tuple<float, std::int32_t>
 brent(UnaryFunction&& f, float x0, float x1)
 {
-  float        tol{1e-5};
+  float        tol{1e-05};
   std::int32_t maxiter{100};
   return detail::brent_impl( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
 }
@@ -140,7 +141,7 @@ template <class UnaryFunction>
 inline std::tuple<float, std::int32_t>
 fixed_point(UnaryFunction&& g, float x0)
 {
-  float        tol{1e-5};
+  float        tol{1e-05};
   std::int32_t maxiter{100};
   return detail::fixed_point_impl( std::forward<UnaryFunction>(g), x0, tol, maxiter);
 }
@@ -171,7 +172,7 @@ template <class UnaryFunction1, class UnaryFunction2>
 inline std::tuple<float, std::int32_t>
 newton(UnaryFunction1&& f, UnaryFunction2&& fp, float x0)
 {
-  float        tol{1e-5};
+  float        tol{1e-05};
   std::int32_t maxiter{100};
   return detail::newton_impl( std::forward<UnaryFunction1>(f),
                               std::forward<UnaryFunction2>(fp),
@@ -197,16 +198,16 @@ template <class UnaryFunction, class Real>
 inline std::tuple<Real, std::int32_t>
 secant(UnaryFunction&& f, Real x0, Real x1, Real tol, std::int32_t maxiter)
 {
-  return detail::secant( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
+  return detail::secant_impl( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
 }
 
 template <class UnaryFunction>
 inline std::tuple<float, std::int32_t>
 secant(UnaryFunction&& f, float x0, float x1)
 {
-  float        tol{1e-5};
+  float        tol{1e-05};
   std::int32_t maxiter{100};
-  return detail::secant( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
+  return detail::secant_impl( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
 }
 
 template <class UnaryFunction>
@@ -215,7 +216,7 @@ secant(UnaryFunction&& f, double x0, double x1)
 {
   double       tol{1e-10};
   std::int32_t maxiter{100};
-  return detail::secant( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
+  return detail::secant_impl( std::forward<UnaryFunction>(f), x0, x1, tol, maxiter );
 }
 
 
