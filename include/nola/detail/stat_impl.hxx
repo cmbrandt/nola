@@ -4,8 +4,8 @@
 #ifndef NOLA_DETAIL_STAT_HXX
 #define NOLA_DETAIL_STAT_HXX
 
-#include <cmath>
-#include <cstdint>
+#include <cmath>   // std::sqrt
+#include <cstdint> // std::int32_t
 
 
 namespace nola

@@ -13,10 +13,9 @@ int main()
 {
   //cxx17_blas();
   cxx17_root();
-  //cxx17_stat();
+  cxx17_stat();
   //cxx17_exec();
   //cxx17_simd();
-  //cxx17_util();
 
   std::cout << "\nend of cxx17_main.cxx\n\n";
 }
