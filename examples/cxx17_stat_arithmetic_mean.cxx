@@ -1,10 +1,10 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <cstdlib>
+#include <cstdint>
 #include <iostream>
 #include <vector>
-#include <nola/stat.hxx>
+#include <nola/cxx17/stat.hxx>
 
 
 int main()
@@ -14,8 +14,11 @@ int main()
   // Sequence of values
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
+  // Length of sequence
+  std::int32_t n = x.size();
+
   // Compute arithmetic mean
-  double m = nola::arithmetic_mean( x.data(), x.size() );
+  double m = nola::stat::arithmetic_mean( n, x.data() );
 
   // Display result
   std::cout << "\narithmetic mean = " << m << std::endl; // m = 0.6000

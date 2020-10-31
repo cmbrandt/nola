@@ -1,10 +1,10 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <cstdlib>
+#include <cstdint>
 #include <iostream>
 #include <vector>
-#include <nola/stat.hxx>
+#include <nola/cxx17/stat.hxx>
 
 
 int main()
@@ -14,8 +14,11 @@ int main()
   // Sequence of values
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
+  // Length of sequence
+  std::int32_t n = x.size();
+
   // Compute variance
-  double v = nola::variance( x.data(), x.size() );
+  double v = nola::stat::variance( n, x.data() );
 
   // Display result
   std::cout << "\nvariance = " << v << std::endl; // v = 0.1000

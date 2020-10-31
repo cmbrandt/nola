@@ -1,10 +1,10 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <cstdlib>
+#include <cstdint>
 #include <iostream>
 #include <vector>
-#include <nola/stat.hxx>
+#include <nola/cxx17/stat.hxx>
 
 
 int main()
@@ -16,10 +16,10 @@ int main()
   std::vector<double> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
   // Length of sequences
-  std::size_t n = x.size();
+  std::int32_t n = x.size();
 
   // Compute covariance
-  double r = nola::covariance( x.data(), y.data(), x.size() );
+  double r = nola::stat::covariance( n, x.data(), y.data() );
 
   // Display result
   std::cout << "\ncovariance = " << r << std::endl; // r = -0.2700
