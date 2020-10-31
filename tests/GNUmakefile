@@ -1,7 +1,7 @@
 # C++ compiler, compiler flags, and include statement
 CXX17      := g++-10
 CXX17FLAGS := -Wall -pedantic -std=c++17
-CXX17INCLD := -I $(HOME)/projects/stl-algorithms/include
+CXX17INCLD := -I $(HOME)/projects/nola/include
 CXX17OBJS  := cxx17_main.o cxx17_blas.o cxx17_root.o cxx17_stat.o cxx17_simd.o cxx17_util.o
 
 all: cxx17_test.exe
