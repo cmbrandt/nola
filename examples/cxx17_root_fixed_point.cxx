@@ -34,8 +34,8 @@ int main()
 
   // Display result
   std::cout << std::setprecision(10)
-            << "\nroot1 = " << x1                   // x    = 0.5671432904
+            << "\nroot1 = " << x1                   // x    = 0.56714329
             << "\niter1 = " << iter1                // iter = 44
-            << "\nroot2 = " << x2                   // x    = 0.5671432904
+            << "\nroot2 = " << x2                   // x    = 0.56714329
             << "\niter2 = " << iter2 << std::endl;  // iter = 52
 }
