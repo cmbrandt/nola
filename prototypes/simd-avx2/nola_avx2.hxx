@@ -20,9 +20,13 @@ using v256d = __m256d;
 //
 // Function declarations
 
+// Generic
+template <class Real>
+inline auto avx2_set_scalar(Real a);
+template <class Real>
+inline auto avx2_set_zero();
+
 // Single precision
-//inline v256f avx2_set_scalar(float a);
-//inline v256f avx2_set_zero();
 inline v256f avx2_broadcast(float const* addr);
 inline v256f avx2_load(float const* addr);
 inline void  avx2_store(float* addr, v256f a);
@@ -31,32 +35,44 @@ inline v256f avx2_sub(v256f a, v256f b);
 inline v256f avx2_mul(v256f a, v256f b);
 inline v256f avx2_div(v256f a, v256f b);
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
-
+inline float avx2_reduce(v256f a);
 
 
 // Double precision
-//inline v256d avx2_set_scalar(double a);
-inline v256d avx2_set_zero();
-inline v256d avx2_broadcast(double const* addr);
-inline v256d avx2_load(double const* addr);
-inline void  avx2_store(double* addr, v256d a);
-inline v256d avx2_add(v256d a, v256d b);
-inline v256d avx2_sub(v256d a, v256d b);
-inline v256d avx2_mul(v256d a, v256d b);
-inline v256d avx2_div(v256d a, v256d b);
-inline v256d avx2_fma(v256d a, v256d b, v256d c);
 
+inline v256d  avx2_broadcast(double const* addr);
+inline v256d  avx2_load(double const* addr);
+inline void   avx2_store(double* addr, v256d a);
+inline v256d  avx2_add(v256d a, v256d b);
+inline v256d  avx2_sub(v256d a, v256d b);
+inline v256d  avx2_mul(v256d a, v256d b);
+inline v256d  avx2_div(v256d a, v256d b);
+inline v256d  avx2_fma(v256d a, v256d b, v256d c);
+inline double avx2_reduce(v256d a);
 
 //
 // Function implementations
 
+// Generic
+
+template <>
+inline auto
+avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
+
+template <>
+inline auto
+avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
+
+template<>
+inline auto
+avx2_set_zero<float>() { return _mm256_setzero_ps(); }
+
+template <>
+inline auto
+avx2_set_zero<double>() { return _mm256_setzero_pd(); }
+
+
 // Single precision
-
-//inline v256f
-//avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
-
-//inline v256f
-//avx2_set_zero() { return _mm256_setzero_ps(); }
 
 inline v256f
 avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
@@ -84,9 +100,6 @@ avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
 
 
 // Double precision
-
-//inline v256d
-//avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
 inline v256d
 avx2_set_zero() { return _mm256_setzero_pd(); }

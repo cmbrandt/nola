@@ -16,7 +16,7 @@ int main()
 {
   std::array<double, 4> a;
 
-  nola::v256d av = nola::avx2_set_zero();
+  nola::v256d av = nola::avx2_set_zero<double>();
 
   nola::avx2_store( a.data(), av );
 

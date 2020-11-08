@@ -16,7 +16,7 @@ int main()
 {
   std::array<double, 4> a;
 
-  nola::v256d av = nola::avx2_set_scalar( float(5.0) );
+  nola::v256d av = nola::avx2_set_scalar( double(5.0) );
 
   nola::avx2_store( a.data(), av );
 
