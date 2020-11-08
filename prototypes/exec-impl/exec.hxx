@@ -21,13 +21,6 @@ struct parallel_unsequenced_policy { };
 
 struct unsequenced_policy { };
 
-/*
-inline constexpr sequenced_policy            seq;
-inline constexpr parallel_policy             par;
-inline constexpr parallel_unsequenced_policy par_unseq;
-inline constexpr unsequenced_policy          unseq;
-*/
-
 inline constexpr auto seq       = sequenced_policy{};
 inline constexpr auto par       = parallel_policy{};
 inline constexpr auto par_unseq = parallel_unsequenced_policy{};
