@@ -1,6 +1,6 @@
 
-#ifndef PAR_HXX
-#define PAR_HXX
+#ifndef SEQ_HXX
+#define SEQ_HXX
 
 
 
@@ -16,9 +16,9 @@ mean(ExecutionPolicy&& exec, int n, Real x[ ]);
 
 template <class Real>
 inline Real
-mean_par(int n, Real x[ ])
+mean_seq(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_par(int n, Real x[])" << std::endl;
+  std::cout << "\ninside mean_seq(int n, Real x[])" << std::endl;
 
   double mean{0.0};
 

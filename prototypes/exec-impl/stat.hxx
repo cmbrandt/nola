@@ -26,6 +26,8 @@ template <class Real>
 inline Real
 mean(int n, Real x[ ])
 {
+  std::cout << "\ninside mean(int n, Real x[])" << std::endl;
+
   double mean{0.0};
 
   for (int i = 0; i < n; ++i)
@@ -34,19 +36,16 @@ mean(int n, Real x[ ])
   return mean / n;
 }
 
-
+/*
 template <class ExecutionPolicy, class Real>
 inline Real
 mean(ExecutionPolicy&&, int n, Real x[ ])
 {
-  double mean{0.0};
+  std::cout << "\ninside mean(DummpyExec, int n, Real x[])" << std::endl;
 
-  for (int i = 0; i < n; ++i)
-    mean += x[i];
-
-  return mean / n;
+  return mean(n, x);
 }
-
+*/
 
 } // namespace stat
 
