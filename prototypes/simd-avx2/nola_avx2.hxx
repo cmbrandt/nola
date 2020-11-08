@@ -25,6 +25,8 @@ template <class Real>
 inline auto avx2_set_scalar(Real a);
 template <class Real>
 inline auto avx2_set_zero();
+template <class Real>
+inline std::int32_t avx2_width();
 
 // Single precision
 inline v256f avx2_broadcast(float const* addr);
@@ -36,7 +38,6 @@ inline v256f avx2_mul(v256f a, v256f b);
 inline v256f avx2_div(v256f a, v256f b);
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
 inline float avx2_reduce(v256f a);
-
 
 // Double precision
 
@@ -57,19 +58,27 @@ inline double avx2_reduce(v256d a);
 
 template <>
 inline auto
-avx2_set_scalar(float a) { return _mm256_set1_ps(a); }
+avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
 
 template <>
 inline auto
 avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
-template<>
+template <>
 inline auto
-avx2_set_zero<float>() { return _mm256_setzero_ps(); }
+avx2_set_zero<float>()  { return _mm256_setzero_ps(); }
 
 template <>
 inline auto
 avx2_set_zero<double>() { return _mm256_setzero_pd(); }
+
+template <>
+inline std::int32_t
+avx2_width<float>()  { return 8; }
+
+template <>
+inline std::int32_t
+avx2_width<double>() { return 4; }
 
 
 // Single precision

@@ -4,7 +4,7 @@
 //    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_double_div.cxx -o double_div.exe
 
 // Usage:
-//    ./fdouble_div.exe
+//    ./double_div.exe
 
 
 #include <array>
