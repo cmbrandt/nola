@@ -15,6 +15,14 @@ FXXFLAGS := -Wall -std=legacy -O3
 #all: libnola.a
 all: blas_obj
 
+#libnola.a: $(blas_obj)
+#	ar rcs libnola.a $^
+
+# ar rcs libnola.a *.o
+
+
+
+
 blas_obj: nola_saxpy.o nola_sgemv.o nola_sgemm.o nola_strsv.o nola_strsm.o \
           nola_daxpy.o nola_dgemv.o nola_dgemm.o nola_dtrsv.o nola_dtrsm.o \
           nola_lsame.o nola_xerbla.o
@@ -59,8 +67,12 @@ nola_xerbla.o: nola_xerbla.f90
 	$(FXX) $(FXXFLAGS) -c nola_xerbla.f90
 
 
+make build:
+	ar rcs libnola.a *.o
+
+
 # Clean build
 make clean:
-		rm *.o
+		rm *.o *.a
 		clear
 
