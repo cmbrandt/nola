@@ -93,7 +93,11 @@ avx512_width<double>() { return 4; }
 // Single precision
 
 inline v512f
-avx512_broadcast(float const* addr) { return _mm512_broadcast_ss(addr); }
+avx512_broadcast(float const* addr)
+{
+  //
+  //return _mm512_broadcastss_ps(addr);
+}
 
 inline v512f
 avx512_load(float const* addr) { return _mm512_loadu_ps(addr); }
@@ -126,7 +130,11 @@ inline v512d
 avx512_set_zero() { return _mm512_setzero_pd(); }
 
 inline v512d
-avx512_broadcast(double const* addr) { return _mm512_broadcast_sd(addr); }
+avx512_broadcast(double const* addr)
+{
+  //
+  //return _mm512_broadcastsd_pd(addr);
+}
 
 inline v512d
 avx512_load(double const* addr) { return _mm512_loadu_pd(addr); }

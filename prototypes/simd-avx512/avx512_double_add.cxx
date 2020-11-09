@@ -26,5 +26,7 @@ int main()
   nola::avx512_store( c.data(), cv );
 
   std::cout << "v = " << cv[0] << " " << cv[1] << " "
+                      << cv[2] << " " << cv[3] << " "
+                      << cv[0] << " " << cv[1] << " "
                       << cv[2] << " " << cv[3] << std::endl;
 }

@@ -1,7 +1,7 @@
-// avx2_float_set_zero.cxx
+// avx512_float_set_zero.cxx
 
 // Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_float_set_zero.cxx -o float_set_zero.exe
+//    g++-9 -Wall -pedantic -mavx512f -std=c++17 -O3 avx512_float_set_zero.cxx -o float_set_zero.exe
 
 // Usage:
 //    ./float_set_zero.exe
@@ -9,16 +9,16 @@
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include "nola_avx512.hxx"
 
 
 int main()
 {
   std::array<float, 8> a;
 
-  nola::v256f av = nola::avx2_set_zero<float>();
+  nola::v512f av = nola::avx512_set_zero<float>();
 
-  nola::avx2_store( a.data(), av );
+  nola::avx512_store( a.data(), av );
 
   std::cout << "v = " << a[0] << " " << a[1] << " "
                       << a[2] << " " << a[3] << " "
