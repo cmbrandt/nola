@@ -2,7 +2,6 @@
 // All rights reserved
 
 #include <iostream>
-
 #include "cxx17_blas.hxx"
 #include "cxx17_root.hxx"
 #include "cxx17_stat.hxx"
