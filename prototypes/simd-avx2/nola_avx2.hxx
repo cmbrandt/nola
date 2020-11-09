@@ -21,14 +21,19 @@ using v256d = __m256d;
 // Function declarations
 
 // Generic
+
 template <class Real>
 inline auto avx2_set_scalar(Real a);
+
 template <class Real>
 inline auto avx2_set_zero();
+
 template <class Real>
 inline std::int32_t avx2_width();
 
+
 // Single precision
+
 inline v256f avx2_broadcast(float const* addr);
 inline v256f avx2_load(float const* addr);
 inline void  avx2_store(float* addr, v256f a);
@@ -38,6 +43,7 @@ inline v256f avx2_mul(v256f a, v256f b);
 inline v256f avx2_div(v256f a, v256f b);
 inline v256f avx2_fma(v256f a, v256f b, v256f c);
 inline float avx2_reduce(v256f a);
+
 
 // Double precision
 
@@ -50,6 +56,7 @@ inline v256d  avx2_mul(v256d a, v256d b);
 inline v256d  avx2_div(v256d a, v256d b);
 inline v256d  avx2_fma(v256d a, v256d b, v256d c);
 inline double avx2_reduce(v256d a);
+
 
 //
 // Function implementations
@@ -64,6 +71,7 @@ template <>
 inline auto
 avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
+
 template <>
 inline auto
 avx2_set_zero<float>()  { return _mm256_setzero_ps(); }
@@ -71,6 +79,7 @@ avx2_set_zero<float>()  { return _mm256_setzero_ps(); }
 template <>
 inline auto
 avx2_set_zero<double>() { return _mm256_setzero_pd(); }
+
 
 template <>
 inline std::int32_t
@@ -87,7 +96,7 @@ inline v256f
 avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
 
 inline v256f
-avx2_load(float const* addr) { return _mm256_load_ps(addr); }
+avx2_load(float const* addr) { return _mm256_loadu_ps(addr); }
 
 inline void
 avx2_store(float* addr, v256f a) { _mm256_store_ps(addr, a); }
@@ -107,6 +116,13 @@ avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
 
+inline float
+avx2_reduce(v256f a)
+{
+  // do stuff
+  return 5.0;
+}
+
 
 // Double precision
 
@@ -117,7 +133,7 @@ inline v256d
 avx2_broadcast(double const* addr) { return _mm256_broadcast_sd(addr); }
 
 inline v256d
-avx2_load(double const* addr) { return _mm256_load_pd(addr); }
+avx2_load(double const* addr) { return _mm256_loadu_pd(addr); }
 
 inline void
 avx2_store(double* addr, v256d a) { _mm256_store_pd(addr, a); }
@@ -136,6 +152,17 @@ avx2_div(v256d a, v256d b) { return _mm256_div_pd(a, b); }
 
 inline v256d
 avx2_fma(v256d a, v256d b, v256d c) { return _mm256_fmadd_pd(a, b, c); }
+
+inline double
+avx2_reduce(v256d a)
+{
+  __m128d low128  = _mm256_castpd256_pd128(a);
+  __m128d high128 = _mm256_extractf128_pd(a, 1);
+          low128  = _mm_add_pd(low128, high128);
+
+  __m128d high64  = _mm_unpackhi_pd(low128, low128);
+  return _mm_cvtsd_f64(_mm_add_sd(low128, high64));
+}
 
 
 } // namespace nola

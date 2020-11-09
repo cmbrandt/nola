@@ -14,10 +14,10 @@
 
 int main()
 {
-  std::array<double, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<double, 8> b{ 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0 }; 
-  std::array<double, 8> c{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 };
-  std::array<double, 8> d;
+  std::array<double, 4> a{ 5.0, 5.0, 5.0, 5.0 }; 
+  std::array<double, 4> b{ 2.0, 2.0, 2.0, 2.0 }; 
+  std::array<double, 4> c{ 1.0, 1.0, 1.0, 1.0 };
+  std::array<double, 4> d;
 
   nola::v256d av = nola::avx2_load( a.data() );
   nola::v256d bv = nola::avx2_load( b.data() );

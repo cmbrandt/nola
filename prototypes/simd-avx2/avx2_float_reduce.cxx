@@ -14,9 +14,9 @@
 
 int main()
 {
-  std::array<float, 4> a{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }; 
+  std::array<float, 8> a{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 }; 
 
-  nola::v256d av = nola::avx2_load( a.data() );
+  nola::v256f av = nola::avx2_load( a.data() );
 
   float r = nola::avx2_reduce(av);
 
