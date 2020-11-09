@@ -1,7 +1,7 @@
-// avx2_float_broacast.cxx
+// avx512_float_broacast.cxx
 
 // Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_float_broadcast.cxx -o float_broadcast.exe
+//    g++-9 -Wall -pedantic -mavx512f -std=c++17 -O3 avx512_float_broadcast.cxx -o float_broadcast.exe
 
 // Usage:
 //    ./float_broadcast.exe
@@ -9,7 +9,7 @@
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include "nola_avx512.hxx"
 
 
 int main()
@@ -18,9 +18,9 @@ int main()
 
   std::array<float, 8> a;
 
-  nola::v256f av = nola::avx2_broadcast(&as);
+  nola::v512f av = nola::avx512_broadcast(&as);
 
-  nola::avx2_store( a.data(), av );
+  nola::avx512_store( a.data(), av );
 
   std::cout << "v = " << a[0] << " " << a[1] << " "
                       << a[2] << " " << a[3] << " "
