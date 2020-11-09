@@ -1,31 +1,58 @@
 # C++ compiler, compiler flags, and include statement
-CXX17      := g++-10
-CXX17FLAGS := -Wall -pedantic -std=c++17
-CXX17INCLD := -I $(HOME)/projects/nola/include
+CXX        := g++-10
+CXXINCLD   := -I $(HOME)/projects/nola/include
+
+CXX17FLAGS := -Wall -pedantic -Wextra -std=c++17
 CXX17OBJS  := cxx17_main.o cxx17_blas.o cxx17_root.o cxx17_stat.o cxx17_simd.o
 
-all: cxx17_test.exe
+CXX23FLAGS := -Wall -pedantic -Wextra -std=c++20
+CXX17OBJS  := cxx23_main.o cxx23_blas.o cxx23_root.o cxx23_stat.o cxx23_simd.o
+
+
+all: cxx17_test.exe cxx23_test.exe
+
 
 cxx17_test.exe: $(CXX17OBJS)
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) $(CXX17OBJS) -o cxx17_test.exe
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) $(CXX17OBJS) -o cxx17_test.exe
 
 cxx17_main.o: cxx17_main.cxx
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) -c cxx17_main.cxx
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) -c cxx17_main.cxx
 
 cxx17_blas.o: cxx17_blas.cxx
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) -c cxx17_blas.cxx
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) -c cxx17_blas.cxx
 
 cxx17_root.o: cxx17_root.cxx
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) -c cxx17_root.cxx
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) -c cxx17_root.cxx
 
 cxx17_stat.o: cxx17_stat.cxx
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) -c cxx17_stat.cxx
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) -c cxx17_stat.cxx
 
 cxx17_simd.o: cxx17_simd.cxx
-	$(CXX17) $(CXX17FLAGS) $(CXX17INCLD) -c cxx17_simd.cxx
+	$(CXX) $(CXX17FLAGS) $(CXXINCLD) -c cxx17_simd.cxx
 
-run: cxx17_test.exe
+
+cxx23_test.exe: $(CXX23OBJS)
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) $(CXX23OBJS) -o cxx23_test.exe
+
+cxx23_main.o: cxx17_main.cxx
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) -c cxx23_main.cxx
+
+cxx23_blas.o: cxx17_blas.cxx
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) -c cxx23_blas.cxx
+
+cxx23_root.o: cxx17_root.cxx
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) -c cxx23_root.cxx
+
+cxx23_stat.o: cxx17_stat.cxx
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) -c cxx23_stat.cxx
+
+cxx23_simd.o: cxx23_simd.cxx
+	$(CXX) $(CXX23FLAGS) $(CXXINCLD) -c cxx23_simd.cxx
+
+
+run: cxx17_test.exe cxx23_test.exe
 	./cxx17_test.exe
+	./cxx23_test.exe
 
 clean:
 	rm *.exe *.o
