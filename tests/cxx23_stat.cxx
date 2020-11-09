@@ -146,7 +146,7 @@ std::int32_t cxx23_standard_deviation_double(std::int32_t fail)
   auto a = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
 
   double r = nola::stat::standard_deviation(a);
-  
+
   bool b = std::abs( r - 0.3162) > 0.0001;
 
   if (b) {
@@ -218,7 +218,7 @@ std::int32_t cxx23_correlation_float(std::int32_t fail)
   std::vector<float> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
   auto z = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
-  auto w = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+  auto w = stdex::mdspan<float, stdex::dynamic_extent>{ y.data(), 5 };
 
   float r = nola::stat::correlation(z, w);
 
@@ -244,7 +244,7 @@ std::int32_t cxx23_correlation_double(std::int32_t fail)
   auto w = stdex::mdspan<double, stdex::dynamic_extent>{ y.data(), 5 };
 
   double r = nola::stat::correlation(z, w);
-  
+
   bool b = std::abs( r + 0.9) > 0.01;
 
   if (b) {
