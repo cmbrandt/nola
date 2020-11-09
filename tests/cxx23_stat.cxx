@@ -7,7 +7,7 @@
 #include <nola/cxx23/stat.hxx>
 #include "cxx23_stat.hxx"
 
-
+/*
 void cxx23_stat()
 {
   std::int32_t fail{0};
@@ -228,4 +228,4 @@ std::int32_t cxx23_correlation_double(std::int32_t fail)
   }
 
   return fail;
-}
+}*/
