@@ -150,8 +150,8 @@ std::int32_t cxx17_standard_deviation_double(std::int32_t fail)
 
 std::int32_t cxx17_covariance_float(std::int32_t fail)
 {
-  std::vector<double> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
-  std::vector<double> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
+  std::vector<float> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
+  std::vector<float> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
   float r = nola::stat::covariance( x.size(), x.data(), y.data() );
 

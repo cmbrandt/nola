@@ -4,10 +4,13 @@
 #include <cmath>
 #include <iostream>
 #include <vector>
+#include <experimental/mdspan>
 #include <nola/cxx23/stat.hxx>
 #include "cxx23_stat.hxx"
 
-/*
+
+namespace stdex = std::experimental;
+
 void cxx23_stat()
 {
   std::int32_t fail{0};
@@ -37,7 +40,9 @@ std::int32_t cxx23_arithmetic_mean_float(std::int32_t fail)
 {
   std::vector<float> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  float r = nola::stat::arithmetic_mean( x.size(), x.data() );
+  auto a = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+
+  float r = nola::stat::arithmetic_mean(a);
 
   if (r != 0.6f) {
     ++fail;
@@ -54,7 +59,9 @@ std::int32_t cxx23_arithmetic_mean_double(std::int32_t fail)
 {
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  double r = nola::stat::arithmetic_mean( x.size(), x.data() );
+  auto a = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
+
+  double r = nola::stat::arithmetic_mean(a);
   
   if (r != 0.6) {
     ++fail;
@@ -74,7 +81,9 @@ std::int32_t cxx23_variance_float(std::int32_t fail)
 {
   std::vector<float> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  float r = nola::stat::variance( x.size(), x.data() );
+  auto a = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };;
+
+  float r = nola::stat::variance(a);
 
   if (r != 0.1f) {
     ++fail;
@@ -91,7 +100,9 @@ std::int32_t cxx23_variance_double(std::int32_t fail)
 {
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  double r = nola::stat::variance( x.size(), x.data() );
+  auto a = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
+
+  double r = nola::stat::variance(a);
   
   if (r != 0.1) {
     ++fail;
@@ -111,7 +122,9 @@ std::int32_t cxx23_standard_deviation_float(std::int32_t fail)
 {
   std::vector<float> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  float r = nola::stat::standard_deviation( x.size(), x.data() );
+  auto a = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+
+  float r = nola::stat::standard_deviation(a);
 
   bool b = std::abs( r - 0.3162f) > 0.0001f;
 
@@ -130,7 +143,9 @@ std::int32_t cxx23_standard_deviation_double(std::int32_t fail)
 {
   std::vector<double> x{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  double r = nola::stat::standard_deviation( x.size(), x.data() );
+  auto a = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
+
+  double r = nola::stat::standard_deviation(a);
   
   bool b = std::abs( r - 0.3162) > 0.0001;
 
@@ -150,10 +165,13 @@ std::int32_t cxx23_standard_deviation_double(std::int32_t fail)
 
 std::int32_t cxx23_covariance_float(std::int32_t fail)
 {
-  std::vector<double> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
-  std::vector<double> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
+  std::vector<float> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
+  std::vector<float> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
-  float r = nola::stat::covariance( x.size(), x.data(), y.data() );
+  auto z = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+  auto w = stdex::mdspan<float, stdex::dynamic_extent>{ y.data(), 5 };
+
+  float r = nola::stat::covariance(z, w);
 
   bool b = std::abs( r + 0.27f) > 0.001f;
 
@@ -173,7 +191,10 @@ std::int32_t cxx23_covariance_double(std::int32_t fail)
   std::vector<double> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
   std::vector<double> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
-  double r = nola::stat::covariance( x.size(), x.data(), y.data() );
+  auto z = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
+  auto w = stdex::mdspan<double, stdex::dynamic_extent>{ y.data(), 5 };
+
+  double r = nola::stat::covariance(z, w);
 
   bool b = std::abs( r + 0.27) > 0.001;
 
@@ -196,7 +217,10 @@ std::int32_t cxx23_correlation_float(std::int32_t fail)
   std::vector<float> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
   std::vector<float> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
-  float r = nola::stat::correlation( x.size(), x.data(), y.data() );
+  auto z = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+  auto w = stdex::mdspan<float, stdex::dynamic_extent>{ x.data(), 5 };
+
+  float r = nola::stat::correlation(z, w);
 
   bool b = std::abs( r + 0.9f) > 0.01f;
 
@@ -216,7 +240,10 @@ std::int32_t cxx23_correlation_double(std::int32_t fail)
   std::vector<double> x{ 3.2, 1.4, 2.6, 0.8, 2.0 };
   std::vector<double> y{ 2.1, 2.5, 2.3, 2.9, 2.7 };
 
-  double r = nola::stat::correlation( x.size(), x.data(), y.data() );
+  auto z = stdex::mdspan<double, stdex::dynamic_extent>{ x.data(), 5 };
+  auto w = stdex::mdspan<double, stdex::dynamic_extent>{ y.data(), 5 };
+
+  double r = nola::stat::correlation(z, w);
   
   bool b = std::abs( r + 0.9) > 0.01;
 
@@ -228,4 +255,4 @@ std::int32_t cxx23_correlation_double(std::int32_t fail)
   }
 
   return fail;
-}*/
+}

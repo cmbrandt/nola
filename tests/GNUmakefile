@@ -9,7 +9,7 @@ CXX23FLAGS := -Wall -pedantic -Wextra -std=c++20
 CXX23OBJS  := cxx23_main.o cxx23_blas.o cxx23_root.o cxx23_stat.o cxx23_simd.o cxx23_exec.o cxx23_util.o
 CXX23INCLD := -I $(HOME)/opt/mdspan/include
 
-all: cxx23_test.exe cxx17_test.exe
+all: cxx17_test.exe cxx23_test.exe
 
 
 cxx17_test.exe: $(CXX17OBJS)
