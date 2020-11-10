@@ -4,6 +4,9 @@
 #ifndef NOLA_CXX17_BLAS_HXX
 #define NOLA_CXX17_BLAS_HXX
 
+#include <cstdint> // std::int32_t
+#include <nola/detail/blas_impl.hxx>
+
 
 namespace nola
 {
@@ -14,29 +17,58 @@ namespace blas
 //----------------------------------------------------------------------------//
 // Declarations
 
-
-template <class Real,
-          class in_vector_1_t,
-          class in_vector_2_t,
-          class out_vector_t>
+template <class Real>
 inline void
-linalg_add(in_vector_1_t x, in_vector_2_t y, out_vector_t z);
+linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ]);
 
 
-template <class Real,
-          class in_vector_t,
-          class in_matrix_t,
-          class out_vector_t>
+template <class Real>
+inline Real
+vector_norm2(std::int32_t n, Real const x[ ]);
+
+
+
+//----------------------------------------------------------------------------//
+// Definitions
+
+//
+// Linear Algebra Add
+
+template <>
 inline void
-matrix_vector_product(in_matrix_t A, in_vector_t x, out_vector_t y);
+linalg_add(std::int32_t n, float alpha, float const x[ ], float y[ ]);
+{
+  return 5.0;
+}
 
 
-template <class Real,
-          class in_matrix_1_t,
-          class in_matrix_2_t,
-          class out_matrix_t>
+template <>
 inline void
-matrix_product(in_matrix_1_t A, in_matrix_2_t B, out_matrix_t C)
+linalg_add(std::int32_t n, double alpha, double const x[ ], double y[ ]);
+{
+  return 5.0;
+}
+
+
+//
+// Euclidean Vector Norm
+
+template <>
+inline float
+vector_norm2(std::int32_t n, float const x[ ])
+{
+  std::int32_t incx = 1;
+  return snrm2_(&n, x, &incx);
+}
+
+
+template <>
+inline double
+vector_norm2(std::int32_t n, double const x[ ])
+{
+  std::int32_t incx = 1;
+  return dnrm2_(&n, x, &incx);
+}
 
 
 } // namespace blas
