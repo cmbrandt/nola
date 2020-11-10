@@ -23,7 +23,7 @@ namespace util
 
 template <class Real>
 inline Real
-compare_containers(std::int32_t size, const Real a[ ], const Real b[ ]);
+max_abs_difference(std::int32_t size, const Real a[ ], const Real b[ ]);
 
 
 template <class Real>
@@ -37,11 +37,11 @@ print_vector(std::string_view s, std::int32_t size, const Real a[ ], std::int32_
 
 template <class Real>
 inline void
-print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, const Real a[ ]);
+print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, const Real a[ ]);
 
 template <class Real>
 inline void
-print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, const Real a[ ], std::int32_t precision, std::int32_t width);
+print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, const Real a[ ], std::int32_t precision, std::int32_t width);
 
 
 //------------------------------------------------------------------------------
@@ -51,9 +51,9 @@ print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, const Rea
 //
 // compare_container
 
-// Return the maximum difference between two ordered sequences of values
+// Return the maximum absolute difference between two ranges
 template <class Real>
-Real compare_containers(std::int32_t size, const Real a[ ], const Real b[ ])
+Real max_abs_difference(std::int32_t size, const Real a[ ], const Real b[ ])
 {
   Real diff{0.0};
 
@@ -94,14 +94,14 @@ void print_vector(std::string_view s, std::int32_t size, const Real a[ ])
 
 // Display all elements of a two-dimensional container
 template <class Real>
-void print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, const Real a[ ], std::int32_t precision , std::int32_t width )
+void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, const Real a[ ], std::int32_t precision , std::int32_t width )
 {
   std::cout << s << " = [" << std::endl;
 
-  for (std::int32_t i = 0; i < cols; ++i) {
-    for (std::int32_t j = 0; j < rows; ++j) {
+  for (std::int32_t i = 0; i < rows; ++i) {
+    for (std::int32_t j = 0; j < cols; ++j) {
       std::cout << " " << std::setprecision(precision)
-                       << std::setw(width) << a[j*cols+i];
+                       << std::setw(width) << a[j*rows+i];
     }
 
     std::cout << std::endl;
@@ -111,9 +111,9 @@ void print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, cons
 }
 
 template <class Real>
-void print_matrix(std::string_view s, std::int32_t cols, std::int32_t rows, const Real a[ ] )
+void print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, const Real a[ ] )
 {
-  return print_matrix(s, cols, rows, a, 6, 8);
+  return print_matrix(s, rows, cols, a, 6, 8);
 }
 
 
