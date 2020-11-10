@@ -1,14 +1,10 @@
 
-// g++-9 -Wall ex_blas_sgemm_core.cxx ../../source/libnola.a -lgfortran -o sgemm.exe
+// g++-10 -Wall -std=c++20 ex_blas_sgemm_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o sgemm.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void sgemm_(const char* transa, const char* transb, const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
-                       const float* alpha, const float a[ ], const std::int32_t* lda, const float b[ ], const std::int32_t* ldb,
-                       const float* beta, float c[ ], const std::int32_t* ldc, std::int32_t length_transa, std::int32_t length_transb);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -42,7 +38,7 @@ int main()
   std::int32_t ldc = m;
 
   // Compute operation C := alpha*A*B + beta*C
-  sgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
+  nola::blas::detail::sgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
          b.data(), &ldb, &beta, c.data(), &ldc, 1, 1);
 
   for (int i = 0; i < 12; ++i)

@@ -1,12 +1,10 @@
 
-// g++-9 -Wall ex_blas_saxpy_core.cxx ../../source/libnola.a -o saxpy.exe
+// g++-10 -Wall -std=c++20 ex_blas_saxpy_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -o saxpy.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void saxpy_(const std::int32_t* n, const float* alpha, const float x[ ], const std::int32_t* incx, float y[ ], const std::int32_t* incy);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -28,7 +26,7 @@ int main()
   std::int32_t incy = 1;
 
   // Compute operation y := alpha*x + y
-  saxpy_(&n, &alpha, x.data(), &incx, y.data(), &incy);
+  nola::blas::detail::saxpy_(&n, &alpha, x.data(), &incx, y.data(), &incy);
 
   for (int i = 0; i < n; ++i)
     std::cout << " " << y[i];

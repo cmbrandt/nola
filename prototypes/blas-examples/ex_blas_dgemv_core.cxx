@@ -1,13 +1,10 @@
 
-// g++-9 -Wall ex_blas_dgemv_core.cxx ../../source/libnola.a -lgfortran -o dgemv.exe
+// g++-10 -Wall ex_blas_dgemv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dgemv.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void dgemv_(const char* trans, const std::int32_t* m, const std::int32_t* n, const double* alpha, const double a[ ], const std::int32_t* lda,
-                       const double x[ ], const std::int32_t* incx, const double* beta, double y[ ], const std::int32_t* incy, std::int32_t length_trans);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -40,7 +37,7 @@ int main()
   std::int32_t incy = 1;
 
   // Compute operation y := alpha*A*x + beta*y
-  dgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
+  nola::blas::detail::dgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
          &beta, y.data(), &incy, 1);
 
   for (int i = 0; i < 3; ++i)

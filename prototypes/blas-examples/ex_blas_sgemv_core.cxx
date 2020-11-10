@@ -1,13 +1,10 @@
 
-// g++-9 -Wall ex_blas_sgemv_core.cxx ../../source/libnola.a -lgfortran -o sgemv.exe
+// g++-10 -Wall -std=c++20 ex_blas_sgemv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o sgemv.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void sgemv_(const char* trans, const std::int32_t* m, const std::int32_t* n, const float* alpha, const float a[ ], const std::int32_t* lda,
-                       const float x[ ], const std::int32_t* incx, const float* beta, float y[ ], const std::int32_t* incy, std::int32_t length_trans);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -40,7 +37,7 @@ int main()
   std::int32_t incy = 1;
 
   // Compute operation y := alpha*A*x + beta*y
-  sgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
+  nola::blas::detail::sgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
          &beta, y.data(), &incy, 1);
 
   for (int i = 0; i < 3; ++i)

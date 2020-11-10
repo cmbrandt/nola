@@ -1,13 +1,10 @@
 
-// g++-9 -Wall ex_blas_dtrsv_core.cxx ../../source/libnola.a -lgfortran -o dtrsv.exe
+// g++-10 -Wall -std=c++20 ex_blas_dtrsv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dtrsv.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void dtrsv_(const char* uplo, const char* trans, const char* diag, const std::int32_t* n, const double a[ ], const std::int32_t* lda,
-                       double x[ ], const std::int32_t* incx, std::int32_t length_uplo, std::int32_t length_trans, std::int32_t length_diag);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -35,7 +32,7 @@ int main()
   std::int32_t incx = 1;
 
   // Compute operation x := A^(-1)*x
-  dtrsv_(&uplo, &trans, &diag, &n, a.data(), &lda, x.data(),
+  nola::blas::detail::dtrsv_(&uplo, &trans, &diag, &n, a.data(), &lda, x.data(),
          &incx, 1, 1, 1);
 
   for (int i = 0; i < 3; ++i)

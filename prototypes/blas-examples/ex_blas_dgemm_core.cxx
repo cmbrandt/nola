@@ -1,14 +1,10 @@
 
-// g++-9 -Wall ex_blas_dgemm_core.cxx ../../source/libnola.a -lgfortran -o dgemm.exe
+// g++-10 -Wall -std=c++20 ex_blas_dgemm_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dgemm.exe
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
-
-
-extern "C" void dgemm_(const char* transa, const char* transb, const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
-                       const double* alpha, const double a[ ], const std::int32_t* lda, const double b[ ], const std::int32_t* ldb,
-                       const double* beta, double c[ ], const std::int32_t* ldc, std::int32_t length_transa, std::int32_t length_transb);
+#include <nola/detail/blas_impl.hxx>
 
 
 int main()
@@ -42,7 +38,7 @@ int main()
   std::int32_t ldc = m;
 
   // Compute operation C := alpha*A*B + beta*C
-  dgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
+  nola::blas::detail::dgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
          b.data(), &ldb, &beta, c.data(), &ldc, 1, 1);
 
   for (int i = 0; i < 12; ++i)
