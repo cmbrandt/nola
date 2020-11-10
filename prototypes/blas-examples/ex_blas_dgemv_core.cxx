@@ -1,5 +1,5 @@
 
-// g++-10 -Wall ex_blas_dgemv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dgemv.exe
+// g++-10 -Wall -std=c++20 ex_blas_dgemv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dgemv.exe
 
 #include <cstdint>
 #include <iostream>
