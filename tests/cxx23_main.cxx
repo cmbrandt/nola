@@ -7,7 +7,6 @@
 #include "cxx23_stat.hxx"
 #include "cxx23_simd.hxx"
 #include "cxx23_exec.hxx"
-#include "cxx23_util.hxx"
 
 
 int main()
@@ -17,7 +16,6 @@ int main()
   cxx23_stat();
   //cxx23_exec();
   //cxx23_simd();
-  //cxx23_util();
 
   std::cout << "\nend of cxx23_main.cxx\n\n";
 }

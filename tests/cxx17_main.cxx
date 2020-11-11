@@ -7,7 +7,6 @@
 #include "cxx17_stat.hxx"
 #include "cxx17_simd.hxx"
 #include "cxx17_exec.hxx"
-#include "cxx17_util.hxx"
 
 
 int main()
@@ -17,7 +16,6 @@ int main()
   cxx17_stat();
   //cxx17_exec();
   //cxx17_simd();
-  //cxx17_util();
 
   std::cout << "\nend of cxx17_main.cxx\n\n";
 }
