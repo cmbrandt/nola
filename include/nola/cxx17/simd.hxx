@@ -4,19 +4,8 @@
 #ifndef NOLA_CXX17_SIMD_HXX
 #define NOLA_CXX17_SIMD_HXX
 
-
-namespace nola
-{
-namespace simd
-{
-
-
-
-
-
-
-} // namespace simd
-} // namespace nola
+#include <nola/detail/simd_avx2.hxx>
+#include <nola/detail/simd_avx512.hxx>
 
 
 #endif
