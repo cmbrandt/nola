@@ -64,6 +64,7 @@ inline Real
 correlation(ExecutionPolicy&& exec, std::int32_t n, const Real x[ ], const Real y[ ]);
 */
 
+
 //----------------------------------------------------------------------------//
 // Definitions
 

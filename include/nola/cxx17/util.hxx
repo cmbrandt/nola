@@ -21,6 +21,7 @@ namespace util
 //------------------------------------------------------------------------------
 // Declarations
 
+
 template <class Real>
 inline Real
 max_abs_difference(std::int32_t size, const Real a[ ], const Real b[ ]);

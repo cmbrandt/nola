@@ -16,7 +16,7 @@ namespace detail
 
 
 //----------------------------------------------------------------------------//
-// Declarations for Reference BLAS
+// Declarations (for Reference BLAS)
 
 
 //
