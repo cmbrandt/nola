@@ -3,24 +3,32 @@
 
 #include <array>
 #include <iostream>
-#include <nola/c++17/simd.hxx>
+#include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<float, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<float, 8> b{ 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0 }; 
-  std::array<float, 8> c;
+  // 
+  constexpr std::int32_t w = nola::simd::avx2_width<float>();
 
-  nola::v256f av = nola::avx2_load( a.data() );
-  nola::v256f bv = nola::avx2_load( b.data() );
+  // 
+  std::array<float, w> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::array<float, w> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
 
-  nola::v256f cv = nola::avx2_add(av, bv);
+  //
+  std::vector<float> c(w);
 
-  nola::avx2_store( c.data(), cv );
+  //
+  nola::simd::v256f av = nola::simd::avx2_load( a.data() );
+  nola::simd::v256f bv = nola::simd::avx2_load( b.data() );
 
-  std::cout << "v = " << cv[0] << " " << cv[1] << " "
-                      << cv[2] << " " << cv[3] << " "
-                      << cv[4] << " " << cv[5] << " "
-                      << cv[6] << " " << cv[7] << std::endl;
+  //
+  nola::simd::v256f cv = nola::simd::avx2_add(av, bv);
+
+  //
+  nola::simd::avx2_store( c.data(), cv );
+
+  // Display result
+  nola::util::print_vector("c", c.size(), c.data(), 2, 3);
 }
