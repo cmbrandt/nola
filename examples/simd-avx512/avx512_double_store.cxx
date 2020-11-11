@@ -1,15 +1,9 @@
-// avx512_double_store.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx512f -std=c++17 -O3 avx512_double_store.cxx -o double_store.exe
-
-// Usage:
-//    ./double_store.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include "nola_avx512.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()

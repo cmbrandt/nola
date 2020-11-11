@@ -9,7 +9,7 @@
 
 #include <array>
 #include <iostream>
-#include "nola_avx512.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()
