@@ -1,15 +1,9 @@
-// avx2_double_set_scalar.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_double_set_scalar.cxx -o double_set_scalar.exe
-
-// Usage:
-//    ./double_set_scalar.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()

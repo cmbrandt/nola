@@ -1,15 +1,9 @@
-// avx2_double_sub.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_double_sub.cxx -o double_sub.exe
-
-// Usage:
-//    ./double_sub.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()

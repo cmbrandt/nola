@@ -1,15 +1,9 @@
-// avx2_double_width.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_double_width.cxx -o double_width.exe
-
-// Usage:
-//    ./double_width.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()

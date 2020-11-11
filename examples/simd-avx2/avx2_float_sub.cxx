@@ -1,15 +1,9 @@
-// avx2_float_sub.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx2 -std=c++17 -O3 avx2_float_sub.cxx -o float_sub.exe
-
-// Usage:
-//    ./float_sub.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include "nola_avx2.hxx"
+#include <nola/c++17/simd.hxx>
 
 
 int main()
