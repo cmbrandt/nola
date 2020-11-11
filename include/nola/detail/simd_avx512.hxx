@@ -16,7 +16,7 @@ namespace simd
 //----------------------------------------------------------------------------//
 // Type aliases
 
-  
+
 using v512f = __m512;
 using v512d = __m512d;
 
@@ -92,12 +92,12 @@ avx512_set_zero<double>() { return _mm512_setzero_pd(); }
 
 
 template <>
-inline std::int32_t
-avx512_width<float>()  { return 8; }
+constexpr std::int32_t
+avx512_width<float>()  { return 16; }
 
 template <>
-inline std::int32_t
-avx512_width<double>() { return 4; }
+constexpr std::int32_t
+avx512_width<double>() { return 8; }
 
 
 //
@@ -114,7 +114,7 @@ inline v512f
 avx512_load(float const* addr) { return _mm512_loadu_ps(addr); }
 
 inline void
-avx512_store(float* addr, v512f a) { _mm512_store_ps(addr, a); }
+avx512_store(float* addr, v512f a) { _mm512_storeu_ps(addr, a); }
 
 inline v512f
 avx512_add(v512f a, v512f b) { return _mm512_add_ps(a, b); }

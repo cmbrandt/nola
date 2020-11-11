@@ -16,7 +16,7 @@ namespace simd
 //----------------------------------------------------------------------------//
 // Type aliases
 
-  
+
 using v256f = __m256;
 using v256d = __m256d;
 
@@ -92,11 +92,11 @@ avx2_set_zero<double>() { return _mm256_setzero_pd(); }
 
 
 template <>
-inline std::int32_t
+constexpr std::int32_t
 avx2_width<float>()  { return 8; }
 
 template <>
-inline std::int32_t
+constexpr std::int32_t
 avx2_width<double>() { return 4; }
 
 
@@ -110,7 +110,7 @@ inline v256f
 avx2_load(float const* addr) { return _mm256_loadu_ps(addr); }
 
 inline void
-avx2_store(float* addr, v256f a) { _mm256_store_ps(addr, a); }
+avx2_store(float* addr, v256f a) { _mm256_storeu_ps(addr, a); }
 
 inline v256f
 avx2_add(v256f a, v256f b) { return _mm256_add_ps(a, b); }
@@ -126,14 +126,14 @@ avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
 
 inline v256f
 avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
-
+/*
 inline float
 avx2_reduce(v256f a)
 {
   // do stuff
   return 5.0;
 }
-
+*/
 
 //
 // Double precision
@@ -148,7 +148,7 @@ inline v256d
 avx2_load(double const* addr) { return _mm256_loadu_pd(addr); }
 
 inline void
-avx2_store(double* addr, v256d a) { _mm256_store_pd(addr, a); }
+avx2_store(double* addr, v256d a) { _mm256_storeu_pd(addr, a); }
 
 inline v256d
 avx2_add(v256d a, v256d b) { return _mm256_add_pd(a, b); }
