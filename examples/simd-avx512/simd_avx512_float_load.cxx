@@ -3,7 +3,7 @@
 
 #include <array>
 #include <iostream>
-#include <nola/c++17/simd.hxx>
+#include <nola/cxx17/simd.hxx>
 
 
 int main()

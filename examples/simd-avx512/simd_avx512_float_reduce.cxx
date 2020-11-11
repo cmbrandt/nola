@@ -1,15 +1,9 @@
-// avx512_float_reduce.cxx
-
-// Compile:
-//    g++-9 -Wall -pedantic -mavx512f -std=c++17 -O3 avx512_float_reduce.cxx -o float_reduce.exe
-
-// Usage:
-//    ./float_reduce.exe
-
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <array>
 #include <iostream>
-#include <nola/c++17/simd.hxx>
+#include <nola/cxx17/simd.hxx>
 
 
 int main()
