@@ -11,11 +11,11 @@
 
 int main()
 {
-  //cxx17_blas();
+  cxx17_blas();
   cxx17_root();
   cxx17_stat();
   //cxx17_exec();
   //cxx17_simd();
 
-  std::cout << "\nend of cxx17_main.cxx\n\n";
+  std::cout << "\nend of cxx17_main.cxx\n\n\n";
 }
