@@ -44,7 +44,7 @@ template <class Real,
           class DiagonalStorage>
 inline void
 matrix_vector_solve(Triangle uplo,
-                    Tranpose trans,
+                    Transpose trans,
                     DiagonalStorage diag,
                     std::int32_t n,
                     Real const a[ ],
