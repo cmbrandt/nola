@@ -20,5 +20,5 @@ int main()
   float r = nola::simd::avx2_reduce(av);
 
   // Display result
-  std::cout << "\nr = " << r << std::endl; // = TODO: NEED TO IMPLEMENT
+  std::cout << "\nr = " << r << std::endl; // r = TODO: NEED TO IMPLEMENT
 }

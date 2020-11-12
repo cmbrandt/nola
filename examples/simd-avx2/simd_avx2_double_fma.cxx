@@ -1,26 +1,39 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<double, 4> a{ 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<double, 4> b{ 2.0, 2.0, 2.0, 2.0 }; 
-  std::array<double, 4> c{ 1.0, 1.0, 1.0, 1.0 };
-  std::array<double, 4> d;
+  std::cout << "\nSIMD AVX2 Double Fused Multiply-Add Example." << std::endl;
 
-  nola::v256d av = nola::avx2_load( a.data() );
-  nola::v256d bv = nola::avx2_load( b.data() );
-  nola::v256d cv = nola::avx2_load( c.data() );
+  // Input data
+  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2 };
+  std::vector<double> c{ 1.1, 1.1, 1.1, 1.1 };
 
-  nola::v256d dv = nola::avx2_fma(av, bv, cv);
+  // Container to store solution
+  std::vector<double> d(4);
 
-  nola::avx2_store( d.data(), dv );
+  // Define SIMD objects using input data
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
+  auto cv = nola::simd::avx2_load( c.data() );
 
-  std::cout << "v = " << dv[0] << " " << dv[1] << " "
-                      << dv[2] << " " << dv[3] << std::endl;
+  // Compute SIMD operation d = (a * b) + c
+  auto dv = nola::simd::avx2_fma(av, bv, cv);
+
+  // Transfer data from SIMD object to container
+  nola::simd::avx2_store( d.data(), dv );
+
+  // Display result
+  nola::util::print_vector("\nd", d.size(), d.data(), 3, 4);
+
+  // d = [
+  //  13.2 13.2 13.2 13.2
+  // ]
 }
