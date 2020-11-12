@@ -1,26 +1,33 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<float, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<float, 8> b{ 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0 }; 
-  std::array<float, 8> c;
+  std::cout << "\nSIMD AVX2 Float Division Example." << std::endl;
 
-  nola::v256f av = nola::avx2_load( a.data() );
-  nola::v256f bv = nola::avx2_load( b.data() );
+  // Two vectors of values
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
 
-  nola::v256f cv = nola::avx2_div(av, bv);
+  // Container to store solution
+  std::vector<float> c(8);
 
-  nola::avx2_store( c.data(), cv );
+  // Initialize SIMD objects using input data
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
 
-  std::cout << "v = " << cv[0] << " " << cv[1] << " "
-                      << cv[2] << " " << cv[3] << " "
-                      << cv[4] << " " << cv[5] << " "
-                      << cv[6] << " " << cv[7] << std::endl;
+  // Compute SIMD operation c = a / b
+  auto cv = nola::simd::avx2_div(av, bv);
+
+  // Store SIMD register to memory
+  nola::simd::avx2_store( c.data(), cv );
+
+  // Display result
+  nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
 }

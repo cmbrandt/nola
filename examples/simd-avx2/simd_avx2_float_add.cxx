@@ -1,7 +1,7 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-//#include <iostream>
+#include <iostream>
 #include <vector>
 #include <nola/cxx17/simd.hxx>
 #include <nola/cxx17/util.hxx>
@@ -9,23 +9,25 @@
 
 int main()
 {
-  // Input vectors
+  std::cout << "\nSIMD AVX2 Float Addition Example." << std::endl;
+
+  // Input data
   std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
   std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
 
-  // Declare solution vector
+  // Container to store solution
   std::vector<float> c(8);
 
-  // Load input data into registers
+  // Initialize SIMD objects using input data
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
 
-  // Sum SIMD vectors
+  // Compute SIMD operation c = a + b
   auto cv = nola::simd::avx2_add(av, bv);
 
-  // Store SIMD register to memory
+  // Move data from SIMD object to container / memory
   nola::simd::avx2_store( c.data(), cv );
 
   // Display result
-  nola::util::print_vector("c", c.size(), c.data(), 2, 3);
+  nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
 }
