@@ -10,15 +10,15 @@ int main()
 {
   std::cout << "\nSIMD AVX2 Float Reduce Example." << std::endl;
 
-  // Vector of values
+  // Input data
   std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
 
-  // Initialize SIMD object using input data
+  // Define SIMD object using input data
   auto av = nola::simd::avx2_load( a.data() );
 
-  // Compute SIMD reduction
+  // Compute horizonal sum of elements in SIMD object
   float r = nola::avx2_reduce(av);
 
   // Display result
-  std::cout << "r = " << r << std::endl;
+  std::cout << "r = " << r << std::endl; // = TODO: NEED TO IMPLEMENT
 }

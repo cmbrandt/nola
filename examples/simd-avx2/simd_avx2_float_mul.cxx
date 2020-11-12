@@ -11,27 +11,27 @@ int main()
 {
   std::cout << "\nSIMD AVX2 Float Multiplication Example." << std::endl;
 
-  // Two vectors of values
+  // Input data
   std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
   std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
 
   // Container to store solution
   std::vector<float> c(8);
 
-  // Initialize SIMD objects using input data
+  // Define SIMD objects using input data
   auto av = nola::simd::avx2_load( a.data() );
   auto bv = nola::simd::avx2_load( b.data() );
 
   // Compute SIMD operation c = a * b
   auto cv = nola::simd::avx2_mul(av, bv);
 
-  // Store SIMD register to memory
+  // Transfer data from SIMD object to container
   nola::simd::avx2_store( c.data(), cv );
 
   // Display result
-  nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
+  nola::util::print_vector("\nc", c.size(), c.data(), 2, 2);
 
   // c = [
-  //  13.2 13.2 13.2 13.2 13.2 13.2 13.2 13.2
+  //  12 12 12 12 12 12 12 12
   // ]
 }
