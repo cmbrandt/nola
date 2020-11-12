@@ -32,4 +32,8 @@ int main()
 
   // Display result
   nola::util::print_vector("\nd", d.size(), d.data(), 3, 4);
+
+  // d = [
+  //  13.2 13.2 13.2 13.2 13.2 13.2 13.2 13.2
+  // ]
 }

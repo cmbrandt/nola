@@ -30,4 +30,8 @@ int main()
 
   // Display result
   nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
+
+  // c = [
+  //  13.2 13.2 13.2 13.2 13.2 13.2 13.2 13.2
+  // ]
 }

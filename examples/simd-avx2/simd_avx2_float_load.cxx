@@ -1,22 +1,32 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<float, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<float, 8> b;
+  std::cout << "\nSIMD AVX2 Float Load Example." << std::endl;
 
-  nola::v256f av = nola::avx2_load( a.data() );
+  // Input data
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  
+  // Container to store solution
+  std::vector<float> b(8);
 
-  nola::avx2_store( b.data(), av );
+  // 
+  auto av = nola::simd::avx2_load( a.data() );
 
-  std::cout << "v = " << b[0] << " " << b[1] << " "
-                      << b[2] << " " << b[3] << " "
-                      << b[4] << " " << b[5] << " "
-                      << b[6] << " " << b[7] << std::endl;
+  // 
+  nola::simd::avx2_store( b.data(), av );
+
+  // Display result
+  nola::util::print_vector("\nb", b.size(), b.data(), 2, 3);
+  
+  // b = [
+  //  5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5
+  // ]
 }
