@@ -29,13 +29,13 @@ using v256d = __m256d;
 // Generic
 
 template <class Real>
-inline auto avx2_set_scalar(Real a);
+inline std::int32_t avx2_length();
 
 template <class Real>
 inline auto avx2_set_zero();
 
 template <class Real>
-inline std::int32_t avx2_width();
+inline auto avx2_set_scalar(Real a);
 
 
 //
@@ -74,12 +74,12 @@ inline double avx2_reduce(v256d a);
 // Generic
 
 template <>
-inline auto
-avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
+constexpr std::int32_t
+avx2_length<float>()  { return 8; }
 
 template <>
-inline auto
-avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
+constexpr std::int32_t
+avx2_length<double>() { return 4; }
 
 
 template <>
@@ -92,12 +92,12 @@ avx2_set_zero<double>() { return _mm256_setzero_pd(); }
 
 
 template <>
-constexpr std::int32_t
-avx2_width<float>()  { return 8; }
+inline auto
+avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
 
 template <>
-constexpr std::int32_t
-avx2_width<double>() { return 4; }
+inline auto
+avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
 
 //
