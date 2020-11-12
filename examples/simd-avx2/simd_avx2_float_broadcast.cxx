@@ -11,16 +11,16 @@ int main()
 {
   std::cout << "\nSIMD AVX2 Float Broadcast Example." << std::endl;
 
-  // Scalar value
-  float s = 5.5;
-
   // Container to store solution
   std::vector<float> a(8);
 
-  // Initialize SIMD object of value zero
+  // Scalar value
+  float s = 5.5;
+
+  // Broadcast scalar value to each element of SIMD object
   auto av = nola::simd::avx2_broadcast(&s);
 
-  // Move data from SIMD object to container
+  // Transfer data from SIMD object to container
   nola::simd::avx2_store( a.data(), av );
 
   // Display result

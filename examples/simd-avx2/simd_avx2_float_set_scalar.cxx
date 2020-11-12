@@ -14,10 +14,10 @@ int main()
   // Container to store solution
   std::vector<float> a(8);
 
-  // Initialize SIMD object of value zero
+  // Define SIMD object using scalar value
   auto av = nola::simd::avx2_set_scalar(5.5f);
 
-  // Move data from SIMD object to container
+  // Transfer data from SIMD object to container
   nola::simd::avx2_store( a.data(), av );
 
   // Display result

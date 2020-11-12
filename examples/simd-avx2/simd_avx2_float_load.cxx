@@ -17,10 +17,10 @@ int main()
   // Container to store solution
   std::vector<float> b(8);
 
-  // 
+  // Define SIMD object using input data
   auto av = nola::simd::avx2_load( a.data() );
 
-  // 
+  // Transfer data from SIMD object to container
   nola::simd::avx2_store( b.data(), av );
 
   // Display result
