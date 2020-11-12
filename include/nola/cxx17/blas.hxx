@@ -151,7 +151,7 @@ vector_norm2(std::int32_t n, double const x[ ])
 
 template <class Transpose>
 inline void
-matrix_vector_product(Transpose trans,
+matrix_vector_product(Transpose /* trans */,
                       std::int32_t m,
                       std::int32_t n,
                       float alpha,
@@ -175,7 +175,7 @@ matrix_vector_product(Transpose trans,
 
 template <class Transpose>
 inline void
-matrix_vector_product(__attribute__((unused)) Transpose trans,
+matrix_vector_product(Transpose /* trans */,
                       std::int32_t m,
                       std::int32_t n,
                       double alpha,
@@ -186,26 +186,15 @@ matrix_vector_product(__attribute__((unused)) Transpose trans,
 {
   std::int32_t inc = 1;
 
-  char t = 'T';
-
+  char trans;
   if constexpr (std::is_same_v<Transpose, no_transpose_t>)
-    t = 'N';
+    trans = 'N';
+  else if constexpr (std::is_same_v<Transpose, nola::blas::transpose_t>)
+    trans = 'T';
+  else
+    std::cout << "\n TODO: perhaps handle this using type trait?" << std::endl;
 
-  return detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-
- /*
-  if constexpr (std::is_same_v<Transpose, transpose_t>) {
-    char t = 'T';
-    std::int32_t inc = 1;
-    return detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-  else {
-    char t = 'N';
-    std::int32_t inc = 1;
-    return detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-*/
-
+  return detail::dgemv_(&trans, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
 }
 
 
