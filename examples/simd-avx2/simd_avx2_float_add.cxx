@@ -1,32 +1,29 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
-#include <iostream>
+//#include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
 #include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  // 
-  constexpr std::int32_t w = nola::simd::avx2_width<float>();
+  // Input vectors
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
 
-  // 
-  std::array<float, w> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
-  std::array<float, w> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 }; 
+  // Declare solution vector
+  std::vector<float> c(8);
 
-  //
-  std::vector<float> c(w);
+  // Load input data into registers
+  auto av = nola::simd::avx2_load( a.data() );
+  auto bv = nola::simd::avx2_load( b.data() );
 
-  //
-  nola::simd::v256f av = nola::simd::avx2_load( a.data() );
-  nola::simd::v256f bv = nola::simd::avx2_load( b.data() );
+  // Sum SIMD vectors
+  auto cv = nola::simd::avx2_add(av, bv);
 
-  //
-  nola::simd::v256f cv = nola::simd::avx2_add(av, bv);
-
-  //
+  // Store SIMD register to memory
   nola::simd::avx2_store( c.data(), cv );
 
   // Display result
