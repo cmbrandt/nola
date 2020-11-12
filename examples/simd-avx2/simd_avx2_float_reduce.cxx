@@ -16,7 +16,7 @@ int main()
   // Define SIMD object using input data
   auto av = nola::simd::avx2_load( a.data() );
 
-  // Compute horizonal sum of elements in SIMD object
+  // Compute sum of all elements in SIMD object
   float r = nola::avx2_reduce(av);
 
   // Display result
