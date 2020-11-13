@@ -1,23 +1,32 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  float as = 5.0; 
+  std::cout << "\nSIMD AVX512 Float Broadcast Example." << std::endl;
 
-  std::array<float, 8> a;
+  // Container to store solution
+  std::vector<float> a(16);
 
-  nola::v512f av = nola::avx512_broadcast(&as);
+  // Scalar value
+  float s = 5.5;
 
-  nola::avx512_store( a.data(), av );
+  // Broadcast scalar value to each element of SIMD object
+  auto av = nola::simd::avx512_broadcast(&s);
 
-  std::cout << "v = " << a[0] << " " << a[1] << " "
-                      << a[2] << " " << a[3] << " "
-                      << a[4] << " " << a[5] << " "
-                      << a[6] << " " << a[7] << std::endl;
+  // Transfer data from SIMD object to container
+  nola::simd::avx512_store( a.data(), av );
+
+  // Display result
+  nola::util::print_vector("\na", a.size(), a.data(), 2, 3);
+
+  // a = [
+  //  5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5
+  // ]
 }

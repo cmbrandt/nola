@@ -1,21 +1,33 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<float, 8> a;
+  std::cout << "\nSIMD AVX512 Float Store Example." << std::endl;
 
-  nola::v512f av = nola::avx512_set_zero();
+  // Input data
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5,
+                        5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 }; 
+  
+  // Container to store solution
+  std::vector<float> b(16);
 
-  nola::avx512_store( a.data(), av );
+  // Define SIMD object using input data
+  auto av = nola::simd::avx512_load( a.data() );
 
-  std::cout << "v = " << a[0] << " " << a[1] << " "
-                      << a[2] << " " << a[3] << " "
-                      << a[4] << " " << a[5] << " "
-                      << a[6] << " " << a[7] << std::endl;
+  // Transfer data from SIMD object to container
+  nola::simd::avx512_store( b.data(), av );
+
+  // Display result
+  nola::util::print_vector("\nb", b.size(), b.data(), 2, 3);
+  
+  // a = [
+  //  5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5
+  // ]
 }
