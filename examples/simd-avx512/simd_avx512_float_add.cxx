@@ -1,26 +1,39 @@
 // Copyright (c) 2019-2021 Christopher M. Brandt
 // All rights reserved
 
-#include <array>
 #include <iostream>
+#include <vector>
 #include <nola/cxx17/simd.hxx>
+#include <nola/cxx17/util.hxx>
 
 
 int main()
 {
-  std::array<float, 8> a{ 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0 }; 
-  std::array<float, 8> b{ 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0, 2.0 }; 
-  std::array<float, 8> c;
+  std::cout << "\nSIMD AVX512 Float Addition Example." << std::endl;
 
-  nola::v512f av = nola::avx512_load( a.data() );
-  nola::v512f bv = nola::avx512_load( b.data() );
+  // Input data
+  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5,
+                        5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2,
+                        2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 };
 
-  nola::v512f cv = nola::avx512_add(av, bv);
+  // Container to store solution
+  std::vector<float> c(16);
 
-  nola::avx512_store( c.data(), cv );
+  // Define SIMD objects using input data
+  auto av = nola::simd::avx512_load( a.data() );
+  auto bv = nola::simd::avx512_load( b.data() );
 
-  std::cout << "v = " << cv[0] << " " << cv[1] << " "
-                      << cv[2] << " " << cv[3] << " "
-                      << cv[4] << " " << cv[5] << " "
-                      << cv[6] << " " << cv[7] << std::endl;
+  // Compute SIMD operation c = a + b
+  auto cv = nola::simd::avx512_add(av, bv);
+
+  // Transfer data from SIMD object to container
+  nola::simd::avx512_store( c.data(), cv );
+
+  // Display result
+  nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
+
+  // c = [
+  //  7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7
+  // ]
 }
