@@ -29,13 +29,13 @@ using v512d = __m512d;
 // Generic
 
 template <class Real>
+inline std::int32_t avx512_length();
+
+template <class Real>
 inline auto avx512_set_scalar(Real a);
 
 template <class Real>
 inline auto avx512_set_zero();
-
-template <class Real>
-inline std::int32_t avx512_width();
 
 
 //
@@ -73,6 +73,16 @@ inline double avx512_reduce(v512d a);
 //
 // Generic
 
+
+template <>
+constexpr std::int32_t
+avx512_length<float>()  { return 16; }
+
+template <>
+constexpr std::int32_t
+avx512_length<double>() { return 8; }
+
+
 template <>
 inline auto
 avx512_set_scalar(float a)  { return _mm512_set1_ps(a); }
@@ -91,25 +101,16 @@ inline auto
 avx512_set_zero<double>() { return _mm512_setzero_pd(); }
 
 
-template <>
-constexpr std::int32_t
-avx512_width<float>()  { return 16; }
-
-template <>
-constexpr std::int32_t
-avx512_width<double>() { return 8; }
-
-
 //
 // Single precision
-
+/*
 inline v512f
 avx512_broadcast(float const* addr)
 {
   //
   //return _mm512_broadcastss_ps(addr);
 }
-
+*/
 inline v512f
 avx512_load(float const* addr) { return _mm512_loadu_ps(addr); }
 
@@ -140,14 +141,14 @@ avx512_reduce(v512f a) { return _mm512_reduce_add_ps(a); }
 
 inline v512d
 avx512_set_zero() { return _mm512_setzero_pd(); }
-
+/*
 inline v512d
 avx512_broadcast(double const* addr)
 {
   //
   //return _mm512_broadcastsd_pd(addr);
 }
-
+*/
 inline v512d
 avx512_load(double const* addr) { return _mm512_loadu_pd(addr); }
 
