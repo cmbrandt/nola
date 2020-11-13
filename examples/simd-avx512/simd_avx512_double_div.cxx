@@ -12,11 +12,11 @@ int main()
   std::cout << "\nSIMD AVX512 Double Division Example." << std::endl;
 
   // Input data
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
-  std::vector<float> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 };
+  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> b{ 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2, 2.2 };
 
   // Container to store solution
-  std::vector<float> c(8);
+  std::vector<double> c(8);
 
   // Define SIMD objects using input data
   auto av = nola::simd::avx512_load( a.data() );
@@ -32,6 +32,6 @@ int main()
   nola::util::print_vector("\nc", c.size(), c.data(), 2, 3);
 
   // c = [
-  //  7.7 7.7 7.7 7.7 7.7 7.7 7.7 7.7
+  //  2.5 2.5 2.5 2.5 2.5 2.5 2.5 2.5
   // ]
 }
