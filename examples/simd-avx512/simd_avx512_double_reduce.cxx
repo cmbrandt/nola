@@ -11,7 +11,7 @@ int main()
   std::cout << "\nSIMD AVX512 Double Reduce Example." << std::endl;
 
   // Input data
-  std::vector<float> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5, 5.5 };
 
   // Define SIMD object using input data
   auto av = nola::simd::avx512_load( a.data() );
