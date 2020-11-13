@@ -27,7 +27,7 @@ int main()
   // Display result
   nola::util::print_vector("\nb", b.size(), b.data(), 2, 3);
   
-  // a = [
+  // b = [
   //  5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5 5.5
   // ]
 }
