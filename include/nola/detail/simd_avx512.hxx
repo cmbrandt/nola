@@ -153,7 +153,7 @@ inline v512d
 avx512_load(double const* addr) { return _mm512_loadu_pd(addr); }
 
 inline void
-avx512_store(double* addr, v512d a) { _mm512_store_pd(addr, a); }
+avx512_store(double* addr, v512d a) { _mm512_storeu_pd(addr, a); }
 
 inline v512d
 avx512_add(v512d a, v512d b) { return _mm512_add_pd(a, b); }

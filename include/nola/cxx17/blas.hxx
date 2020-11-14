@@ -111,18 +111,18 @@ matrix_product(TransposeA transa,
 
 template <>
 inline void
-linalg_add(std::int32_t n, float alpha, float const x[ ], float y[ ])
+linalg_add<float>(std::int32_t n, float alpha, float const x[ ], float y[ ])
 {
   std::int32_t inc = 1;
-  return detail::saxpy_(&n, &alpha, x, &inc, y, &inc);
+  detail::saxpy_(&n, &alpha, x, &inc, y, &inc);
 }
 
 template <>
 inline void
-linalg_add(std::int32_t n, double alpha, double const x[ ], double y[ ])
+linalg_add<double>(std::int32_t n, double alpha, double const x[ ], double y[ ])
 {
   std::int32_t inc = 1;
-  return detail::daxpy_(&n, &alpha, x, &inc, y, &inc);
+  detail::daxpy_(&n, &alpha, x, &inc, y, &inc);
 }
 
 
@@ -131,7 +131,7 @@ linalg_add(std::int32_t n, double alpha, double const x[ ], double y[ ])
 
 template <>
 inline float
-vector_norm2(std::int32_t n, float const x[ ])
+vector_norm2<float>(std::int32_t n, float const x[ ])
 {
   std::int32_t inc = 1;
   return detail::snrm2_(&n, x, &inc);
@@ -139,7 +139,7 @@ vector_norm2(std::int32_t n, float const x[ ])
 
 template <>
 inline double
-vector_norm2(std::int32_t n, double const x[ ])
+vector_norm2<double>(std::int32_t n, double const x[ ])
 {
   std::int32_t inc = 1;
   return detail::dnrm2_(&n, x, &inc);
@@ -163,13 +163,15 @@ matrix_vector_product(Transpose /* trans */,
   if constexpr (std::is_same_v<Transpose, transpose_t>) {
     char t = 'T';
     std::int32_t inc = 1;
-    return detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
-  else {
+  else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
     char t = 'N';
     std::int32_t inc = 1;
-    return detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
+  else
+    static_assert("Not implemented.");
 }
 
 
@@ -184,17 +186,18 @@ matrix_vector_product(Transpose /* trans */,
                       double beta,
                       double y[ ])
 {
-  std::int32_t inc = 1;
-
-  char trans;
-  if constexpr (std::is_same_v<Transpose, no_transpose_t>)
-    trans = 'N';
-  else if constexpr (std::is_same_v<Transpose, nola::blas::transpose_t>)
-    trans = 'T';
+  if constexpr (std::is_same_v<Transpose, transpose_t>) {
+    char t = 'T';
+    std::int32_t inc = 1;
+    detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+  }
+  else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
+    char t = 'N';
+    std::int32_t inc = 1;
+    detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+  }
   else
-    std::cout << "\n TODO: perhaps handle this using type trait?" << std::endl;
-
-  return detail::dgemv_(&trans, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    static_assert("Not implemented.");
 }
 
 
