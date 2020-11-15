@@ -1,8 +1,10 @@
 
-#ifndef STAT_HXX
-#define STAT_HXX
+#ifndef NOLA_STAT_HXX
+#define NOLA_STAT_HXX
 
 
+namespace nola
+{
 namespace stat
 {
 
@@ -36,18 +38,9 @@ mean(int n, Real x[ ])
   return mean / n;
 }
 
-/*
-template <class ExecutionPolicy, class Real>
-inline Real
-mean(ExecutionPolicy&&, int n, Real x[ ])
-{
-  std::cout << "\ninside mean(DummpyExec, int n, Real x[])" << std::endl;
-
-  return mean(n, x);
-}
-*/
 
 } // namespace stat
+} // namespace nola
 
 
 #endif

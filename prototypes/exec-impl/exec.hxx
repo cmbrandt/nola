@@ -1,37 +1,62 @@
 
-#ifndef EXEC_HXX
-#define EXEC_HXX
+#ifndef NOLA_EXEC_HXX
+#define NOLA_EXEC_HXX
 
 #include <type_traits>
-#include "par.hxx"
-#include "unseq.hxx"
-#include "par_unseq.hxx"
-#include "seq.hxx"
 
 
+namespace nola
+{
 namespace exec
 {
 
 
-struct sequenced_policy { };
+//----------------------------------------------------------------------------//
+// Execution policy classes
 
+struct sequential_policy { };
 struct parallel_policy { };
-
-struct parallel_unsequenced_policy { };
-
-struct unsequenced_policy { };
-
-inline constexpr auto seq       = sequenced_policy{};
-inline constexpr auto par       = parallel_policy{};
-inline constexpr auto par_unseq = parallel_unsequenced_policy{};
-inline constexpr auto unseq     = unsequenced_policy{};
+struct parallel_unsequential_policy  { };
+struct unsequential_policy  { };
 
 
-} // namespace exec
+//----------------------------------------------------------------------------//
+// Execution policy instances
+
+constexpr auto seq       = sequential_policy {};
+constexpr auto par       = parallel_policy {};
+constexpr auto par_unseq = parallel_unsequential_policy {};
+constexpr auto unseq     = unsequential_policy {};
 
 
-namespace stat
-{
+//----------------------------------------------------------------------------//
+// Execution policy type trait
+
+
+template <typename T>
+struct is_execution_policy : std::false_type { };
+
+template <typename T>
+inline constexpr bool is_execution_policy_v = is_execution_policy<T>::value;
+
+
+//
+// Specializations
+
+template <>
+struct is_execution_policy<sequential_policy> : std::true_type { };
+
+template <>
+struct is_execution_policy<parallel_policy> : std::true_type { };
+
+template <>
+struct is_execution_policy<parallel_unsequential_policy> : std::true_type { };
+
+template <>
+struct is_execution_policy<unsequential_policy> : std::true_type { };
+
+
+/*
 
 template <class ExecutionPolicy, class Real>
 inline Real
@@ -47,9 +72,11 @@ mean(ExecutionPolicy&& exec, int n, Real x[ ])
     return mean_seq(n, x);
 }
 
+*/
 
 
-} // stat
+} // namespace stat
+} // namespace nola
 
 
 #endif
