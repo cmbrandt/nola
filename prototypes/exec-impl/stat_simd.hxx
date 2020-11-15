@@ -1,17 +1,30 @@
 
-#ifndef UNSEQ_HXX
-#define UNSEQ_HXX
+#ifndef NOLA_STAT_SIMD_HXX
+#define NOLA_STAT_SIMD_HXX
+
+#include <iostream>
 
 
+namespace nola
+{
 namespace stat
 {
 
 
+// Declarations
+
 template <class Real>
 inline Real
-mean_unseq(int n, Real x[ ])
+mean_simd(int n, Real x[]);
+
+
+// Implementations
+
+template <class Real>
+inline Real
+mean_simd(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_unseq(int n, Real x[])" << std::endl;
+  std::cout << "\ninside mean_simd()" << std::endl;
 
   double mean{0.0};
 
@@ -23,6 +36,7 @@ mean_unseq(int n, Real x[ ])
 
 
 } // namespace stat
+} // namespace nola
 
 
 #endif

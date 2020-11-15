@@ -1,24 +1,30 @@
 
-#ifndef PAR_HXX
-#define PAR_HXX
+#ifndef NOLA_STAT_PARALLEL_HXX
+#define NOLA_STAT_PARALLEL_HXX
+
+#include <iostream>
 
 
-
+namespace nola
+{
 namespace stat
 {
 
-/*
-template <class ExecutionPolicy, class Real>
-inline Real
-mean(ExecutionPolicy&& exec, int n, Real x[ ]);
-*/
 
+// Declarations
 
 template <class Real>
 inline Real
-mean_par(int n, Real x[ ])
+mean_parallel(int n, Real x[]);
+
+
+// Implementations
+
+template <class Real>
+inline Real
+mean_parallel(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_par(int n, Real x[])" << std::endl;
+  std::cout << "\ninside mean_parallel()" << std::endl;
 
   double mean{0.0};
 
@@ -30,6 +36,7 @@ mean_par(int n, Real x[ ])
 
 
 } // namespace stat
+} // namespace nola
 
 
 #endif

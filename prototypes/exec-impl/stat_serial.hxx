@@ -1,24 +1,32 @@
 
-#ifndef SEQ_HXX
-#define SEQ_HXX
+#ifndef NOLA_STAT_SERIAL_HXX
+#define NOLA_STAT_SERIAL_HXX
+
+#include <iostream>
 
 
-
+namespace nola
+{
 namespace stat
 {
+namespace detail
+{
 
-/*
-template <class ExecutionPolicy, class Real>
-inline Real
-mean(ExecutionPolicy&& exec, int n, Real x[ ]);
-*/
 
+// Declarations
 
 template <class Real>
 inline Real
-mean_seq(int n, Real x[ ])
+mean_serial(int n, Real x[]);
+
+
+// Implementations
+
+template <class Real>
+inline Real
+mean_serial(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_seq(int n, Real x[])" << std::endl;
+  std::cout << "\ninside mean_serial()" << std::endl;
 
   double mean{0.0};
 
@@ -29,7 +37,9 @@ mean_seq(int n, Real x[ ])
 }
 
 
+} // namespace detail
 } // namespace stat
+} // namespace nola
 
 
 #endif
