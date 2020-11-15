@@ -30,8 +30,10 @@ constexpr auto unseq     = unsequential_policy {};
 
 
 //----------------------------------------------------------------------------//
-// Execution policy type trait
+// Execution policy type support
 
+
+// Type category
 
 template <typename T>
 struct is_execution_policy : std::false_type { };
@@ -40,8 +42,7 @@ template <typename T>
 inline constexpr bool is_execution_policy_v = is_execution_policy<T>::value;
 
 
-//
-// Specializations
+// Type category specializations
 
 template <>
 struct is_execution_policy<sequential_policy> : std::true_type { };
