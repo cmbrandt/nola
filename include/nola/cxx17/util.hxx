@@ -50,7 +50,7 @@ print_matrix(std::string_view s, std::int32_t rows, std::int32_t cols, const Rea
 
 
 //
-// compare_container
+// Maximum Absolute Difference
 
 // Return the maximum absolute difference between two ranges
 template <class Real>
@@ -68,7 +68,7 @@ Real max_abs_difference(std::int32_t size, const Real a[ ], const Real b[ ])
 
 
 //
-// print_vector
+// Print Vector
 
 // Display all elements of a one-dimensional container
 template <class Real>
@@ -91,7 +91,7 @@ void print_vector(std::string_view s, std::int32_t size, const Real a[ ])
 
 
 //
-// print_matrix
+// Print Matrix
 
 // Display all elements of a two-dimensional container
 template <class Real>
