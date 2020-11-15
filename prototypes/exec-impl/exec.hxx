@@ -57,25 +57,6 @@ template <>
 struct is_execution_policy<unsequential_policy> : std::true_type { };
 
 
-/*
-
-template <class ExecutionPolicy, class Real>
-inline Real
-mean(ExecutionPolicy&& exec, int n, Real x[ ])
-{
-  if constexpr ( std::is_same_v<ExecutionPolicy, exec::parallel_policy> )
-    return mean_par(n, x);
-  else if ( std::is_same_v<ExecutionPolicy, exec::parallel_unsequenced_policy> )
-    return mean_par_unseq(n, x);
-  else if ( std::is_same_v<ExecutionPolicy, exec::unsequenced_policy> )
-    return mean_unseq(n, x);
-  else
-    return mean_seq(n, x);
-}
-
-*/
-
-
 } // namespace stat
 } // namespace nola
 

@@ -9,6 +9,8 @@ namespace nola
 {
 namespace stat
 {
+namespace detail
+{
 
 
 // Declarations
@@ -35,6 +37,7 @@ mean_parallel_simd(int n, Real x[ ])
 }
 
 
+} // namespace detail
 } // namespace stat
 } // namespace nola
 
