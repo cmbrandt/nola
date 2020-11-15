@@ -5,8 +5,8 @@
 #include <iostream>
 #include "stat_impl.hxx"
 
-
-// If <exec.hxx> is included
+// If <nola/cxx17/exec.hxx> has already been included,
+// pull in the parallel/simd backends
 #if defined (NOLA_EXEC_HXX)
   #include "stat_exec_impl.hxx"
 #endif

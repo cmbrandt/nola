@@ -17,14 +17,14 @@ namespace detail
 
 template <class Real>
 inline Real
-mean_serial(int n, Real x[]);
+mean_serial_impl(int n, Real x[]);
 
 
 // Implementations
 
 template <class Real>
 inline Real
-mean_serial(int n, Real x[ ])
+mean_serial_impl(int n, Real x[ ])
 {
   std::cout << "\ninside mean_serial()" << std::endl;
 

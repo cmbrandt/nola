@@ -25,7 +25,7 @@ template <class Real>
 inline Real
 mean(int n, Real x[ ])
 {
-  return detail::mean_serial(n, x);
+  return detail::mean_serial_impl(n, x);
 }
 
 

@@ -16,8 +16,8 @@ namespace exec
 
 struct sequential_policy { };
 struct parallel_policy { };
-struct parallel_unsequential_policy  { };
-struct unsequential_policy  { };
+struct parallel_unsequential_policy { };
+struct unsequential_policy { };
 
 
 //----------------------------------------------------------------------------//

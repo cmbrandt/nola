@@ -29,16 +29,16 @@ inline Real
 mean(ExecutionPolicy&& /*exec*/, int n, Real x[ ])
 {
   if constexpr (std::is_same_v<std::decay_t<ExecutionPolicy>, nola::exec::sequential_policy>)
-    return detail::mean_serial(n, x);
+    return detail::mean_serial_impl(n, x);
   else
   if constexpr (std::is_same_v<std::decay_t<ExecutionPolicy>, nola::exec::parallel_policy>)
-    return detail::mean_parallel(n, x);
+    return detail::mean_parallel_impl(n, x);
   else
   if constexpr (std::is_same_v<std::decay_t<ExecutionPolicy>, nola::exec::parallel_unsequential_policy>)
-    return detail::mean_parallel_simd(n, x);
+    return detail::mean_parallel_simd_impl(n, x);
   else
   if constexpr (std::is_same_v<std::decay_t<ExecutionPolicy>, nola::exec::unsequential_policy>)
-    return detail::mean_simd(n, x);
+    return detail::mean_simd_impl(n, x);
   else
     static_assert(nola::exec::is_execution_policy_v<ExecutionPolicy>);
 
