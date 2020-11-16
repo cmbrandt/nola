@@ -6,7 +6,6 @@
 
 #include <nola/detail/stat_impl.hxx>
 
-
 // If <nola/cxx17/exec.hxx> has already been included,
 // pull in the parallel/simd backends
 #if defined (NOLA_EXEC_HXX)

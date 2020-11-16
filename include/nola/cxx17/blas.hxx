@@ -103,18 +103,96 @@ matrix_product(TransposeA transa,
 
 
 //----------------------------------------------------------------------------//
+// Helper classes
+
+//
+// Linear Algebra Add
+
+template <class Real>
+struct Blas_axpy {
+  // static void
+  // nola_axpy(const std::int32_t n,
+  //           const Real alpha,
+  //           const Real x[ ], const std::int32_t incx,
+  //           Real y[ ], const std::int32_t incy);
+};
+
+template <>
+struct Blas_axpy<float> {
+  static void
+  nola_axpy(const std::int32_t n,
+            const float alpha,
+            const float x[ ], const std::int32_t incx,
+            float y[ ], const std::int32_t incy)
+  {
+    detail::nola_saxpy_(&n, &alpha, x, &incx, y, &incy);
+  }
+};
+
+template <>
+struct Blas_axpy<double> {
+  static void
+  nola_axpy(const std::int32_t n,
+            const double alpha,
+            const double x[ ], const std::int32_t incx,
+            double y[ ], const std::int32_t incy)
+  {
+    detail::nola_daxpy_(&n, &alpha, x, &incx, y, &incy);
+  }
+};
+
+
+//
+// Euclidean Vector Norm
+
+/*
+template <class Real>
+struct Blas_nrm2 { };
+
+template <>
+struct Blas_nrm2<float> {
+  static void
+  nola_nrm2( <args> )
+  {
+    nola_snrm2_(&n, x, &inc);
+  }
+};
+
+template <>
+struct Blas_nrm2<double> {
+  static void
+  nola_nrm2( <> )
+  {
+    nola_dnrm2_(&n, x, &inc);
+  }
+};
+*/
+
+
+
+
+//----------------------------------------------------------------------------//
 // Definitions
 
 
 //
 // Linear Algebra Add
 
+template <class Real>
+inline void
+linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ])
+{
+  std::int32_t inc = 1;
+  Blas_axpy<Real>::nola_axpy(n, alpha, x, inc, y, inc);
+}
+
+/*
 template <>
 inline void
 linalg_add<float>(std::int32_t n, float alpha, float const x[ ], float y[ ])
 {
   std::int32_t inc = 1;
-  detail::saxpy_(&n, &alpha, x, &inc, y, &inc);
+  detail::nola_saxpy_(&n, &alpha, x, &inc, y, &inc);
 }
 
 template <>
@@ -122,9 +200,9 @@ inline void
 linalg_add<double>(std::int32_t n, double alpha, double const x[ ], double y[ ])
 {
   std::int32_t inc = 1;
-  detail::daxpy_(&n, &alpha, x, &inc, y, &inc);
+  detail::nola_daxpy_(&n, &alpha, x, &inc, y, &inc);
 }
-
+*/
 
 //
 // Euclidean Vector Norm
@@ -134,7 +212,7 @@ inline float
 vector_norm2<float>(std::int32_t n, float const x[ ])
 {
   std::int32_t inc = 1;
-  return detail::snrm2_(&n, x, &inc);
+  return detail::nola_snrm2_(&n, x, &inc);
 }
 
 template <>
@@ -142,7 +220,7 @@ inline double
 vector_norm2<double>(std::int32_t n, double const x[ ])
 {
   std::int32_t inc = 1;
-  return detail::dnrm2_(&n, x, &inc);
+  return detail::nola_dnrm2_(&n, x, &inc);
 }
 
 
@@ -160,18 +238,21 @@ matrix_vector_product(Transpose /* trans */,
                       float beta,
                       float y[ ])
 {
+
   if constexpr (std::is_same_v<Transpose, transpose_t>) {
     char t = 'T';
     std::int32_t inc = 1;
-    detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::nola_sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
   else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
     char t = 'N';
     std::int32_t inc = 1;
-    detail::sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::nola_sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
   else
     static_assert("Not implemented.");
+
+
 }
 
 
@@ -189,12 +270,12 @@ matrix_vector_product(Transpose /* trans */,
   if constexpr (std::is_same_v<Transpose, transpose_t>) {
     char t = 'T';
     std::int32_t inc = 1;
-    detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::nola_dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
   else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
     char t = 'N';
     std::int32_t inc = 1;
-    detail::dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
+    detail::nola_dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
   }
   else
     static_assert("Not implemented.");

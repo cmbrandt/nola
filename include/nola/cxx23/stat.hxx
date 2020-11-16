@@ -54,7 +54,7 @@ inline auto
 arithmetic_mean(in_vector_t x)
 {
   static_assert( x.rank() == 1 );
-  return detail::arithmetic_mean_impl( x.extent(0), x.data() );
+  return detail::arithmetic_mean_serial_impl( x.extent(0), x.data() );
 }
 
 
@@ -66,7 +66,7 @@ inline auto
 variance(in_vector_t x)
 {
   static_assert( x.rank() == 1 );
-  return detail::variance_impl( x.extent(0), x.data() );
+  return detail::variance_serial_impl( x.extent(0), x.data() );
 }
 
 
@@ -78,7 +78,7 @@ inline auto
 standard_deviation(in_vector_t x)
 {
   static_assert( x.rank() == 1 );
-  return detail::standard_deviation_impl( x.extent(0), x.data() );
+  return detail::standard_deviation_serial_impl( x.extent(0), x.data() );
 }
 
 
@@ -91,7 +91,7 @@ covariance(in_vector_1_t x, in_vector_2_t y)
 {
   static_assert( x.rank() == 1 or y.rank() == 1 );
   assert (x.extent(0) == y.extent(0) );
-  return detail::covariance_impl( x.extent(0), x.data(), y.data() );
+  return detail::covariance_serial_impl( x.extent(0), x.data(), y.data() );
 }
 
 
@@ -104,7 +104,7 @@ correlation(in_vector_1_t x, in_vector_2_t y)
 {
   static_assert( x.rank() == 1 or y.rank() == 1 );
   assert (x.extent(0) == y.extent(0) );
-  return detail::correlation_impl( x.extent(0), x.data(), y.data() );
+  return detail::correlation_serial_impl( x.extent(0), x.data(), y.data() );
 }
 
 
