@@ -1,4 +1,4 @@
- !> \brief \b LSAME
+ !> \brief \b NOLA_LSAME
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !      LOGICAL FUNCTION LSAME( CA, CB )
+ !      LOGICAL FUNCTION NOLA_LSAME( CA, CB )
  !
  !     .. Scalar Arguments ..
  !      CHARACTER          CA, CB
@@ -20,7 +20,7 @@
  !>
  !> \verbatim
  !>
- !> LSAME returns .TRUE. if CA is the same letter as CB regardless of
+ !> NOLA_LSAME returns .TRUE. if CA is the same letter as CB regardless of
  !> case.
  !> \endverbatim
  !
@@ -49,7 +49,7 @@
  !> \ingroup auxOTHERauxiliary
  !
  !  =====================================================================
-       LOGICAL FUNCTION lsame( CA, CB )
+       LOGICAL FUNCTION NOLA_LSAME( CA, CB )
  !
  !  -- LAPACK auxiliary routine (version 3.7.0) --
  !  -- LAPACK is a software package provided by Univ. of Tennessee,    --
@@ -72,8 +72,8 @@
  !
  !     Test if the characters are equal
  !
-       lsame = ca.EQ.cb
-       IF( lsame ) RETURN
+       NOLA_LSAME = ca.EQ.cb
+       IF( NOLA_LSAME ) RETURN
  !
  !     Now test for equivalence if both characters are alphabetic.
  !
@@ -111,10 +111,10 @@
           IF( inta.GE.225 .AND. inta.LE.250 ) inta = inta - 32
           IF( intb.GE.225 .AND. intb.LE.250 ) intb = intb - 32
        END IF
-       lsame = inta.EQ.intb
+       NOLA_LSAME = inta.EQ.intb
  !
  !     RETURN
  !
- !     End of LSAME
+ !     End of NOLA_LSAME
  !
        END

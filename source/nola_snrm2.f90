@@ -1,4 +1,4 @@
- !> \brief \b SNRM2
+ !> \brief \b NOLA_SNRM2
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !       REAL FUNCTION SNRM2(N,X,INCX)
+ !       REAL FUNCTION NOLA_SNRM2(N,X,INCX)
  !
  !       .. Scalar Arguments ..
  !       INTEGER INCX,N
@@ -23,10 +23,10 @@
  !>
  !> \verbatim
  !>
- !> SNRM2 returns the euclidean norm of a vector via the function
+ !> NOLA_SNRM2 returns the euclidean norm of a vector via the function
  !> name, so that
  !>
- !>    SNRM2 := sqrt( x'*x ).
+ !>    NOLA_SNRM2 := sqrt( x'*x ).
  !> \endverbatim
  !
  !  Arguments:
@@ -72,7 +72,7 @@
  !> \endverbatim
  !>
  !  =====================================================================
-       REAL FUNCTION SNRM2(N,X,INCX)
+       REAL FUNCTION NOLA_SNRM2(N,X,INCX)
  !
  !  -- Reference BLAS level1 routine (version 3.8.0) --
  !  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -124,9 +124,9 @@
            norm = scale*sqrt(ssq)
        END IF
  !
-       snrm2 = norm
+       NOLA_SNRM2 = norm
        RETURN
  !
- !     End of SNRM2.
+ !     End of NOLA_SNRM2.
  !
        END

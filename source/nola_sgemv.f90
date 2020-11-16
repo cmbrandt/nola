@@ -1,4 +1,4 @@
- !> \brief \b SGEMV
+ !> \brief \b NOLA_SGEMV
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !       SUBROUTINE SGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
+ !       SUBROUTINE NOLA_SGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
  !
  !       .. Scalar Arguments ..
  !       REAL ALPHA,BETA
@@ -25,7 +25,7 @@
  !>
  !> \verbatim
  !>
- !> SGEMV  performs one of the matrix-vector operations
+ !> NOLA_SGEMV  performs one of the matrix-vector operations
  !>
  !>    y := alpha*A*x + beta*y,   or   y := alpha*A**T*x + beta*y,
  !>
@@ -154,7 +154,7 @@
  !> \endverbatim
  !>
  !  =====================================================================
-       SUBROUTINE sgemv(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
+       SUBROUTINE NOLA_SGEMV(TRANS,M,N,ALPHA,A,LDA,X,INCX,BETA,Y,INCY)
  !
  !  -- Reference BLAS level2 routine (version 3.7.0) --
  !  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -181,11 +181,11 @@
        INTEGER I,INFO,IX,IY,J,JX,JY,KX,KY,LENX,LENY
  !     ..
  !     .. External Functions ..
-       LOGICAL LSAME
-       EXTERNAL lsame
+       LOGICAL NOLA_LSAME
+       EXTERNAL nola_lsame
  !     ..
  !     .. External Subroutines ..
-       EXTERNAL xerbla
+       EXTERNAL nola_xerbla
  !     ..
  !     .. Intrinsic Functions ..
        INTRINSIC max
@@ -194,7 +194,7 @@
  !     Test the input parameters.
  !
        info = 0
-       IF (.NOT.lsame(trans,'N') .AND. .NOT.lsame(trans,'T') .AND. .NOT.lsame(trans,'C')) THEN
+       IF (.NOT.nola_lsame(trans,'N') .AND. .NOT.nola_lsame(trans,'T') .AND. .NOT.nola_lsame(trans,'C')) THEN
            info = 1
        ELSE IF (m.LT.0) THEN
            info = 2
@@ -208,7 +208,7 @@
            info = 11
        END IF
        IF (info.NE.0) THEN
-           CALL xerbla('SGEMV ',info)
+           CALL nola_xerbla('NOLA_SGEMV ',info)
            RETURN
        END IF
  !
@@ -219,7 +219,7 @@
  !     Set  LENX  and  LENY, the lengths of the vectors x and y, and set
  !     up the start points in  X  and  Y.
  !
-       IF (lsame(trans,'N')) THEN
+       IF (nola_lsame(trans,'N')) THEN
            lenx = n
            leny = m
        ELSE
@@ -269,7 +269,7 @@
            END IF
        END IF
        IF (alpha.EQ.zero) RETURN
-       IF (lsame(trans,'N')) THEN
+       IF (nola_lsame(trans,'N')) THEN
  !
  !        Form  y := alpha*A*x + y.
  !
@@ -323,6 +323,6 @@
  !
        RETURN
  !
- !     End of SGEMV .
+ !     End of NOLA_SGEMV .
  !
        END

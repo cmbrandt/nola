@@ -1,4 +1,4 @@
- !> \brief \b STRSV
+ !> \brief \b NOLA_STRSV
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !       SUBROUTINE STRSV(UPLO,TRANS,DIAG,N,A,LDA,X,INCX)
+ !       SUBROUTINE NOLA_STRSV(UPLO,TRANS,DIAG,N,A,LDA,X,INCX)
  !
  !       .. Scalar Arguments ..
  !       INTEGER INCX,LDA,N
@@ -24,7 +24,7 @@
  !>
  !> \verbatim
  !>
- !> STRSV  solves one of the systems of equations
+ !> NOLA_STRSV  solves one of the systems of equations
  !>
  !>    A*x = b,   or   A**T*x = b,
  !>
@@ -147,7 +147,7 @@
  !> \endverbatim
  !>
  !  =====================================================================
-       SUBROUTINE strsv(UPLO,TRANS,DIAG,N,A,LDA,X,INCX)
+       SUBROUTINE NOLA_STRSV(UPLO,TRANS,DIAG,N,A,LDA,X,INCX)
  !
  !  -- Reference BLAS level2 routine (version 3.7.0) --
  !  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -174,11 +174,11 @@
        LOGICAL NOUNIT
  !     ..
  !     .. External Functions ..
-       LOGICAL LSAME
-       EXTERNAL lsame
+       LOGICAL NOLA_LSAME
+       EXTERNAL nola_lsame
  !     ..
  !     .. External Subroutines ..
-       EXTERNAL xerbla
+       EXTERNAL nola_xerbla
  !     ..
  !     .. Intrinsic Functions ..
        INTRINSIC max
@@ -187,11 +187,11 @@
  !     Test the input parameters.
  !
        info = 0
-       IF (.NOT.lsame(uplo,'U') .AND. .NOT.lsame(uplo,'L')) THEN
+       IF (.NOT.nola_lsame(uplo,'U') .AND. .NOT.nola_lsame(uplo,'L')) THEN
            info = 1
-       ELSE IF (.NOT.lsame(trans,'N') .AND. .NOT.lsame(trans,'T') .AND. .NOT.lsame(trans,'C')) THEN
+       ELSE IF (.NOT.nola_lsame(trans,'N') .AND. .NOT.nola_lsame(trans,'T') .AND. .NOT.nola_lsame(trans,'C')) THEN
            info = 2
-       ELSE IF (.NOT.lsame(diag,'U') .AND. .NOT.lsame(diag,'N')) THEN
+       ELSE IF (.NOT.nola_lsame(diag,'U') .AND. .NOT.nola_lsame(diag,'N')) THEN
            info = 3
        ELSE IF (n.LT.0) THEN
            info = 4
@@ -201,7 +201,7 @@
            info = 8
        END IF
        IF (info.NE.0) THEN
-           CALL xerbla('STRSV ',info)
+           CALL nola_xerbla('NOLA_STRSV ',info)
            RETURN
        END IF
  !
@@ -209,7 +209,7 @@
  !
        IF (n.EQ.0) RETURN
  !
-       nounit = lsame(diag,'N')
+       nounit = nola_lsame(diag,'N')
  !
  !     Set up the start point in X if the increment is not unity. This
  !     will be  ( N - 1 )*INCX  too small for descending loops.
@@ -223,11 +223,11 @@
  !     Start the operations. In this version the elements of A are
  !     accessed sequentially with one pass through A.
  !
-       IF (lsame(trans,'N')) THEN
+       IF (nola_lsame(trans,'N')) THEN
  !
  !        Form  x := inv( A )*x.
  !
-           IF (lsame(uplo,'U')) THEN
+           IF (nola_lsame(uplo,'U')) THEN
                IF (incx.EQ.1) THEN
                    DO 20 j = n,1,-1
                        IF (x(j).NE.zero) THEN
@@ -284,7 +284,7 @@
  !
  !        Form  x := inv( A**T )*x.
  !
-           IF (lsame(uplo,'U')) THEN
+           IF (nola_lsame(uplo,'U')) THEN
                IF (incx.EQ.1) THEN
                    DO 100 j = 1,n
                        temp = x(j)
@@ -338,6 +338,6 @@
  !
        RETURN
  !
- !     End of STRSV .
+ !     End of NOLA_STRSV .
  !
        END

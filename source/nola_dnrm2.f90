@@ -1,4 +1,4 @@
- !> \brief \b DNRM2
+ !> \brief \b NOLA_DNRM2
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !       DOUBLE PRECISION FUNCTION DNRM2(N,X,INCX)
+ !       DOUBLE PRECISION FUNCTION NOLA_DNRM2(N,X,INCX)
  !
  !       .. Scalar Arguments ..
  !       INTEGER INCX,N
@@ -23,10 +23,10 @@
  !>
  !> \verbatim
  !>
- !> DNRM2 returns the euclidean norm of a vector via the function
+ !> NOLA_DNRM2 returns the euclidean norm of a vector via the function
  !> name, so that
  !>
- !>    DNRM2 := sqrt( x'*x )
+ !>    NOLA_DNRM2 := sqrt( x'*x )
  !> \endverbatim
  !
  !  Arguments:
@@ -72,7 +72,7 @@
  !> \endverbatim
  !>
  !  =====================================================================
-       DOUBLE PRECISION FUNCTION dnrm2(N,X,INCX)
+       DOUBLE PRECISION FUNCTION NOLA_DNRM2(N,X,INCX)
  !
  !  -- Reference BLAS level1 routine (version 3.8.0) --
  !  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -124,9 +124,9 @@
            norm = scale*sqrt(ssq)
        END IF
  !
-       dnrm2 = norm
+       NOLA_DNRM2 = norm
        RETURN
  !
- !     End of DNRM2.
+ !     End of NOLA_DNRM2.
  !
        END

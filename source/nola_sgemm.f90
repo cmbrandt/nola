@@ -1,4 +1,4 @@
- !> \brief \b SGEMM
+ !> \brief \b NOLA_SGEMM
  !
  !  =========== DOCUMENTATION ===========
  !
@@ -8,7 +8,7 @@
  !  Definition:
  !  ===========
  !
- !       SUBROUTINE SGEMM(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC)
+ !       SUBROUTINE NOLA_SGEMM(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC)
  !
  !       .. Scalar Arguments ..
  !       REAL ALPHA,BETA
@@ -25,7 +25,7 @@
  !>
  !> \verbatim
  !>
- !> SGEMM  performs one of the matrix-matrix operations
+ !> NOLA_SGEMM  performs one of the matrix-matrix operations
  !>
  !>    C := alpha*op( A )*op( B ) + beta*C,
  !>
@@ -185,7 +185,7 @@
  !> \endverbatim
  !>
  !  =====================================================================
-       SUBROUTINE sgemm(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC)
+       SUBROUTINE NOLA_SGEMM(TRANSA,TRANSB,M,N,K,ALPHA,A,LDA,B,LDB,BETA,C,LDC)
  !
  !  -- Reference BLAS level3 routine (version 3.7.0) --
  !  -- Reference BLAS is a software package provided by Univ. of Tennessee,    --
@@ -204,11 +204,11 @@
  !  =====================================================================
  !
  !     .. External Functions ..
-       LOGICAL LSAME
-       EXTERNAL lsame
+       LOGICAL NOLA_LSAME
+       EXTERNAL nola_lsame
  !     ..
  !     .. External Subroutines ..
-       EXTERNAL xerbla
+       EXTERNAL nola_xerbla
  !     ..
  !     .. Intrinsic Functions ..
        INTRINSIC max
@@ -227,8 +227,8 @@
  !     transposed and set  NROWA, NCOLA and  NROWB  as the number of rows
  !     and  columns of  A  and the  number of  rows  of  B  respectively.
  !
-       nota = lsame(transa,'N')
-       notb = lsame(transb,'N')
+       nota = nola_lsame(transa,'N')
+       notb = nola_lsame(transb,'N')
        IF (nota) THEN
            nrowa = m
            ncola = k
@@ -245,9 +245,9 @@
  !     Test the input parameters.
  !
        info = 0
-       IF ((.NOT.nota) .AND. (.NOT.lsame(transa,'C')) .AND. (.NOT.lsame(transa,'T'))) THEN
+       IF ((.NOT.nota) .AND. (.NOT.nola_lsame(transa,'C')) .AND. (.NOT.nola_lsame(transa,'T'))) THEN
            info = 1
-       ELSE IF ((.NOT.notb) .AND. (.NOT.lsame(transb,'C')) .AND. (.NOT.lsame(transb,'T'))) THEN
+       ELSE IF ((.NOT.notb) .AND. (.NOT.nola_lsame(transb,'C')) .AND. (.NOT.nola_lsame(transb,'T'))) THEN
            info = 2
        ELSE IF (m.LT.0) THEN
            info = 3
@@ -263,7 +263,7 @@
            info = 13
        END IF
        IF (info.NE.0) THEN
-           CALL xerbla('SGEMM ',info)
+           CALL nola_xerbla('NOLA_SGEMM ',info)
            RETURN
        END IF
  !
@@ -376,6 +376,6 @@
  !
        RETURN
  !
- !     End of SGEMM .
+ !     End of NOLA_SGEMM .
  !
        END
