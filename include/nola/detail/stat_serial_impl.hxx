@@ -25,7 +25,7 @@ namespace detail
 
 template <class Real>
 inline Real
-arithmetic_mean_impl(std::int32_t n, const Real x[ ])
+arithmetic_mean_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute and return the mean of the sequence
   Real sum{0.0};
@@ -42,7 +42,7 @@ arithmetic_mean_impl(std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-variance_impl(std::int32_t n, const Real x[ ])
+variance_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
@@ -69,7 +69,7 @@ variance_impl(std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-standard_deviation_impl(std::int32_t n, const Real x[ ])
+standard_deviation_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
@@ -99,7 +99,7 @@ standard_deviation_impl(std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-covariance_impl(std::int32_t n, const Real x[ ], const Real y[ ])
+covariance_serial_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the first sequence
   Real sum{0.0};
@@ -135,7 +135,7 @@ covariance_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 
 template <class Real>
 inline Real
-correlation_impl(std::int32_t n, const Real x[ ], const Real y[ ])
+correlation_serial_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the first sequence
   Real sum{0.0};

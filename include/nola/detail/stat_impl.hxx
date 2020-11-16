@@ -52,7 +52,7 @@ template <class Real>
 inline Real
 arithmetic_mean(std::int32_t n, Real const x[ ])
 {
-  return detail::arithmetic_mean_impl(n, x);
+  return detail::arithmetic_mean_serial_impl(n, x);
 }
 
 
@@ -63,7 +63,7 @@ template <class Real>
 inline Real
 variance(std::int32_t n, Real const x[ ])
 {
-  return detail::variance_impl(n, x);
+  return detail::variance_serial_impl(n, x);
 }
 
 
@@ -74,7 +74,7 @@ template <class Real>
 inline Real
 standard_deviation(std::int32_t n, Real const x[ ])
 {
-  return detail::standard_deviation_impl(n, x);
+  return detail::standard_deviation_serial_impl(n, x);
 }
 
 
@@ -85,7 +85,7 @@ template <class Real>
 inline Real
 covariance(std::int32_t n, Real const x[ ], Real const y[ ])
 {
-  return detail::covariance_impl(n, x, y);
+  return detail::covariance_serial_impl(n, x, y);
 }
 
 
@@ -96,7 +96,7 @@ template <class Real>
 inline Real
 correlation(std::int32_t n, Real const x[ ], Real const y[ ])
 {
-  return detail::correlation_impl(n, x, y);
+  return detail::correlation_serial_impl(n, x, y);
 }
 
 
