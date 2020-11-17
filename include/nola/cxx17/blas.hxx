@@ -384,7 +384,7 @@ matrix_vector_product(Transpose /*trans*/,
   // Determine value of template parameter
   constexpr bool A_trans = std::is_same_v<Transpose, transpose_t>;
 
-  // Define input paramter for BLAS routine
+  // Define input parameter for BLAS routine
   const char TRANS = A_trans ? 'T' : 'N';
 
   detail::blas_gemv<Real>::gemv(TRANS, m, n, alpha, a, m, x, 1, beta, y, 1);
