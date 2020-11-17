@@ -26,7 +26,7 @@ int main()
   std::int32_t incy = 1;
 
   // Compute operation y := alpha*x + y
-  nola::blas::detail::saxpy_(&n, &alpha, x.data(), &incx, y.data(), &incy);
+  nola::blas::detail::nola_saxpy_(&n, &alpha, x.data(), &incx, y.data(), &incy);
 
   for (int i = 0; i < n; ++i)
     std::cout << " " << y[i];

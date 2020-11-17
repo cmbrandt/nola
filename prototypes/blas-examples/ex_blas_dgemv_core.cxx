@@ -37,7 +37,7 @@ int main()
   std::int32_t incy = 1;
 
   // Compute operation y := alpha*A*x + beta*y
-  nola::blas::detail::dgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
+  nola::blas::detail::nola_dgemv_(&trans, &m, &n, &alpha, a.data(), &lda, x.data(), &incx,
          &beta, y.data(), &incy, 1);
 
   for (int i = 0; i < 3; ++i)

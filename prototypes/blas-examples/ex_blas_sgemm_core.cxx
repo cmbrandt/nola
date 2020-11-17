@@ -38,7 +38,7 @@ int main()
   std::int32_t ldc = m;
 
   // Compute operation C := alpha*A*B + beta*C
-  nola::blas::detail::sgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
+  nola::blas::detail::nola_sgemm_(&transa, &transb, &m, &n, &k, &alpha, a.data(), &lda,
          b.data(), &ldb, &beta, c.data(), &ldc, 1, 1);
 
   for (int i = 0; i < 12; ++i)

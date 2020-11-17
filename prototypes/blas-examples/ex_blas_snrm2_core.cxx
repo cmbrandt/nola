@@ -21,7 +21,7 @@ int main()
   std::int32_t incx = 1;
 
   // Compute operation: n = (x'*x)^(1/2)
-  float norm = nola::blas::detail::snrm2_(&n, x.data(), &incx);
+  float norm = nola::blas::detail::nola_snrm2_(&n, x.data(), &incx);
 
   // Display solution
   std::cout << "\nnorm = " << norm << std::endl; // norm = 14.2829

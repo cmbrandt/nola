@@ -32,7 +32,7 @@ int main()
   std::int32_t incx = 1;
 
   // Compute operation x := A^(-1)*x
-  nola::blas::detail::strsv_(&uplo, &trans, &diag, &n, a.data(), &lda, x.data(),
+  nola::blas::detail::nola_strsv_(&uplo, &trans, &diag, &n, a.data(), &lda, x.data(),
          &incx, 1, 1, 1);
 
   for (int i = 0; i < 3; ++i)
