@@ -1,4 +1,5 @@
-// g++-10 -Wall -std=c++20 ex_blas_dtrsv_core.cxx -I ~/projects/nola/include ../../lib/libnola.a -lgfortran -o dtrsv.exe
+// Copyright (c) 2019-2021 Christopher M. Brandt
+// All rights reserved
 
 #include <cstdint>
 #include <iostream>
