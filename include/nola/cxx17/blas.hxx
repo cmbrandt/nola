@@ -210,7 +210,8 @@ struct blas_gemv<float> {
        const float beta,
        float y[ ], const std::int32_t incy)
   {
-    detail::nola_sgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
+    detail::nola_sgemv_(&trans, &m, &n, &alpha, a, &lda,
+                        x, &incx, &beta, y, &incy, 1);
   }
 };
 
@@ -225,7 +226,8 @@ struct blas_gemv<double> {
        const double beta,
        double y[ ], const std::int32_t incy)
   {
-    detail::nola_dgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
+    detail::nola_dgemv_(&trans, &m, &n, &alpha, a, &lda,
+                        x, &incx, &beta, y, &incy, 1);
   }
 };
 
@@ -261,7 +263,8 @@ struct blas_trsv<float> {
        std::int32_t length_trans,
        std::int32_t length_diag)
   {
-    detail::nola_strsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx, 1, 1, 1);
+    detail::nola_strsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx,
+                        length_uplo, length_trans, length_diag);
   }
 };
 
@@ -278,7 +281,8 @@ struct blas_trsv<double> {
        std::int32_t length_trans,
        std::int32_t length_diag)
   {
-    detail::nola_dtrsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx, 1, 1, 1);
+    detail::nola_dtrsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx,
+                        length_uplo, length_trans, length_diag);
   }
 };
 
@@ -344,9 +348,9 @@ template <class Real,
           class Transpose,
           class DiagonalStorage>
 inline void
-matrix_vector_solve(Triangle uplo,
-                    Transpose trans,
-                    DiagonalStorage diag,
+matrix_vector_solve(Triangle /*uplo*/,
+                    Transpose /*trans*/,
+                    DiagonalStorage /*diag*/,
                     std::int32_t n,
                     Real const a[ ],
                     Real x[ ])
