@@ -119,19 +119,19 @@ namespace detail
 template <class Real>
 struct blas_axpy {
   // static void
-  // axpy(const std::int32_t n,
-  //      const Real alpha,
-  //      const Real x[ ], const std::int32_t incx,
-  //      Real y[ ], const std::int32_t incy);
+  // axpy(std::int32_t const n,
+  //      Real const alpha,
+  //      Real const x[ ], std::int32_t const incx,
+  //      Real y[ ], std::int32_t const incy);
 };
 
 template <>
 struct blas_axpy<float> {
   static void
-  axpy(const std::int32_t n,
-       const float alpha,
-       const float x[ ], const std::int32_t incx,
-       float y[ ], const std::int32_t incy)
+  axpy(std::int32_t const n,
+       float const alpha,
+       float const x[ ], std::int32_t const incx,
+       float y[ ], std::int32_t const incy)
   {
     detail::nola_saxpy_(&n, &alpha, x, &incx, y, &incy);
   }
@@ -140,10 +140,10 @@ struct blas_axpy<float> {
 template <>
 struct blas_axpy<double> {
   static void
-  axpy(const std::int32_t n,
-       const double alpha,
-       const double x[ ], const std::int32_t incx,
-       double y[ ], const std::int32_t incy)
+  axpy(std::int32_t const n,
+       double const alpha,
+       double const x[ ], std::int32_t const incx,
+       double y[ ], std::int32_t const incy)
   {
     detail::nola_daxpy_(&n, &alpha, x, &incx, y, &incy);
   }
@@ -435,7 +435,7 @@ matrix_product(TransposeA /*transa*/,
                Real const a[ ],
                Real const b[ ],
                Real beta,
-               Real c [ ])
+               Real c[ ])
 {
   // Determine values of template parameters
   constexpr bool A_trans = std::is_same_v<TransposeA, transpose_t>;
@@ -444,7 +444,7 @@ matrix_product(TransposeA /*transa*/,
   // Define input parameters for BLAS routine
   const char TRANSA = A_trans ? 'T' : 'N';
   const char TRANSB = B_trans ? 'T' : 'N';
-  
+
   const std::int32_t lda = A_trans ? k : m;
   const std::int32_t ldb = B_trans ? n : k;
   const std::int32_t ldc = m;
