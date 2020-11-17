@@ -32,7 +32,6 @@ constexpr auto no_transpose = no_transpose_t{};
 //
 // Triangle
 
-
 struct upper_triangle_t { };
 constexpr auto upper_triangle = upper_triangle_t{};
 
@@ -445,21 +444,14 @@ matrix_product(TransposeA /*transa*/,
   // Define input parameters for BLAS routine
   const char TRANSA = A_trans ? 'T' : 'N';
   const char TRANSB = B_trans ? 'T' : 'N';
+  
+  const std::int32_t lda = A_trans ? k : m;
+  const std::int32_t ldb = B_trans ? n : k;
+  const std::int32_t ldc = m;
 
   detail::blas_gemm<Real>::gemm(TRANSA, TRANSB, m, n, k, alpha,
-                                a, m, b, k, beta, c, m, 1, 1);
+                                a, lda, b, ldb, beta, c, ldc, 1, 1);
 }
-
-
-/*
-
-NOTES:
-* how to handle case where argument passed to BLAS C++17 interface is undefined?
-* how to handle cases where (assuming) the combination of templated arguments
-  determines the definiton of other params, e.g. lda, ldb, etc.
-* how to keep the impl as simple, clean, and readable as possible?
-
-*/
 
 
 } // namespace blas
