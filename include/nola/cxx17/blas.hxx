@@ -145,28 +145,34 @@ struct Blas_axpy<double> {
 //
 // Euclidean Vector Norm
 
-/*
+
 template <class Real>
-struct Blas_nrm2 { };
+struct Blas_nrm2 {
+  // static Real
+  // nola_nrm2(const std::int32_t n,
+  //           const Real x[ ], const std::int32_t incx);
+};
 
 template <>
 struct Blas_nrm2<float> {
-  static void
-  nola_nrm2( <args> )
+  static float
+  nola_nrm2(const std::int32_t n,
+            const float x[ ], const std::int32_t incx)
   {
-    nola_snrm2_(&n, x, &inc);
+    return detail::nola_snrm2_(&n, x, &incx);
   }
 };
 
 template <>
 struct Blas_nrm2<double> {
-  static void
-  nola_nrm2( <> )
+  static double
+  nola_nrm2(const std::int32_t n,
+            const double x[ ], const std::int32_t incx)
   {
-    nola_dnrm2_(&n, x, &inc);
+    return detail::nola_dnrm2_(&n, x, &incx);
   }
 };
-*/
+
 
 
 
@@ -186,27 +192,19 @@ linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ])
   Blas_axpy<Real>::nola_axpy(n, alpha, x, inc, y, inc);
 }
 
-/*
-template <>
-inline void
-linalg_add<float>(std::int32_t n, float alpha, float const x[ ], float y[ ])
-{
-  std::int32_t inc = 1;
-  detail::nola_saxpy_(&n, &alpha, x, &inc, y, &inc);
-}
-
-template <>
-inline void
-linalg_add<double>(std::int32_t n, double alpha, double const x[ ], double y[ ])
-{
-  std::int32_t inc = 1;
-  detail::nola_daxpy_(&n, &alpha, x, &inc, y, &inc);
-}
-*/
 
 //
 // Euclidean Vector Norm
 
+template <class Real>
+inline Real
+vector_norm2(std::int32_t n, Real const x[ ])
+{
+  std::int32_t inc = 1;
+  return Blas_nrm2<Real>::nola_nrm2(n, x, inc);
+}
+
+/*
 template <>
 inline float
 vector_norm2<float>(std::int32_t n, float const x[ ])
@@ -222,6 +220,7 @@ vector_norm2<double>(std::int32_t n, double const x[ ])
   std::int32_t inc = 1;
   return detail::nola_dnrm2_(&n, x, &inc);
 }
+*/
 
 
 //

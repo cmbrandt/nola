@@ -39,10 +39,12 @@ nola_daxpy_(const std::int32_t* n,
 // xNRM2 (e.g. Vector Euclidean Norm)
 
 extern "C" float
-nola_snrm2_(const std::int32_t* n,const float x[ ], const std::int32_t* incx);
+nola_snrm2_(const std::int32_t* n,
+            const float x[ ], const std::int32_t* incx);
 
 extern "C" double
-nola_dnrm2_(const std::int32_t* n, const double x[ ], const std::int32_t* incx);
+nola_dnrm2_(const std::int32_t* n,
+            const double x[ ], const std::int32_t* incx);
 
 
 //
