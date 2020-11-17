@@ -75,7 +75,7 @@ nola_dgemv_(const char* trans,
 // xTRSV (e.g. Triangular Matrix Vector Solve)
 
 extern "C" void
-strsv_(const char* uplo,
+nola_strsv_(const char* uplo,
        const char* trans,
        const char* diag,
        const std::int32_t* n,
@@ -86,7 +86,7 @@ strsv_(const char* uplo,
        std::int32_t length_diag);
 
 extern "C" void
-dtrsv_(const char* uplo,
+nola_dtrsv_(const char* uplo,
        const char* trans,
        const char* diag,
        const std::int32_t* n,

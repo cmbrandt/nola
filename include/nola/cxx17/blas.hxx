@@ -110,37 +110,41 @@ matrix_product(TransposeA transa,
 // Helper classes
 
 
+namespace detail
+{
+
+
 //
 // Linear Algebra Add
 
 template <class Real>
-struct Blas_axpy {
+struct blas_axpy {
   // static void
-  // nola_axpy(const std::int32_t n,
-  //           const Real alpha,
-  //           const Real x[ ], const std::int32_t incx,
-  //           Real y[ ], const std::int32_t incy);
+  // axpy(const std::int32_t n,
+  //      const Real alpha,
+  //      const Real x[ ], const std::int32_t incx,
+  //      Real y[ ], const std::int32_t incy);
 };
 
 template <>
-struct Blas_axpy<float> {
+struct blas_axpy<float> {
   static void
-  nola_axpy(const std::int32_t n,
-            const float alpha,
-            const float x[ ], const std::int32_t incx,
-            float y[ ], const std::int32_t incy)
+  axpy(const std::int32_t n,
+       const float alpha,
+       const float x[ ], const std::int32_t incx,
+       float y[ ], const std::int32_t incy)
   {
     detail::nola_saxpy_(&n, &alpha, x, &incx, y, &incy);
   }
 };
 
 template <>
-struct Blas_axpy<double> {
+struct blas_axpy<double> {
   static void
-  nola_axpy(const std::int32_t n,
-            const double alpha,
-            const double x[ ], const std::int32_t incx,
-            double y[ ], const std::int32_t incy)
+  axpy(const std::int32_t n,
+       const double alpha,
+       const double x[ ], const std::int32_t incx,
+       double y[ ], const std::int32_t incy)
   {
     detail::nola_daxpy_(&n, &alpha, x, &incx, y, &incy);
   }
@@ -152,27 +156,27 @@ struct Blas_axpy<double> {
 
 
 template <class Real>
-struct Blas_nrm2 {
+struct blas_nrm2 {
   // static Real
-  // nola_nrm2(const std::int32_t n,
-  //           const Real x[ ], const std::int32_t incx);
+  // nrm2(const std::int32_t n,
+  //      const Real x[ ], const std::int32_t incx);
 };
 
 template <>
-struct Blas_nrm2<float> {
+struct blas_nrm2<float> {
   static float
-  nola_nrm2(const std::int32_t n,
-            const float x[ ], const std::int32_t incx)
+  nrm2(const std::int32_t n,
+       const float x[ ], const std::int32_t incx)
   {
     return detail::nola_snrm2_(&n, x, &incx);
   }
 };
 
 template <>
-struct Blas_nrm2<double> {
+struct blas_nrm2<double> {
   static double
-  nola_nrm2(const std::int32_t n,
-            const double x[ ], const std::int32_t incx)
+  nrm2(const std::int32_t n,
+       const double x[ ], const std::int32_t incx)
   {
     return detail::nola_dnrm2_(&n, x, &incx);
   }
@@ -183,50 +187,103 @@ struct Blas_nrm2<double> {
 // Matrix Vector product
 
 template <class Real>
-struct Blas_gemv {
+struct blas_gemv {
   // static void
-  // nola_gemv(const char trans,
-  //           const std::int32_t m, const std::int32_t n,
-  //           const Real alpha,
-  //           const Real a[ ], const std::int32_t lda,
-  //           const Real x[ ], const std::int32_t incx,
-  //           const Real beta,
-  //           Real y[ ], const std::int32_t incy,
-  //           std::int32_t length_trans)
+  // gemv(const char trans,
+  //      const std::int32_t m, const std::int32_t n,
+  //      const Real alpha,
+  //      const Real a[ ], const std::int32_t lda,
+  //      const Real x[ ], const std::int32_t incx,
+  //      const Real beta,
+  //      Real y[ ], const std::int32_t incy,
+  //      std::int32_t length_trans);
 };
 
 template <>
-struct Blas_gemv<float> {
+struct blas_gemv<float> {
   static void
-  nola_gemv(const char trans,
-            const std::int32_t m, const std::int32_t n,
-            const float alpha,
-            const float a[ ], const std::int32_t lda,
-            const float x[ ], const std::int32_t incx,
-            const float beta,
-            float y[ ], const std::int32_t incy)
+  gemv(const char trans,
+       const std::int32_t m, const std::int32_t n,
+       const float alpha,
+       const float a[ ], const std::int32_t lda,
+       const float x[ ], const std::int32_t incx,
+       const float beta,
+       float y[ ], const std::int32_t incy)
   {
     detail::nola_sgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
   }
 };
 
 template <>
-struct Blas_gemv<double> {
+struct blas_gemv<double> {
   static void
-  nola_gemv(const char trans,
-            const std::int32_t m, const std::int32_t n,
-            const double alpha,
-            const double a[ ], const std::int32_t lda,
-            const double x[ ], const std::int32_t incx,
-            const double beta,
-            double y[ ], const std::int32_t incy)
+  gemv(const char trans,
+       const std::int32_t m, const std::int32_t n,
+       const double alpha,
+       const double a[ ], const std::int32_t lda,
+       const double x[ ], const std::int32_t incx,
+       const double beta,
+       double y[ ], const std::int32_t incy)
   {
     detail::nola_dgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
   }
 };
 
 
+//
+// Matrix Vector Solve
 
+template <class Real>
+struct blas_trsv {
+  // static void
+  // trsv(const char uplo,
+  //      const char trans,
+  //      const char diag,
+  //      const std::int32_t n,
+  //      const float a[ ], const std::int32_t lda,
+  //      float x[ ], const std::int32_t incx,
+  //      std::int32_t length_uplo,
+  //      std::int32_t length_trans,
+  //      std::int32_t length_diag);
+};
+
+
+template <>
+struct blas_trsv<float> {
+  static void
+  trsv(const char uplo,
+       const char trans,
+       const char diag,
+       const std::int32_t n,
+       const float a[ ], const std::int32_t lda,
+       float x[ ], const std::int32_t incx,
+       std::int32_t length_uplo,
+       std::int32_t length_trans,
+       std::int32_t length_diag)
+  {
+    detail::nola_strsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx, 1, 1, 1);
+  }
+};
+
+template <>
+struct blas_trsv<double> {
+  static void
+  trsv(const char uplo,
+       const char trans,
+       const char diag,
+       const std::int32_t n,
+       const double a[ ], const std::int32_t lda,
+       double x[ ], const std::int32_t incx,
+       std::int32_t length_uplo,
+       std::int32_t length_trans,
+       std::int32_t length_diag)
+  {
+    detail::nola_dtrsv_(&uplo, &trans, &diag, &n, a, &lda, x, &incx, 1, 1, 1);
+  }
+};
+
+
+} // namespace detail
 
 
 //----------------------------------------------------------------------------//
@@ -240,7 +297,7 @@ template <class Real>
 inline void
 linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ])
 {
-  Blas_axpy<Real>::nola_axpy(n, alpha, x, std::int32_t{1}, y, std::int32_t{1});
+  detail::blas_axpy<Real>::axpy(n, alpha, x, 1, y, 1);
 }
 
 
@@ -251,7 +308,7 @@ template <class Real>
 inline Real
 vector_norm2(std::int32_t n, Real const x[ ])
 {
-  return Blas_nrm2<Real>::nola_nrm2(n, x, std::int32_t{1});
+  return detail::blas_nrm2<Real>::nrm2(n, x, 1);
 }
 
 
@@ -260,7 +317,7 @@ vector_norm2(std::int32_t n, Real const x[ ])
 
 template <class Real, class Transpose>
 inline void
-matrix_vector_product(Transpose /* trans */,
+matrix_vector_product(Transpose /*trans*/,
                       std::int32_t m,
                       std::int32_t n,
                       Real alpha,
@@ -275,9 +332,38 @@ matrix_vector_product(Transpose /* trans */,
   // Define input paramter for BLAS routine
   const char TRANS = A_trans ? 'T' : 'N';
 
-  Blas_gemv<Real>::nola_gemv(TRANS, m, n, alpha, a, m, x,
-                             std::int32_t{1}, beta, y, std::int32_t{1});
+  detail::blas_gemv<Real>::gemv(TRANS, m, n, alpha, a, m, x, 1, beta, y, 1);
 }
+
+
+//
+// Matrix Vector Solve
+
+template <class Real,
+          class Triangle,
+          class Transpose,
+          class DiagonalStorage>
+inline void
+matrix_vector_solve(Triangle uplo,
+                    Transpose trans,
+                    DiagonalStorage diag,
+                    std::int32_t n,
+                    Real const a[ ],
+                    Real x[ ])
+{
+  // Determine values of template parameters
+  constexpr bool A_uplo  = std::is_same_v<Triangle,        upper_triangle_t>;
+  constexpr bool A_trans = std::is_same_v<Transpose,       transpose_t>;
+  constexpr bool A_diag  = std::is_same_v<DiagonalStorage, implicit_unit_diagonal_t>;
+
+  // Define input parameters for BLAS routine
+  const char UPLO  = A_uplo  ? 'U' : 'L';
+  const char TRANS = A_trans ? 'T' : 'N';
+  const char DIAG  = A_diag  ? 'U' : 'N';
+
+  detail::blas_trsv<Real>::trsv(UPLO, TRANS, DIAG, n, a, n, x, 1, 1, 1, 1);
+}
+
 
 
 /*
