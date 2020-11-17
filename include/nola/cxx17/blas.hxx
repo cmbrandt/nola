@@ -39,6 +39,7 @@ constexpr auto upper_triangle = upper_triangle_t{};
 struct lower_triangle_t { };
 constexpr auto lower_triangle = lower_triangle_t{};
 
+
 //
 // Diagonal Storage
 
@@ -49,18 +50,21 @@ struct explicit_diagonal_t { };
 constexpr auto explicit_diagonal = explicit_diagonal_t{};
 
 
-
 //----------------------------------------------------------------------------//
 // Declarations
 
 
 template <class Real>
 inline void
-linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ]);
+linalg_add(std::int32_t n,
+           Real alpha,
+           Real const x[ ],
+           Real y[ ]);
 
 template <class Real>
 inline Real
-vector_norm2(std::int32_t n, Real const x[ ]);
+vector_norm2(std::int32_t n,
+             Real const x[ ]);
 
 template <class Real,
           class Transpose>
@@ -104,6 +108,7 @@ matrix_product(TransposeA transa,
 
 //----------------------------------------------------------------------------//
 // Helper classes
+
 
 //
 // Linear Algebra Add
@@ -174,6 +179,53 @@ struct Blas_nrm2<double> {
 };
 
 
+//
+// Matrix Vector product
+
+template <class Real>
+struct Blas_gemv {
+  // static void
+  // nola_gemv(const char trans,
+  //           const std::int32_t m, const std::int32_t n,
+  //           const Real alpha,
+  //           const Real a[ ], const std::int32_t lda,
+  //           const Real x[ ], const std::int32_t incx,
+  //           const Real beta,
+  //           Real y[ ], const std::int32_t incy,
+  //           std::int32_t length_trans)
+};
+
+template <>
+struct Blas_gemv<float> {
+  static void
+  nola_gemv(const char trans,
+            const std::int32_t m, const std::int32_t n,
+            const float alpha,
+            const float a[ ], const std::int32_t lda,
+            const float x[ ], const std::int32_t incx,
+            const float beta,
+            float y[ ], const std::int32_t incy)
+  {
+    detail::nola_sgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
+  }
+};
+
+template <>
+struct Blas_gemv<double> {
+  static void
+  nola_gemv(const char trans,
+            const std::int32_t m, const std::int32_t n,
+            const double alpha,
+            const double a[ ], const std::int32_t lda,
+            const double x[ ], const std::int32_t incx,
+            const double beta,
+            double y[ ], const std::int32_t incy)
+  {
+    detail::nola_dgemv_(&trans, &m, &n, &alpha, a, &lda, x, &incx, &beta, y, &incy, 1);
+  }
+};
+
+
 
 
 
@@ -188,8 +240,7 @@ template <class Real>
 inline void
 linalg_add(std::int32_t n, Real alpha, Real const x[ ], Real y[ ])
 {
-  std::int32_t inc = 1;
-  Blas_axpy<Real>::nola_axpy(n, alpha, x, inc, y, inc);
+  Blas_axpy<Real>::nola_axpy(n, alpha, x, std::int32_t{1}, y, std::int32_t{1});
 }
 
 
@@ -200,84 +251,32 @@ template <class Real>
 inline Real
 vector_norm2(std::int32_t n, Real const x[ ])
 {
-  std::int32_t inc = 1;
-  return Blas_nrm2<Real>::nola_nrm2(n, x, inc);
+  return Blas_nrm2<Real>::nola_nrm2(n, x, std::int32_t{1});
 }
-
-/*
-template <>
-inline float
-vector_norm2<float>(std::int32_t n, float const x[ ])
-{
-  std::int32_t inc = 1;
-  return detail::nola_snrm2_(&n, x, &inc);
-}
-
-template <>
-inline double
-vector_norm2<double>(std::int32_t n, double const x[ ])
-{
-  std::int32_t inc = 1;
-  return detail::nola_dnrm2_(&n, x, &inc);
-}
-*/
 
 
 //
 // Matrix Vector Product
 
-template <class Transpose>
+template <class Real, class Transpose>
 inline void
 matrix_vector_product(Transpose /* trans */,
                       std::int32_t m,
                       std::int32_t n,
-                      float alpha,
-                      float const a[ ],
-                      float const x[ ],
-                      float beta,
-                      float y[ ])
+                      Real alpha,
+                      Real const a[ ],
+                      Real const x[ ],
+                      Real beta,
+                      Real y[ ])
 {
+  // Determine value of template parameter
+  constexpr bool A_trans = std::is_same_v<Transpose, transpose_t>;
 
-  if constexpr (std::is_same_v<Transpose, transpose_t>) {
-    char t = 'T';
-    std::int32_t inc = 1;
-    detail::nola_sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-  else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
-    char t = 'N';
-    std::int32_t inc = 1;
-    detail::nola_sgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-  else
-    static_assert("Not implemented.");
+  // Define input paramter for BLAS routine
+  const char TRANS = A_trans ? 'T' : 'N';
 
-
-}
-
-
-template <class Transpose>
-inline void
-matrix_vector_product(Transpose /* trans */,
-                      std::int32_t m,
-                      std::int32_t n,
-                      double alpha,
-                      double const a[ ],
-                      double const x[ ],
-                      double beta,
-                      double y[ ])
-{
-  if constexpr (std::is_same_v<Transpose, transpose_t>) {
-    char t = 'T';
-    std::int32_t inc = 1;
-    detail::nola_dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-  else if constexpr (std::is_same_v<Transpose, no_transpose_t>) {
-    char t = 'N';
-    std::int32_t inc = 1;
-    detail::nola_dgemv_(&t, &m, &n, &alpha, a, &m, x, &inc, &beta, y, &inc, 1);
-  }
-  else
-    static_assert("Not implemented.");
+  Blas_gemv<Real>::nola_gemv(TRANS, m, n, alpha, a, m, x,
+                             std::int32_t{1}, beta, y, std::int32_t{1});
 }
 
 
