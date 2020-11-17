@@ -37,3 +37,11 @@ int main()
   //  0.7667 0.1667 0.06667
   // ]
 }
+
+/*
+
+g++-10 -Wall -Wpedantic -Wextra -std=c++17 -I \
+~/projects/nola/include cxx17_blas_matrix_vector_solve.cxx \
+../../lib/libnola.a -lgfortran -o vec_solve.exe
+
+*/

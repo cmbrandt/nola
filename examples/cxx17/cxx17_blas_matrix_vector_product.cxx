@@ -46,6 +46,6 @@ int main()
 
 g++-10 -Wall -Wpedantic -Wextra -std=c++17 -I \
 ~/projects/nola/include cxx17_blas_matrix_vector_product.cxx \
-../../lib/libnola.a -lgfortran -o prod.exe
+../../lib/libnola.a -lgfortran -o mat_vec_prod.exe
 
 */

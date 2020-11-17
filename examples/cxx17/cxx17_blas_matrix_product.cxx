@@ -45,3 +45,11 @@ int main()
   //  19.125 23.625 28.125
   // ]
 }
+
+/*
+
+g++-10 -Wall -Wpedantic -Wextra -std=c++17 -I \
+~/projects/nola/include cxx17_blas_matrix_product.cxx \
+../../lib/libnola.a -lgfortran -o mat_prod.exe
+
+*/
