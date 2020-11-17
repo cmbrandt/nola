@@ -18,7 +18,7 @@ int main()
   // Vector of values
   std::vector<double> x{ 2.0, 0.5, 0.2 };
 
-  // Specify form of operations
+  // Specify form of op(A)
   using nola::blas::upper_triangle;
   using nola::blas::no_transpose;
   using nola::blas::explicit_diagonal;
