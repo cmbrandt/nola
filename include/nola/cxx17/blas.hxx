@@ -119,19 +119,19 @@ namespace detail
 template <class Real>
 struct blas_axpy {
   // static void
-  // axpy(std::int32_t const n,
-  //      Real const alpha,
-  //      Real const x[ ], std::int32_t const incx,
-  //      Real y[ ], std::int32_t const incy);
+  // axpy(std::int32_t n,
+  //      Real alpha,
+  //      Real const x[ ], std::int32_t incx,
+  //      Real y[ ], std::int32_t incy);
 };
 
 template <>
 struct blas_axpy<float> {
   static void
-  axpy(std::int32_t const n,
-       float const alpha,
-       float const x[ ], std::int32_t const incx,
-       float y[ ], std::int32_t const incy)
+  axpy(std::int32_t n,
+       float alpha,
+       float const x[ ], std::int32_t incx,
+       float y[ ], std::int32_t incy)
   {
     detail::nola_saxpy_(&n, &alpha, x, &incx, y, &incy);
   }
@@ -140,10 +140,10 @@ struct blas_axpy<float> {
 template <>
 struct blas_axpy<double> {
   static void
-  axpy(std::int32_t const n,
-       double const alpha,
-       double const x[ ], std::int32_t const incx,
-       double y[ ], std::int32_t const incy)
+  axpy(std::int32_t n,
+       double alpha,
+       double const x[ ], std::int32_t incx,
+       double y[ ], std::int32_t incy)
   {
     detail::nola_daxpy_(&n, &alpha, x, &incx, y, &incy);
   }
@@ -153,19 +153,18 @@ struct blas_axpy<double> {
 //
 // Euclidean Vector Norm
 
-
 template <class Real>
 struct blas_nrm2 {
   // static Real
-  // nrm2(const std::int32_t n,
-  //      const Real x[ ], const std::int32_t incx);
+  // nrm2(std::int32_t n,
+  //      Real const x[ ], std::int32_t incx);
 };
 
 template <>
 struct blas_nrm2<float> {
   static float
-  nrm2(const std::int32_t n,
-       const float x[ ], const std::int32_t incx)
+  nrm2(std::int32_t n,
+       float const x[ ], std::int32_t incx)
   {
     return detail::nola_snrm2_(&n, x, &incx);
   }
@@ -174,8 +173,8 @@ struct blas_nrm2<float> {
 template <>
 struct blas_nrm2<double> {
   static double
-  nrm2(const std::int32_t n,
-       const double x[ ], const std::int32_t incx)
+  nrm2(std::int32_t n,
+       double const x[ ], std::int32_t incx)
   {
     return detail::nola_dnrm2_(&n, x, &incx);
   }
@@ -188,45 +187,47 @@ struct blas_nrm2<double> {
 template <class Real>
 struct blas_gemv {
   // static void
-  // gemv(const char trans,
-  //      const std::int32_t m, const std::int32_t n,
-  //      const Real alpha,
-  //      const Real a[ ], const std::int32_t lda,
-  //      const Real x[ ], const std::int32_t incx,
-  //      const Real beta,
-  //      Real y[ ], const std::int32_t incy,
+  // gemv(char trans,
+  //      std::int32_t m, std::int32_t n,
+  //      Real alpha,
+  //      Real const a[ ], std::int32_t lda,
+  //      Real const x[ ], std::int32_t incx,
+  //      Real beta,
+  //      Real y[ ], std::int32_t incy,
   //      std::int32_t length_trans);
 };
 
 template <>
 struct blas_gemv<float> {
   static void
-  gemv(const char trans,
-       const std::int32_t m, const std::int32_t n,
-       const float alpha,
-       const float a[ ], const std::int32_t lda,
-       const float x[ ], const std::int32_t incx,
-       const float beta,
-       float y[ ], const std::int32_t incy)
+  gemv(char trans,
+       std::int32_t m, std::int32_t n,
+       float alpha,
+       float const a[ ], std::int32_t lda,
+       float const x[ ], std::int32_t incx,
+       float beta,
+       float y[ ], std::int32_t incy,
+       std::int32_t length_trans)
   {
     detail::nola_sgemv_(&trans, &m, &n, &alpha, a, &lda,
-                        x, &incx, &beta, y, &incy, 1);
+                        x, &incx, &beta, y, &incy, length_trans);
   }
 };
 
 template <>
 struct blas_gemv<double> {
   static void
-  gemv(const char trans,
-       const std::int32_t m, const std::int32_t n,
-       const double alpha,
-       const double a[ ], const std::int32_t lda,
-       const double x[ ], const std::int32_t incx,
-       const double beta,
-       double y[ ], const std::int32_t incy)
+  gemv(char trans,
+       std::int32_t m, std::int32_t n,
+       double alpha,
+       double const a[ ], std::int32_t lda,
+       double const x[ ], std::int32_t incx,
+       double beta,
+       double y[ ], std::int32_t incy,
+       std::int32_t length_trans)
   {
     detail::nola_dgemv_(&trans, &m, &n, &alpha, a, &lda,
-                        x, &incx, &beta, y, &incy, 1);
+                        x, &incx, &beta, y, &incy, length_trans);
   }
 };
 
@@ -237,12 +238,12 @@ struct blas_gemv<double> {
 template <class Real>
 struct blas_trsv {
   // static void
-  // trsv(const char uplo,
-  //      const char trans,
-  //      const char diag,
-  //      const std::int32_t n,
-  //      const float a[ ], const std::int32_t lda,
-  //      float x[ ], const std::int32_t incx,
+  // trsv(char uplo,
+  //      char trans,
+  //      char diag,
+  //      std::int32_t n,
+  //      Real const a[ ], std::int32_t lda,
+  //      Real x[ ], std::int32_t incx,
   //      std::int32_t length_uplo,
   //      std::int32_t length_trans,
   //      std::int32_t length_diag);
@@ -252,12 +253,12 @@ struct blas_trsv {
 template <>
 struct blas_trsv<float> {
   static void
-  trsv(const char uplo,
-       const char trans,
-       const char diag,
-       const std::int32_t n,
-       const float a[ ], const std::int32_t lda,
-       float x[ ], const std::int32_t incx,
+  trsv(char uplo,
+       char trans,
+       char diag,
+       std::int32_t n,
+       float const a[ ], std::int32_t lda,
+       float x[ ], std::int32_t incx,
        std::int32_t length_uplo,
        std::int32_t length_trans,
        std::int32_t length_diag)
@@ -270,12 +271,12 @@ struct blas_trsv<float> {
 template <>
 struct blas_trsv<double> {
   static void
-  trsv(const char uplo,
-       const char trans,
-       const char diag,
-       const std::int32_t n,
-       const double a[ ], const std::int32_t lda,
-       double x[ ], const std::int32_t incx,
+  trsv(char uplo,
+       char trans,
+       char diag,
+       std::int32_t n,
+       double const a[ ], std::int32_t lda,
+       double x[ ], std::int32_t incx,
        std::int32_t length_uplo,
        std::int32_t length_trans,
        std::int32_t length_diag)
@@ -292,26 +293,26 @@ struct blas_trsv<double> {
 template <class Real>
 struct blas_gemm {
   // static void
-  // gemm(const char transa, const char transb,
-  //      const std::int32_t m, const std::int32_t n, const std::int32_t k,
-  //      const Real alpha,
-  //      const Real a[ ], const std::int32_t lda,
-  //      const Real b[ ], const std::int32_t ldb,
-  //      const Real beta,
-  //      Real c[ ], const std::int32_t ldc,
+  // gemm(char transa, char transb,
+  //      std::int32_t m, std::int32_t n, std::int32_t k,
+  //      Real alpha,
+  //      Real const a[ ], std::int32_t lda,
+  //      Real const b[ ], std::int32_t ldb,
+  //      Real beta,
+  //      Real c[ ], std::int32_t ldc,
   //      std::int32_t length_transa, std::int32_t length_transb);
 };
 
 template <>
 struct blas_gemm<float> {
   static void
-  gemm(const char transa, const char transb,
-       const std::int32_t m, const std::int32_t n, const std::int32_t k,
-       const float alpha,
-       const float a[ ], const std::int32_t lda,
-       const float b[ ], const std::int32_t ldb,
-       const float beta,
-       float c[ ], const std::int32_t ldc,
+  gemm(char transa, char transb,
+       std::int32_t m, std::int32_t n, std::int32_t k,
+       float alpha,
+       float const a[ ], std::int32_t lda,
+       float const b[ ], std::int32_t ldb,
+       float beta,
+       float c[ ], std::int32_t ldc,
        std::int32_t length_transa, std::int32_t length_transb)
   {
     detail::nola_sgemm_(&transa, &transb, &m, &n, &k, &alpha, a, &lda, b, &ldb,
@@ -322,13 +323,13 @@ struct blas_gemm<float> {
 template <>
 struct blas_gemm<double> {
   static void
-  gemm(const char transa, const char transb,
-       const std::int32_t m, const std::int32_t n, const std::int32_t k,
-       const double alpha,
-       const double a[ ], const std::int32_t lda,
-       const double b[ ], const std::int32_t ldb,
-       const double beta,
-       double c[ ], const std::int32_t ldc,
+  gemm(char transa, char transb,
+       std::int32_t m, std::int32_t n, std::int32_t k,
+       double alpha,
+       double const a[ ], std::int32_t lda,
+       double const b[ ], std::int32_t ldb,
+       double beta,
+       double c[ ], std::int32_t ldc,
        std::int32_t length_transa, std::int32_t length_transb)
   {
     detail::nola_dgemm_(&transa, &transb, &m, &n, &k, &alpha, a, &lda, b, &ldb,
@@ -386,7 +387,7 @@ matrix_vector_product(Transpose /*trans*/,
   // Define input parameter for BLAS routine
   const char TRANS = A_trans ? 'T' : 'N';
 
-  detail::blas_gemv<Real>::gemv(TRANS, m, n, alpha, a, m, x, 1, beta, y, 1);
+  detail::blas_gemv<Real>::gemv(TRANS, m, n, alpha, a, m, x, 1, beta, y, 1, 1);
 }
 
 
