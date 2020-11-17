@@ -287,6 +287,57 @@ struct blas_trsv<double> {
 };
 
 
+//
+// Matrix Product
+
+template <class Real>
+struct blas_gemm {
+  // static void
+  // gemm(const char transa, const char transb,
+  //      const std::int32_t m, const std::int32_t n, const std::int32_t k,
+  //      const Real alpha,
+  //      const Real a[ ], const std::int32_t lda,
+  //      const Real b[ ], const std::int32_t ldb,
+  //      const Real beta,
+  //      Real c[ ], const std::int32_t ldc,
+  //      std::int32_t length_transa, std::int32_t length_transb);
+};
+
+template <>
+struct blas_gemm<float> {
+  static void
+  gemm(const char transa, const char transb,
+       const std::int32_t m, const std::int32_t n, const std::int32_t k,
+       const float alpha,
+       const float a[ ], const std::int32_t lda,
+       const float b[ ], const std::int32_t ldb,
+       const float beta,
+       float c[ ], const std::int32_t ldc,
+       std::int32_t length_transa, std::int32_t length_transb)
+  {
+    detail::nola_sgemm_(&transa, &transb, &m, &n, &k, &alpha, a, &lda, b, &ldb,
+                        &beta, c, &ldc, length_transa, length_transb);
+  }
+};
+
+template <>
+struct blas_gemm<double> {
+  static void
+  gemm(const char transa, const char transb,
+       const std::int32_t m, const std::int32_t n, const std::int32_t k,
+       const double alpha,
+       const double a[ ], const std::int32_t lda,
+       const double b[ ], const std::int32_t ldb,
+       const double beta,
+       double c[ ], const std::int32_t ldc,
+       std::int32_t length_transa, std::int32_t length_transb)
+  {
+    detail::nola_dgemm_(&transa, &transb, &m, &n, &k, &alpha, a, &lda, b, &ldb,
+                        &beta, c, &ldc, length_transa, length_transb);
+  }
+};
+
+
 } // namespace detail
 
 
@@ -368,6 +419,36 @@ matrix_vector_solve(Triangle /*uplo*/,
   detail::blas_trsv<Real>::trsv(UPLO, TRANS, DIAG, n, a, n, x, 1, 1, 1, 1);
 }
 
+
+//
+// Matrix Product
+
+template <class Real,
+          class TransposeA,
+          class TransposeB>
+inline void
+matrix_product(TransposeA /*transa*/,
+               TransposeB /*transb*/,
+               std::int32_t m,
+               std::int32_t n,
+               std::int32_t k,
+               Real alpha,
+               Real const a[ ],
+               Real const b[ ],
+               Real beta,
+               Real c [ ])
+{
+  // Determine values of template parameters
+  constexpr bool A_trans = std::is_same_v<TransposeA, transpose_t>;
+  constexpr bool B_trans = std::is_same_v<TransposeB, transpose_t>;
+
+  // Define input parameters for BLAS routine
+  const char TRANSA = A_trans ? 'T' : 'N';
+  const char TRANSB = B_trans ? 'T' : 'N';
+
+  detail::blas_gemm<Real>::gemm(TRANSA, TRANSB, m, n, k, alpha,
+                                a, m, b, k, beta, c, m, 1, 1);
+}
 
 
 /*

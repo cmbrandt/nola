@@ -76,48 +76,48 @@ nola_dgemv_(const char* trans,
 
 extern "C" void
 nola_strsv_(const char* uplo,
-       const char* trans,
-       const char* diag,
-       const std::int32_t* n,
-       const float a[ ], const std::int32_t* lda,
-       float x[ ], const std::int32_t* incx,
-       std::int32_t length_uplo,
-       std::int32_t length_trans,
-       std::int32_t length_diag);
+            const char* trans,
+            const char* diag,
+            const std::int32_t* n,
+            const float a[ ], const std::int32_t* lda,
+            float x[ ], const std::int32_t* incx,
+            std::int32_t length_uplo,
+            std::int32_t length_trans,
+            std::int32_t length_diag);
 
 extern "C" void
 nola_dtrsv_(const char* uplo,
-       const char* trans,
-       const char* diag,
-       const std::int32_t* n,
-       const double a[ ], const std::int32_t* lda,
-       double x[ ], const std::int32_t* incx,
-       std::int32_t length_uplo,
-       std::int32_t length_trans,
-       std::int32_t length_diag);
+            const char* trans,
+            const char* diag,
+            const std::int32_t* n,
+            const double a[ ], const std::int32_t* lda,
+            double x[ ], const std::int32_t* incx,
+            std::int32_t length_uplo,
+            std::int32_t length_trans,
+            std::int32_t length_diag);
 
 
 //
 // xGEMM (e.g. General Matrix Product)
 
 extern "C" void
-sgemm_(const char* transa, const char* transb,
-       const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
-       const float* alpha,
-       const float a[ ], const std::int32_t* lda,
-       const float b[ ], const std::int32_t* ldb,
-       const float* beta,
-       float c[ ], const std::int32_t* ldc,
-       std::int32_t length_transa, std::int32_t length_transb);
+nola_sgemm_(const char* transa, const char* transb,
+            const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
+            const float* alpha,
+            const float a[ ], const std::int32_t* lda,
+            const float b[ ], const std::int32_t* ldb,
+            const float* beta,
+            float c[ ], const std::int32_t* ldc,
+            std::int32_t length_transa, std::int32_t length_transb);
 
 extern "C" void
-dgemm_(const char* transa, const char* transb,
-       const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
-       const double* alpha,
-       const double a[ ], const std::int32_t* lda,
-       const double b[ ], const std::int32_t* ldb, const double* beta,
-       double c[ ], const std::int32_t* ldc,
-       std::int32_t length_transa, std::int32_t length_transb);
+nola_dgemm_(const char* transa, const char* transb,
+            const std::int32_t* m, const std::int32_t* n, const std::int32_t* k,
+            const double* alpha,
+            const double a[ ], const std::int32_t* lda,
+            const double b[ ], const std::int32_t* ldb, const double* beta,
+            double c[ ], const std::int32_t* ldc,
+            std::int32_t length_transa, std::int32_t length_transb);
 
 
 } // namespace detail
