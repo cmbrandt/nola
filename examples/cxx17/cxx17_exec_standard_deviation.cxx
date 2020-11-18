@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nExecution Policy Standard Deviation C++17 Interface Example." << std::endl;
+  std::cout << "\nStandard Deviation C++17 Interface Example." << std::endl;
 
   // Execution policies
   using nola::exec::seq;

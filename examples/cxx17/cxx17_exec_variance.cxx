@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nExecution Policy Variance C++17 Interface Example." << std::endl;
+  std::cout << "\nVariance C++17 Interface Example." << std::endl;
 
   // Execution policies
   using nola::exec::seq;

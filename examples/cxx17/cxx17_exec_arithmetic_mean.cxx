@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::cout << "\nExecution Policy Arithmetic Mean C++17 Interface Example." << std::endl;
+  std::cout << "\nArithmetic Mean C++17 Interface Example." << std::endl;
 
   // Execution policies
   using nola::exec::seq;
