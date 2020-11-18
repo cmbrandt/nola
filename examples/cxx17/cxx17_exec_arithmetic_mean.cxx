@@ -27,7 +27,7 @@ int main()
   // Compute arithmetic mean
   double m1 = nola::stat::arithmetic_mean( n, x.data() );
 
-  // Compute arithmetic mean using execution policy overloads
+  // Compute arithmetic mean using execution policy overload
   double m2 = nola::stat::arithmetic_mean( seq,       n, x.data() );
   double m3 = nola::stat::arithmetic_mean( par,       n, x.data() );
   double m4 = nola::stat::arithmetic_mean( par_unseq, n, x.data() );

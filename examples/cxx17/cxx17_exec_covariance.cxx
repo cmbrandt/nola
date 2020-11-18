@@ -28,17 +28,17 @@ int main()
   // Compute covariance
   double r1 = nola::stat::covariance( n, x.data(), y.data() );
 
-  // Compute covariance using execution policy overloads
+  // Compute covariance using execution policy overload
   double r2 = nola::stat::covariance( seq,       n, x.data(), y.data() );
   double r3 = nola::stat::covariance( par,       n, x.data(), y.data() );
   double r4 = nola::stat::covariance( par_unseq, n, x.data(), y.data() );
   double r5 = nola::stat::covariance( unseq,     n, x.data(), y.data() );
 
   // Display result
-  std::cout << "\ncovariance             = " << r1 // r1 = 0.1
-            << "\ncovariance (seq)       = " << r2 // r2 = 0.1
-            << "\ncovariance (par)       = " << r3 // r3 = 0.1
-            << "\ncovariance (par_unseq) = " << r4 // r4 = 0.1
-            << "\ncovariance (unseq)     = " << r5 // r5 = 0.1
+  std::cout << "\ncovariance             = " << r1 // r1 = -0.2700
+            << "\ncovariance (seq)       = " << r2 // r2 = -0.2700
+            << "\ncovariance (par)       = " << r3 // r3 = -0.2700
+            << "\ncovariance (par_unseq) = " << r4 // r4 = -0.2700
+            << "\ncovariance (unseq)     = " << r5 // r5 = -0.2700
             << std::endl;
 }

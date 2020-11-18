@@ -26,19 +26,19 @@ int main()
   std::int32_t n = x.size();
 
   // Compute correlation
-  double r1 = nola::stat::correlation( n, x.data(), y.data() );
+  double c1 = nola::stat::correlation( n, x.data(), y.data() );
 
-  // Compute correlation using execution policy overloads
-  double r2 = nola::stat::correlation( seq,       n, x.data(), y.data() );
-  double r3 = nola::stat::correlation( par,       n, x.data(), y.data() );
-  double r4 = nola::stat::correlation( par_unseq, n, x.data(), y.data() );
-  double r5 = nola::stat::correlation( unseq,     n, x.data(), y.data() );
+  // Compute correlation using execution policy overload
+  double c2 = nola::stat::correlation( seq,       n, x.data(), y.data() );
+  double c3 = nola::stat::correlation( par,       n, x.data(), y.data() );
+  double c4 = nola::stat::correlation( par_unseq, n, x.data(), y.data() );
+  double c5 = nola::stat::correlation( unseq,     n, x.data(), y.data() );
 
   // Display result
-  std::cout << "\ncorrelation             = " << r1 // r1 = 0.1
-            << "\ncorrelation (seq)       = " << r2 // r2 = 0.1
-            << "\ncorrelation (par)       = " << r3 // r3 = 0.1
-            << "\ncorrelation (par_unseq) = " << r4 // r4 = 0.1
-            << "\ncorrelation (unseq)     = " << r5 // r5 = 0.1
+  std::cout << "\ncorrelation             = " << c1 // c1 = -0.9000
+            << "\ncorrelation (seq)       = " << c2 // c2 = -0.9000
+            << "\ncorrelation (par)       = " << c3 // c3 = -0.9000
+            << "\ncorrelation (par_unseq) = " << c4 // c4 = -0.9000
+            << "\ncorrelation (unseq)     = " << c5 // c5 = -0.9000
             << std::endl;
 }

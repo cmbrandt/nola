@@ -27,7 +27,7 @@ int main()
   // Compute standard deviation
   double s1 = nola::stat::standard_deviation( n, x.data() );
 
-  // Compute standard deviation using execution policy overloads
+  // Compute standard deviation using execution policy overload
   double s2 = nola::stat::standard_deviation( seq,       n, x.data() );
   double s3 = nola::stat::standard_deviation( par,       n, x.data() );
   double s4 = nola::stat::standard_deviation( par_unseq, n, x.data() );
