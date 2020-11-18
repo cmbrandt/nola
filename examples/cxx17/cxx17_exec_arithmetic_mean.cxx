@@ -34,10 +34,10 @@ int main()
   double m5 = nola::stat::arithmetic_mean( unseq,     n, x.data() );
 
   // Display result
-  std::cout << "\narithmetic mean             = " << m1 // m = 0.6000
-            << "\narithmetic mean (seq)       = " << m2 // m = 0.6000
-            << "\narithmetic mean (par)       = " << m3 // m = 0.6000
-            << "\narithmetic mean (par_unseq) = " << m4 // m = 0.6000
-            << "\narithmetic mean (unseq)     = " << m5 // m = 0.6000
+  std::cout << "\narithmetic mean             = " << m1 // m1 = 0.6000
+            << "\narithmetic mean (seq)       = " << m2 // m2 = 0.6000
+            << "\narithmetic mean (par)       = " << m3 // m3 = 0.6000
+            << "\narithmetic mean (par_unseq) = " << m4 // m4 = 0.6000
+            << "\narithmetic mean (unseq)     = " << m5 // m5 = 0.6000
             << std::endl;
 }
