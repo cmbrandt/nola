@@ -29,7 +29,7 @@ arithmetic_mean_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute and return the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  arithmetic_mean_serial_impl()" << std::endl;
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
 
@@ -46,7 +46,7 @@ variance_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  variance_serial_impl()" << std::endl;
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
 
@@ -73,7 +73,7 @@ standard_deviation_serial_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  standard_deviation_serial_impl()" << std::endl;
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
 
@@ -103,7 +103,7 @@ covariance_serial_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the first sequence
   Real sum{0.0};
-
+std::cout << "\n  covariance_serial_impl()" << std::endl;
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
 
@@ -139,7 +139,7 @@ correlation_serial_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the first sequence
   Real sum{0.0};
-
+std::cout << "\n  correlation_serial_impl()" << std::endl;
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
 

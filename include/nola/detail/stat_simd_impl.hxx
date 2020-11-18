@@ -26,11 +26,11 @@ namespace detail
 
 template <class Real>
 inline Real
-arithmetic_mean_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
+arithmetic_mean_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute and return the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  arithmetic_mean_simd_impl()" << std::endl;
   #pragma omp simd reduction (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -44,11 +44,11 @@ arithmetic_mean_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-variance_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
+variance_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  variance_mean_simd_impl()" << std::endl;
   #pragma omp simd reduction (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -73,11 +73,11 @@ variance_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-standard_deviation_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
+standard_deviation_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  standard_deviation_simd_impl()" << std::endl;
   #pragma omp simd reduction (+:sum)
   for (std::int32_t i = 0; i < n; ++i)
     sum += x[i];
@@ -105,12 +105,12 @@ standard_deviation_impl(nola::exec::unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-covariance_impl(nola::exec::unseq, std::int32_t n, const Real x[ ], const Real y[ ])
+covariance_simd_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
-
+std::cout << "\n  covariance_simd_impl()" << std::endl;
   #pragma omp simd reduction (+:sum1, sum2)
   for (std::int32_t i = 0; i < n; ++i) {
     sum1 += x[i];
@@ -139,12 +139,12 @@ covariance_impl(nola::exec::unseq, std::int32_t n, const Real x[ ], const Real y
 
 template <class Real>
 inline Real
-correlation_impl(nola::exec::unseq, std::int32_t n, const Real x[ ], const Real y[ ])
+correlation_simd_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
-
+std::cout << "\n  correlation_simd_impl()" << std::endl;
   #pragma omp simd reduction (+:sum1, sum2)
   for (std::int32_t i = 0; i < n; ++i) {
     sum1 += x[i];

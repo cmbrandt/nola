@@ -448,10 +448,9 @@ matrix_product(TransposeA /*transa*/,
 
   const std::int32_t lda = A_trans ? k : m;
   const std::int32_t ldb = B_trans ? n : k;
-  const std::int32_t ldc = m;
 
   detail::blas_gemm<Real>::gemm(TRANSA, TRANSB, m, n, k, alpha,
-                                a, lda, b, ldb, beta, c, ldc, 1, 1);
+                                a, lda, b, ldb, beta, c, m, 1, 1);
 }
 
 

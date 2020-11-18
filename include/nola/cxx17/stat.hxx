@@ -4,12 +4,14 @@
 #ifndef NOLA_CXX17_STAT_HXX
 #define NOLA_CXX17_STAT_HXX
 
-#include <nola/detail/stat_impl.hxx>
 
 // If <nola/cxx17/exec.hxx> has already been included,
-// pull in the parallel/simd backends
-#if defined (NOLA_EXEC_HXX)
-  #include "stat_exec_impl.hxx"
+// pull in the parallel/simd backend declarations
+#if defined (NOLA_CXX17_EXEC_HXX)
+  #include <nola/detail/stat_exec_impl.hxx>
+// Otherwise, only pull in serial backend
+#else
+  #include <nola/detail/stat_impl.hxx>
 #endif
 
 

@@ -40,7 +40,6 @@ inline Real
 correlation(std::int32_t n, Real const x[ ], Real const y[ ]);
 
 
-
 //----------------------------------------------------------------------------//
 // Definitions
 

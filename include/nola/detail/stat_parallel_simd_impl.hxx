@@ -26,11 +26,11 @@ namespace detail
 
 template <class Real>
 inline Real
-arithmetic_mean_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
+arithmetic_mean_parallel_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute and return the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  arithmetic_mean_parallel_simd_impl()" << std::endl;
   #pragma omp parallel for simd \
     default      (none)         \
     shared       (x)            \
@@ -48,11 +48,11 @@ arithmetic_mean_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-variance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
+variance_parallel_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  variance_parallel_simd_impl()" << std::endl;
   #pragma omp parallel for simd \
     default      (none)         \
     shared       (x)            \
@@ -85,11 +85,11 @@ variance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-standard_deviation_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
+standard_deviation_parallel_simd_impl(std::int32_t n, const Real x[ ])
 {
   // Compute the mean of the sequence
   Real sum{0.0};
-
+std::cout << "\n  standard_deviation_parallel_simd_impl()" << std::endl;
   #pragma omp parallel for simd \
     default      (none)         \
     shared       (x)            \
@@ -125,12 +125,12 @@ standard_deviation_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ])
 
 template <class Real>
 inline Real
-covariance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ], const Real y[ ])
+covariance_parallel_simd_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
-
+std::cout << "\n  covariance_parallel_simd_impl()" << std::endl;
   #pragma omp parallel for simd \
     default      (none)         \
     shared       (x, y)         \
@@ -167,12 +167,12 @@ covariance_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ], const Re
 
 template <class Real>
 inline Real
-correlation_impl(nola::exec::par_unseq, std::int32_t n, const Real x[ ], const Real y[ ])
+correlation_parallel_simd_impl(std::int32_t n, const Real x[ ], const Real y[ ])
 {
   // Compute the mean of the two sequences
   Real sum1{0.0};
   Real sum2{0.0};
-
+std::cout << "\n  correlation_parallel_simd_impl()" << std::endl;
   #pragma omp parallel for simd \
     default      (none)         \
     shared       (x, y)         \
