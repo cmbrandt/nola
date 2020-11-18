@@ -17,16 +17,16 @@ namespace detail
 
 template <class Real>
 inline Real
-mean_simd_impl(int n, Real x[]);
+arithmetic_mean_simd_impl(int n, Real x[]);
 
 
 // Implementations
 
 template <class Real>
 inline Real
-mean_simd_impl(int n, Real x[ ])
+arithmetic_mean_simd_impl(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_simd()" << std::endl;
+  std::cout << "\ninside arithmetic_mean_simd()" << std::endl;
 
   double mean{0.0};
 

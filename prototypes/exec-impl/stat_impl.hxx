@@ -16,16 +16,16 @@ namespace stat
 
 template <class Real>
 inline Real
-mean(int n, Real x[]);
+arithmetic_mean(int n, Real x[]);
 
 
 // Implementations
 
 template <class Real>
 inline Real
-mean(int n, Real x[ ])
+arithmetic_mean(int n, Real x[ ])
 {
-  return detail::mean_serial_impl(n, x);
+  return detail::arithmetic_mean_serial_impl(n, x);
 }
 
 

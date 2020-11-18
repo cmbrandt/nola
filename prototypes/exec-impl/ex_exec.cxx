@@ -15,11 +15,11 @@ int main()
 
   std::vector<double> v{ 0.2, 0.4, 0.6, 0.8, 1.0 };
 
-  double m1 = nola::stat::mean(            v.size(), v.data() );
-  double m2 = nola::stat::mean( seq,       v.size(), v.data() );
-  double m3 = nola::stat::mean( par,       v.size(), v.data() );
-  double m4 = nola::stat::mean( par_unseq, v.size(), v.data() );
-  double m5 = nola::stat::mean( unseq,     v.size(), v.data() );
+  double m1 = nola::stat::arithmetic_mean(            v.size(), v.data() );
+  double m2 = nola::stat::arithmetic_mean( seq,       v.size(), v.data() );
+  double m3 = nola::stat::arithmetic_mean( par,       v.size(), v.data() );
+  double m4 = nola::stat::arithmetic_mean( par_unseq, v.size(), v.data() );
+  double m5 = nola::stat::arithmetic_mean( unseq,     v.size(), v.data() );
 
   std::cout << "\nmean1 = " << m1
             << "\nmean2 = " << m2

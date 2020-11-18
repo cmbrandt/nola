@@ -17,16 +17,16 @@ namespace detail
 
 template <class Real>
 inline Real
-mean_parallel_impl(int n, Real x[]);
+arithmetic_mean_parallel_impl(int n, Real x[]);
 
 
 // Implementations
 
 template <class Real>
 inline Real
-mean_parallel_impl(int n, Real x[ ])
+arithmetic_mean_parallel_impl(int n, Real x[ ])
 {
-  std::cout << "\ninside mean_parallel()" << std::endl;
+  std::cout << "\ninside arithmetic_mean_parallel()" << std::endl;
 
   double mean{0.0};
 
