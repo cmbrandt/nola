@@ -36,9 +36,11 @@ int main()
   nola::blas::matrix_product( no_transpose, no_transpose, m, n, k, alpha,
                               a.data(), b.data(), beta, c.data() );
 
-  nola::util::print_matrix("\nC", m, n, c.data(), 5, 6);
+  nola::util::print_matrix("\nmatrix 'C'", m, n, c.data(), 5, 6);
 
-  // C = [
+  // Output:
+
+  // matrix 'C' = [
   //   3.375  4.875  6.375
   //   8.625 11.125 13.625
   //  13.875 17.375 20.875

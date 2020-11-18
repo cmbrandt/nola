@@ -31,9 +31,11 @@ int main()
                                    explicit_diagonal, n, a.data(), x.data() );
 
   // Display result
-  nola::util::print_vector("\nx", n, x.data(), 4, 5);
+  nola::util::print_vector("\nvector 'x'", n, x.data(), 4, 5);
 
-  // x = [
+  // Output:
+
+  // vector 'x' = [
   //  0.7667 0.1667 0.06667
   // ]
 }

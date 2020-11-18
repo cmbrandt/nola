@@ -20,12 +20,12 @@ int main()
   std::int32_t cols = 2;
 
   // Display elements of two-dimensional container
-  nola::util::print_matrix( "\n matrix 'A'" , rows, cols, A.data() );
-  nola::util::print_matrix( "\n matrix 'A'" , rows, cols, A.data(), 4, 6);
+  nola::util::print_matrix( "\nmatrix 'A'" , rows, cols, A.data() );
+  nola::util::print_matrix( "\nmatrix 'A'" , rows, cols, A.data(), 4, 6);
 
   // Output:
 
-  //  matrix 'A' = [
+  // matrix 'A' = [
   //   3.22222  0.88888
   //   1.44444  2.11111
   //   2.66666  7.99999

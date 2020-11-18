@@ -35,9 +35,11 @@ int main()
                                     x.data(), beta, y.data() );
 
   // Display result
-  nola::util::print_vector("\ny", m, y.data(), 3, 4);
+  nola::util::print_vector("\nvector 'y'", m, y.data(), 3, 4);
 
-  // y = [
+  // Output:
+
+  // vector 'y' = [
   //  4.75 6.25 7.75
   // ]
 }

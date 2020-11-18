@@ -26,9 +26,11 @@ int main()
   nola::blas::linalg_add( n, alpha, x.data(), y.data() );
 
   // Display result
-  nola::util::print_vector("y", n, y.data(), 2, 3);
+  nola::util::print_vector("\nvector 'y'", n, y.data(), 2, 3);
   
-  // y = [
+  // Output:
+
+  // vector 'y' = [
   //  2.3 3.1 3.9 4.7 5.5 6.3 7.1 7.9
   // ]
 }
