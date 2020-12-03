@@ -4,14 +4,14 @@
 #include <iostream>
 #include <vector>
 #include <nola/cxx17/simd.hxx>
-
+ 
 
 int main()
 {
   std::cout << "\nSIMD AVX2 Double Reduce Example." << std::endl;
 
   // Input data
-  std::vector<double> a{ 5.5, 5.5, 5.5, 5.5 };
+  std::vector<double> a{ 1.1, 2.3, 3.5, 4.9 }; //5.5, 5.5, 5.5, 5.5 };
 
   // Define SIMD object using input data
   auto av = nola::simd::avx2_load( a.data() );

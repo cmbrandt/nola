@@ -41,6 +41,7 @@ inline auto avx2_set_scalar(Real a);
 //
 // Single precision
 
+//inline auto avx2_set_scalar(float a);
 inline v256f avx2_broadcast(float const* addr);
 inline v256f avx2_load(float const* addr);
 inline void  avx2_store(float* addr, v256f a);
@@ -55,6 +56,7 @@ inline float avx2_reduce(v256f a);
 //
 // Double precision
 
+//inline auto avx2_set_scalar(double a);
 inline v256d  avx2_broadcast(double const* addr);
 inline v256d  avx2_load(double const* addr);
 inline void   avx2_store(double* addr, v256d a);
@@ -103,6 +105,9 @@ avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 //
 // Single precision
 
+//inline v256f
+//avx2_set_scalar(float a)  { return _mm256_set1_ps(a); }
+
 inline v256f
 avx2_broadcast(float const* addr) { return _mm256_broadcast_ss(addr); }
 
@@ -117,26 +122,9 @@ avx2_add(v256f a, v256f b) { return _mm256_add_ps(a, b); }
 
 inline v256f 
 avx2_sub(v256f a, v256f b) { return _mm256_sub_ps(a, b); }
-
-inline v256f
-avx2_mul(v256f a, v256f b) { return _mm256_mul_ps(a, b); }
-
-inline v256f
-avx2_div(v256f a, v256f b) { return _mm256_div_ps(a, b); }
-
-inline v256f
-avx2_fma(v256f a, v256f b, v256f c) { return _mm256_fmadd_ps(a, b, c); }
-/*
-inline float
-avx2_reduce(v256f a)
-{
-  // do stuff
-  return 5.0;
-}
-*/
-
-//
-// Double precision
+ 
+//inline v256d
+//avx2_set_scalar(double a) { return _mm256_set1_pd(a); }
 
 inline v256d
 avx2_set_zero() { return _mm256_setzero_pd(); }

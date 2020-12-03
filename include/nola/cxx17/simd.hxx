@@ -4,7 +4,7 @@
 #ifndef NOLA_CXX17_SIMD_HXX
 #define NOLA_CXX17_SIMD_HXX
 
-//#include <nola/detail/simd_avx2.hxx>
+#include <nola/detail/simd_avx2.hxx>
 #include <nola/detail/simd_avx512.hxx>
 
 
