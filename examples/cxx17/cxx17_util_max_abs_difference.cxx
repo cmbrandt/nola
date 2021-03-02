@@ -13,7 +13,7 @@ int main()
 
   // Two sequences of values
   std::vector<double> x{ 3.2, 1.4, 2.6,  0.8, 2.0  };
-  std::vector<double> y{ 3.2, 1.4, 2.61, 0.8, 2.03 };
+  std::vector<double> y{ 3.2, 1.4, 2.59, 0.8, 2.03 };
 
   // Length of sequences
   std::int32_t n = x.size();
