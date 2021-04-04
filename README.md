@@ -1,5 +1,6 @@
 # The Nola C++ Numerical Library
 
+![Release](https://img.shields.io/badge/Release-v0.7.0-brightgreen)
 [![License: MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)](https://opensource.org/licenses/MIT)
 [![Standard](https://img.shields.io/badge/C%2B%2B-17/20/23-blue.svg)](https://en.wikipedia.org/wiki/C%2B%2B#Standardization)
 
